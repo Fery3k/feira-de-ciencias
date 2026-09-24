@@ -1,0 +1,118 @@
+{
+  "educadores": [
+    {
+      "id": "edu-1",
+      "nome": "Profª. Maria Silva",
+      "email": "maria.silva@escola.com",
+      "senha": "senha123",
+      "cargo": "Educadora - Ciências",
+      "avatar": "👩‍🏫"
+    },
+    {
+      "id": "edu-2",
+      "nome": "Prof. Carlos Eduardo",
+      "email": "carlos.eduardo@escola.com",
+      "senha": "senha123",
+      "cargo": "Educador - Ed. Física",
+      "avatar": "👨‍🏫"
+    },
+    {
+      "id": "edu-3",
+      "nome": "Administração Escolar",
+      "email": "admin@escola.com",
+      "senha": "admin123",
+      "cargo": "Administrador do Portal",
+      "avatar": "🏫"
+    }
+  ],
+  "postagens": [],
+  "avisos": [
+    "📚 Prova de Matemática do 3º bimestre: dia 28/10",
+    "🔬 Feira de Ciências: inscrições abertas até 30/10",
+    "⚽ Campeonato Interclasses começa dia 04/11",
+    "📖 Semana da Leitura: 11 a 15/11 com autores convidados"
+  ],
+  "avisosSidebar": [
+    {
+      "id": "aviso-1",
+      "titulo": "Reunião de Pais e Mestres",
+      "desc": "Dia 25/10 às 19h no auditório. Presença recomendada.",
+      "cor": "var(--cor-erro)",
+      "icone": "priority_high"
+    },
+    {
+      "id": "aviso-2",
+      "titulo": "Matrículas 2025 Abertas",
+      "desc": "Garanta sua vaga para o próximo ano letivo.",
+      "cor": "var(--cor-primaria)",
+      "icone": "edit_document"
+    }
+  ],
+  "eventosSidebar": [
+    {
+      "id": "evt-3",
+      "dia": "04",
+      "mes": "Nov",
+      "nome": "Início do Campeonato Interclasses",
+      "detalhe": "Futebol e Vôlei · Quadra · 14h00",
+      "cor": "var(--cor-destaque)"
+    },
+    {
+      "id": "evt-4",
+      "dia": "11",
+      "mes": "Nov",
+      "nome": "Semana da Leitura",
+      "detalhe": "11 a 15/Nov · Biblioteca · Manhã e Tarde",
+      "cor": "var(--cor-aviso)"
+    }
+  ],
+  "horarioAulas": {
+    "titulo": "Horário de Aulas",
+    "descricao": "Confira a grade horária das turmas para o ano letivo de 2024.",
+    "turnos": [
+      {
+        "turma": "Ensino Fundamental I (1º ao 5º ano)",
+        "horario": "13h00 às 17h30",
+        "dias": "Segunda a Sexta"
+      },
+      {
+        "turma": "Ensino Fundamental II (6º ao 9º ano)",
+        "horario": "07h10 às 12h35",
+        "dias": "Segunda a Sexta"
+      },
+      {
+        "turma": "Ensino Médio (1º ao 3º ano)",
+        "horario": "07h10 às 13h10",
+        "dias": "Segunda a Sexta"
+      }
+    ],
+    "observacoes": "Tolerância de atraso: 10 minutos no 1º horário. Portões abrem 20 minutos antes do início das aulas."
+  },
+  "cardapio": {
+    "titulo": "Cardápio Escolar da Semana",
+    "descricao": "Alimentação saudável e balanceada elaborada por nutricionistas escolares.",
+    "dias": [
+      {
+        "dia": "Segunda-feira",
+        "prato": "Arroz branco, feijão carioquinha, frango grelhado ao molho de ervas e salada de alface com tomate."
+      },
+      {
+        "dia": "Terça-feira",
+        "prato": "Arroz integral, feijão preto, carne moída refogada com purê de batatas e cenoura ralada."
+      },
+      {
+        "dia": "Quarta-feira",
+        "prato": "Macarrão penne ao molho bolonhesa, salada de folhas verdes e melancia de sobremesa."
+      },
+      {
+        "dia": "Quinta-feira",
+        "prato": "Arroz com milho, feijão, iscas de peixe empanadas e salada de repolho roxo."
+      },
+      {
+        "dia": "Sexta-feira",
+        "prato": "Strogonoff de frango, arroz branco, batata palha crocante e salada tropical de frutas."
+      }
+    ],
+    "observacoes": "Cardápio sujeito a pequenas alterações. Opções vegetarianas disponíveis mediante solicitação prévia."
+  }
+}

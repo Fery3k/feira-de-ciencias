@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal Escolar — Colégio Exemplo</title>
+<meta name="description" content="Portal de informações do Colégio Exemplo. Acesse avisos, eventos, matérias e muito mais."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+
+<style>
+/* ============================================================ */
+/*  RESET & BASE                                                */
+/* ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1e293b;
+  background: #f0f4f8;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* ============================================================ */
+/*  VARIÁVEIS DE TEMA                                           */
+/* ============================================================ */
+:root {
+  --cor-primaria: #1a73e8;
+  --cor-primaria-escura: #1557b0;
+  --cor-secundaria: #0d9488;
+  --cor-destaque: #7c3aed;
+  --cor-aviso: #f59e0b;
+  --cor-erro: #ef4444;
+
+  --bg-pagina: #f0f4f8;
+  --bg-card: #ffffff;
+  --bg-header: #0f172a;
+  --bg-header-grad: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+
+  --texto-principal: #1e293b;
+  --texto-secundario: #64748b;
+  --texto-claro: #ffffff;
+
+  --max-w: 1200px;
+  --gap: 1.25rem;
+  --raio: 12px;
+}
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1rem; }
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* ============================================================ */
+/*  HEADER & NAVEGAÇÃO                                         */
+/* ============================================================ */
+.header-top {
+  background: var(--bg-header-grad);
+  color: var(--texto-claro);
+  font-size: 12px;
+  padding: 8px 0;
+}
+.header-top .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-top-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+.header-top-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.masthead {
+  background: var(--bg-card);
+  padding: 20px 0;
+  border-bottom: 3px solid var(--cor-primaria);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.masthead .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.masthead-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.masthead-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--bg-header-grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.masthead-info { display: flex; flex-direction: column; }
+.masthead-nome {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--texto-principal);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.masthead-subtitulo {
+  font-size: 12px;
+  color: var(--texto-secundario);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.btn-contato {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cor-secundaria);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.btn-contato:hover { background: #0b7f74; }
+
+.nav-materias {
+  background: var(--bg-card);
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.nav-materias .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  overflow-x: auto;
+}
+.nav-link {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-secundario);
+  padding: 12px 18px;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--cor-primaria); }
+.nav-link.active {
+  color: var(--cor-primaria);
+  font-weight: 700;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  background: var(--cor-primaria);
+  border-radius: 3px 3px 0 0;
+}
+
+.nav-btn-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(26, 115, 232, 0.08);
+  color: var(--cor-primaria);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn-action:hover {
+  background: var(--cor-primaria);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.nav-btn-action.btn-cardapio {
+  background: rgba(13, 148, 136, 0.08);
+  color: var(--cor-secundaria);
+}
+.nav-btn-action.btn-cardapio:hover {
+  background: var(--cor-secundaria);
+  color: #fff;
+}
+
+/* ============================================================ */
+/*  BARRA DE AVISOS                                             */
+/* ============================================================ */
+.barra-avisos {
+  background: var(--cor-primaria);
+  color: #fff;
+  overflow: hidden;
+}
+.barra-avisos .container {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.aviso-tag {
+  background: var(--bg-header);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.aviso-ticker {
+  flex: 1;
+  overflow: hidden;
+  padding: 10px 16px;
+}
+.aviso-texto {
+  display: inline-block;
+  animation: scroll-avisos 35s linear infinite;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+@keyframes scroll-avisos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================ */
+/*  CONTEÚDO PRINCIPAL (GRID + SIDEBAR)                         */
+/* ============================================================ */
+.conteudo { padding: 24px 0 48px; }
+.conteudo-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--gap);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+.card-evento {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--raio);
+  background: #111;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.card-evento:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+.card-evento img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.card-evento:hover img { transform: scale(1.05); }
+
+.card-destaque {
+  grid-row: 1 / 3;
+  min-height: 480px;
+}
+.card-menor { min-height: 234px; }
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+}
+.card-overlay-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: #fff;
+}
+.tag-ciencias   { background: var(--cor-secundaria); }
+.tag-esportes   { background: var(--cor-destaque); }
+.tag-literatura { background: var(--cor-aviso); color: #1e293b; }
+.tag-evento     { background: var(--cor-primaria); }
+.tag-tecnico-ds { background: #e11d48; }
+.tag-tecnico-adm { background: #0891b2; }
+
+.card-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+.card-overlay-bottom { display: flex; flex-direction: column; gap: 6px; }
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 400;
+}
+.card-titulo {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.card-destaque .card-titulo { font-size: 24px; }
+.card-menor .card-titulo   { font-size: 16px; }
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+}
+.card-link {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar { display: flex; flex-direction: column; gap: var(--gap); }
+
+.sidebar-bloco {
+  background: var(--bg-card);
+  border-radius: var(--raio);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.sidebar-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-header-left .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--cor-primaria);
+}
+.sidebar-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--texto-principal);
+}
+.btn-quick-admin {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cor-destaque);
+  background: rgba(124, 58, 237, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.btn-quick-admin:hover { background: rgba(124, 58, 237, 0.2); }
+
+.evento-lista { display: flex; flex-direction: column; }
+.evento-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.evento-item:last-child { border-bottom: none; }
+.evento-item:hover { background: #f8fafc; }
+.evento-data {
+  width: 44px;
+  height: 44px;
+  background: var(--cor-primaria);
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.evento-data .dia {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+.evento-data .mes {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.evento-info { flex: 1; min-width: 0; }
+.evento-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  line-height: 1.3;
+}
+.evento-detalhe {
+  font-size: 11px;
+  color: var(--texto-secundario);
+  margin-top: 2px;
+}
+
+.aviso-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+.aviso-item:last-child { border-bottom: none; }
+.aviso-item:hover { background: #f8fafc; }
+.aviso-icone {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  font-size: 18px;
+}
+.aviso-info { flex: 1; min-width: 0; }
+.aviso-titulo-item {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  line-height: 1.3;
+}
+.aviso-desc {
+  font-size: 11px;
+  color: var(--texto-secundario);
+  margin-top: 2px;
+}
+
+.links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px;
+}
+.link-util {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.link-util:hover {
+  background: #f0f7ff;
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.link-util-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.link-util-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(26, 115, 232, 0.1);
+  color: var(--cor-primaria);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.link-util:hover .link-util-icon {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+/* ============================================================ */
+/*  MODAL & ESTILOS DO PAINEL ADMIN COMPLETO                    */
+/* ============================================================ */
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-fundo.aberto {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-janela {
+  background: #fff;
+  width: 92%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.3s;
+}
+.modal-fundo.aberto .modal-janela {
+  transform: translateY(0) scale(1);
+}
+.modal-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.modal-topo-esq {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-fechar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-secundario);
+  transition: background 0.2s;
+}
+.modal-fechar:hover {
+  background: #f1f5f9;
+  color: var(--texto-principal);
+}
+.modal-corpo { padding: 24px 28px 32px; }
+
+.btn-area-educador {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cor-destaque);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.btn-area-educador:hover { background: #6d28d9; }
+
+.educador-logged-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.btn-admin-panel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #10b981;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.btn-admin-panel:hover { background: #059669; }
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(239, 68, 68, 0.4); color: #fff; }
+
+.admin-bar-banner {
+  background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
+  color: #fff;
+  padding: 12px 0;
+  border-bottom: 2px solid #6366f1;
+}
+.admin-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.admin-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.admin-bar-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-novo-post {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+.btn-gerenciar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.modal-janela-sm { max-width: 440px; }
+.modal-janela-lg { max-width: 860px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 12px; font-weight: 700; color: var(--texto-principal); }
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--texto-principal);
+  background: #fff;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-with-icon .material-symbols-outlined {
+  position: absolute;
+  left: 12px;
+  color: var(--texto-secundario);
+  font-size: 20px;
+  pointer-events: none;
+}
+.input-with-icon .form-input { padding-left: 40px; }
+
+.btn-submit-login {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: var(--cor-destaque);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-erro-msg {
+  margin-top: 12px;
+  padding: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* NAVEGAÇÃO PRINCIPAL DAS ABAS DO PAINEL ADMIN */
+.admin-nav-tabs {
+  display: flex;
+  gap: 6px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+.admin-tab-item {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-secundario);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.admin-tab-item.active {
+  color: var(--cor-primaria);
+  border-bottom-color: var(--cor-primaria);
+  font-weight: 700;
+}
+
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media(max-width: 650px) {
+  .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 0;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.btn-cancelar {
+  padding: 10px 18px;
+  background: #e2e8f0;
+  color: var(--texto-principal);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.btn-salvar-post {
+  padding: 10px 20px;
+  background: var(--cor-primaria);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.table-responsive { overflow-x: auto; margin-top: 14px; }
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.post-table th, .post-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+.post-table th { background: #f8fafc; font-weight: 700; color: var(--texto-secundario); }
+.post-table-img { width: 45px; height: 32px; object-fit: cover; border-radius: 4px; }
+.btn-tbl-action {
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--texto-secundario);
+  transition: all 0.2s;
+}
+.btn-tbl-edit:hover { background: #e0f2fe; color: #0284c7; }
+.btn-tbl-delete:hover { background: #fee2e2; color: #dc2626; }
+
+.card-admin-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+.btn-card-admin {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-card-admin:hover { background: #1e293b; }
+.btn-card-admin.delete:hover { background: #ef4444; }
+
+.rodape {
+  background: var(--bg-header-grad);
+  color: #fff;
+  padding: 32px 0 20px;
+  margin-top: 48px;
+}
+.rodape-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.rodape-marca-nome {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+}
+.rodape-marca-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  max-width: 320px;
+  margin-top: 4px;
+}
+.rodape-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.rodape-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+}
+.rodape-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  padding-top: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================ -->
+<!-- 1. BARRA SUPERIOR                                            -->
+<!-- ============================================================ -->
+<div class="header-top">
+  <div class="container">
+    <div class="header-top-left">
+      <span>📍 Rua Exemplo, 123 — São Paulo, SP</span>
+      <span>📞 (11) 1234-5678</span>
+      <span>📧 contato@colegioexemplo.com.br</span>
+    </div>
+    <div class="header-top-right" id="user-header-area">
+      <button class="btn-area-educador" onclick="abrirModalLogin()">
+        <span class="material-symbols-outlined">lock</span>
+        Área do Educador
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- BARRA DE ADMINISTRADOR -->
+<div id="admin-bar" class="admin-bar-banner" style="display: none;">
+  <div class="container admin-bar-content">
+    <div class="admin-bar-info">
+      <span class="material-symbols-outlined">admin_panel_settings</span>
+      <span><strong>Modo Admin Ativo:</strong> Gerencie postagens, eventos da agenda, avisos e contas de educadores.</span>
+    </div>
+    <div class="admin-bar-btns">
+      <button class="btn-novo-post" onclick="abrirFormularioPost()">
+        <span class="material-symbols-outlined">add_circle</span>
+        Nova Postagem
+      </button>
+      <button class="btn-gerenciar" onclick="abrirPainelAdmin('posts')">
+        <span class="material-symbols-outlined">manage_search</span>
+        Painel Geral de Gestão
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. MASTHEAD                                                  -->
+<!-- ============================================================ -->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead-left">
+      <div class="masthead-logo">
+        <span class="material-symbols-outlined">school</span>
+      </div>
+      <div class="masthead-info">
+        <span class="masthead-nome">Colégio Exemplo</span>
+        <span class="masthead-subtitulo">Educação que transforma — Ensino Fundamental e Médio</span>
+      </div>
+    </div>
+    <div class="masthead-right">
+      <button class="btn-contato">
+        <span class="material-symbols-outlined">mail</span>
+        Fale Conosco
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- 3. NAVEGAÇÃO                                                 -->
+<!-- ============================================================ -->
+<nav class="nav-materias">
+  <div class="container">
+    <a href="#" class="nav-link active" onclick="filtrarCategoria('todas', this)">Início</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Português', this)">Português</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Matemática', this)">Matemática</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Ciências', this)">Ciências</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('História', this)">História</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Geografia', this)">Geografia</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Ed. Física', this)">Ed. Física</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Artes', this)">Artes</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico DS', this)">Técnico DS</a>
+    <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico ADM', this)">Técnico ADM</a>
+    
+    <div style="margin-left: auto; display: flex; gap: 8px; padding: 4px 0;">
+      <button class="nav-btn-action" onclick="abrirModalHorario()" title="Ver Horário de Aulas">
+        <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span> Horário
+      </button>
+      <button class="nav-btn-action btn-cardapio" onclick="abrirModalCardapio()" title="Ver Cardápio Escolar">
+        <span class="material-symbols-outlined" style="font-size: 18px;">restaurant</span> Cardápio
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- 4. BARRA DE AVISOS                                           -->
+<!-- ============================================================ -->
+<div class="barra-avisos">
+  <div class="container">
+    <span class="aviso-tag">
+      <span class="material-symbols-outlined">campaign</span>
+      Avisos
+    </span>
+    <div class="aviso-ticker">
+      <span class="aviso-texto" id="aviso-texto-ticker"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. CONTEÚDO PRINCIPAL (CARDS E SIDEBAR)                      -->
+<!-- ============================================================ -->
+<main class="conteudo">
+  <div class="container">
+    <div class="conteudo-grid">
+
+      <!-- COLUNA ESQUERDA: GRID DINÂMICO DE POSTS -->
+      <div class="cards-grid" id="cards-grid-container"></div>
+
+      <!-- COLUNA DIREITA: SIDEBAR DE EVENTOS E AVISOS -->
+      <aside class="sidebar">
+
+        <!-- PRÓXIMOS EVENTOS -->
+        <div class="sidebar-bloco">
+          <div class="sidebar-header">
+            <div class="sidebar-header-left">
+              <span class="material-symbols-outlined">calendar_month</span>
+              <span class="sidebar-titulo">Próximos Eventos</span>
+            </div>
+            <span id="btn-admin-quick-eventos"></span>
+          </div>
+          <div class="evento-lista" id="evento-lista-sidebar"></div>
+        </div>
+
+        <!-- AVISOS IMPORTANTES -->
+        <div class="sidebar-bloco">
+          <div class="sidebar-header">
+            <div class="sidebar-header-left">
+              <span class="material-symbols-outlined">notifications_active</span>
+              <span class="sidebar-titulo">Avisos Importantes</span>
+            </div>
+            <span id="btn-admin-quick-avisos"></span>
+          </div>
+          <div id="aviso-lista-sidebar"></div>
+        </div>
+
+        <!-- LINKS ÚTEIS -->
+        <div class="sidebar-bloco">
+          <div class="sidebar-header">
+            <div class="sidebar-header-left">
+              <span class="material-symbols-outlined">link</span>
+              <span class="sidebar-titulo">Links Úteis</span>
+            </div>
+            <span id="btn-admin-quick-links"></span>
+          </div>
+          <div class="links-grid" id="links-grid-sidebar">
+            <div class="link-util" role="button" tabindex="0" onclick="abrirModalHorario()" onkeydown="if(event.key==='Enter') abrirModalHorario()">
+              <div class="link-util-info">
+                <div class="link-util-icon"><span class="material-symbols-outlined">schedule</span></div>
+                <span>Horário de Aulas</span>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+            </div>
+            <div class="link-util" role="button" tabindex="0" onclick="abrirModalCardapio()" onkeydown="if(event.key==='Enter') abrirModalCardapio()">
+              <div class="link-util-info">
+                <div class="link-util-icon" style="background: rgba(13, 148, 136, 0.1); color: var(--cor-secundaria);"><span class="material-symbols-outlined">restaurant</span></div>
+                <span>Cardápio</span>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================ -->
+<!-- 6. MODAIS DO SISTEMA                                         -->
+<!-- ============================================================ -->
+
+<!-- MODAL: LOGIN DO EDUCADOR -->
+<div class="modal-fundo" id="modal-login" onclick="fecharModal(event)">
+  <div class="modal-janela modal-janela-sm" onclick="event.stopPropagation()">
+    <div class="modal-topo" style="background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); color: #fff;">
+      <div class="modal-topo-esq">
+        <span class="material-symbols-outlined" style="color: #60a5fa;">lock_person</span>
+        <span style="font-weight: 700; font-size: 15px;">Login — Área do Educador</span>
+      </div>
+      <button class="modal-fechar" style="color: #fff;" onclick="fecharModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <p style="font-size: 13px; color: var(--texto-secundario); margin-bottom: 20px;">
+        Acesse com sua conta autorizada para gerenciar postagens, notícias, agenda e avisos da escola.
+      </p>
+
+      <form id="form-login" onsubmit="processarLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="login-email">E-mail do Educador</label>
+          <div class="input-with-icon">
+            <span class="material-symbols-outlined">mail</span>
+            <input type="email" id="login-email" class="form-input" placeholder="seu.email@escola.com" required/>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="form-label" for="login-senha">Senha</label>
+          <div class="input-with-icon">
+            <span class="material-symbols-outlined">key</span>
+            <input type="password" id="login-senha" class="form-input" placeholder="••••••••" required/>
+          </div>
+        </div>
+
+        <div id="login-erro" class="login-erro-msg" style="display: none;"></div>
+
+        <button type="submit" class="btn-submit-login">
+          <span class="material-symbols-outlined">login</span>
+          Entrar no Sistema
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PAINEL ADMIN COMPLETO (CMS) -->
+<div class="modal-fundo" id="modal-admin" onclick="fecharModal(event)">
+  <div class="modal-janela modal-janela-lg" onclick="event.stopPropagation()">
+    <div class="modal-topo">
+      <div class="modal-topo-esq">
+        <span class="material-symbols-outlined" style="color: var(--cor-destaque);">admin_panel_settings</span>
+        <span style="font-weight: 700; font-size: 16px;">Painel de Administração do Portal</span>
+      </div>
+      <button class="modal-fechar" onclick="fecharModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-corpo">
+
+      <!-- NAVEGAÇÃO DE SEÇÕES DO PAINEL ADMIN -->
+      <div class="admin-nav-tabs">
+        <button type="button" class="admin-tab-item active" id="tab-nav-posts" onclick="alternarSecaoAdmin('posts')">
+          <span class="material-symbols-outlined">newspaper</span> Postagens do Blog
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-eventos" onclick="alternarSecaoAdmin('eventos')">
+          <span class="material-symbols-outlined">calendar_month</span> Próximos Eventos
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-avisos" onclick="alternarSecaoAdmin('avisos')">
+          <span class="material-symbols-outlined">campaign</span> Avisos da Escola
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-horario" onclick="alternarSecaoAdmin('horario')">
+          <span class="material-symbols-outlined">schedule</span> Horário de Aulas
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-cardapio" onclick="alternarSecaoAdmin('cardapio')">
+          <span class="material-symbols-outlined">restaurant</span> Cardápio Escolar
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-educadores" onclick="alternarSecaoAdmin('educadores')">
+          <span class="material-symbols-outlined">group</span> Contas & Senhas
+        </button>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO 1: POSTAGENS                       -->
+      <!-- ======================================== -->
+      <div id="secao-admin-posts" class="admin-secao-panel">
+        <form id="form-postagem" onsubmit="salvarPostagemSubmit(event)">
+          <input type="hidden" id="post-id" value=""/>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="post-titulo">Título da Postagem *</label>
+              <input type="text" id="post-titulo" class="form-input" placeholder="Ex: Feira Literária da Escola 2024" required/>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-categoria">Categoria / Matéria *</label>
+              <select id="post-categoria" class="form-select" required>
+                <option value="Ciências|tag-ciencias">Ciências</option>
+                <option value="Ed. Física|tag-esportes">Ed. Física / Esportes</option>
+                <option value="Português|tag-literatura">Português / Literatura</option>
+                <option value="Matemática|tag-evento">Matemática</option>
+                <option value="História|tag-evento">História</option>
+                <option value="Geografia|tag-evento">Geografia</option>
+                <option value="Artes|tag-evento">Artes</option>
+                <option value="Técnico DS|tag-tecnico-ds">Técnico DS</option>
+                <option value="Técnico ADM|tag-tecnico-adm">Técnico ADM</option>
+                <option value="Evento|tag-evento">Evento Geral</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="post-data">Data de Exibição *</label>
+              <input type="text" id="post-data" class="form-input" placeholder="Ex: 15 de Novembro, 2024" required/>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="post-local">Local / Ambientes</label>
+              <input type="text" id="post-local" class="form-input" placeholder="Ex: Auditório Principal, Quadra, etc."/>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="post-resumo">Resumo Curto (exibido nos cards) *</label>
+            <input type="text" id="post-resumo" class="form-input" placeholder="Uma frase chamativa resumindo a notícia..." required/>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="post-conteudo">Conteúdo Completo da Postagem *</label>
+            <textarea id="post-conteudo" class="form-textarea" rows="4" placeholder="Escreva aqui todas as informações detalhadas sobre a matéria ou evento..." required></textarea>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="post-imagem-preset">Imagem da Postagem</label>
+              <select id="post-imagem-preset" class="form-select" onchange="selecionarPresetImagem(this.value)">
+                <option value="img-ciencias.jpg">Imagem Padrão — Ciências</option>
+                <option value="img-esportes.jpg">Imagem Padrão — Esportes / Ed. Física</option>
+                <option value="img-literatura.jpg">Imagem Padrão — Literatura / Biblioteca</option>
+                <option value="custom">Link/URL Personalizado de Imagem</option>
+              </select>
+              <input type="text" id="post-imagem-custom" class="form-input" style="margin-top: 8px; display: none;" placeholder="Cole a URL da imagem..."/>
+            </div>
+
+            <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+              <label class="checkbox-container">
+                <input type="checkbox" id="post-destaque"/>
+                <strong>Destacar como Notícia Principal</strong> (Card Grande)
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="button" class="btn-cancelar" onclick="limparFormularioPost()">Limpar Form</button>
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">publish</span> Salvar Postagem
+            </button>
+          </div>
+        </form>
+
+        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Postagens Cadastradas</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Autor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-posts-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO 2: PRÓXIMOS EVENTOS                -->
+      <!-- ======================================== -->
+      <div id="secao-admin-eventos" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);" id="titulo-form-evento">Gerenciar Próximos Eventos (Sidebar)</h3>
+        <form id="form-evento" onsubmit="salvarEventoSubmit(event)">
+          <input type="hidden" id="evt-id" value=""/>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label" for="evt-dia">Dia *</label>
+              <input type="text" id="evt-dia" class="form-input" placeholder="Ex: 28" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evt-mes">Mês (3 letras) *</label>
+              <input type="text" id="evt-mes" class="form-input" placeholder="Ex: Out" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evt-cor">Cor do Badge</label>
+              <select id="evt-cor" class="form-select">
+                <option value="var(--cor-primaria)">Azul (Padrão)</option>
+                <option value="var(--cor-secundaria)">Verde (Feiras/Projetos)</option>
+                <option value="var(--cor-destaque)">Roxo (Esportes/Cultura)</option>
+                <option value="var(--cor-aviso)">Amarelo (Avisos/Provas)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="evt-nome">Nome do Evento *</label>
+              <input type="text" id="evt-nome" class="form-input" placeholder="Ex: Prova de Matemática — 3º Bimestre" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="evt-detalhe">Detalhe / Sala / Horário *</label>
+              <input type="text" id="evt-detalhe" class="form-input" placeholder="Ex: 9º ano · Sala 12 · 08h00" required/>
+            </div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="button" class="btn-cancelar" onclick="limparFormularioEvento()">Limpar Form</button>
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">event</span> Salvar Evento
+            </button>
+          </div>
+        </form>
+
+        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Lista de Eventos</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Nome do Evento</th>
+                <th>Detalhes</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-eventos-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO 3: AVISOS DA ESCOLA                -->
+      <!-- ======================================== -->
+      <div id="secao-admin-avisos" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Avisos Importantes da Sidebar</h3>
+        
+        <form id="form-aviso-sidebar" onsubmit="salvarAvisoSidebarSubmit(event)">
+          <input type="hidden" id="aviso-sidebar-id" value=""/>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="aviso-sidebar-titulo">Título do Aviso *</label>
+              <input type="text" id="aviso-sidebar-titulo" class="form-input" placeholder="Ex: Reunião de Pais e Mestres" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aviso-sidebar-icone">Tipo / Ícone</label>
+              <select id="aviso-sidebar-icone" class="form-select">
+                <option value="priority_high|var(--cor-erro)">⚠️ Urgente (Vermelho)</option>
+                <option value="edit_document|var(--cor-primaria)">📝 Informativo (Azul)</option>
+                <option value="checkroom|var(--cor-secundaria)">👕 Comunicado (Verde)</option>
+                <option value="event_note|var(--cor-destaque)">📌 Destaque (Roxo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="aviso-sidebar-desc">Descrição do Aviso *</label>
+            <input type="text" id="aviso-sidebar-desc" class="form-input" placeholder="Ex: Dia 25/10 às 19h no auditório. Presença recomendada." required/>
+          </div>
+
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="button" class="btn-cancelar" onclick="limparFormularioAvisoSidebar()">Limpar</button>
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">campaign</span> Salvar Aviso Important
+            </button>
+          </div>
+        </form>
+
+        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Avisos Importantes Atuais</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-avisos-sidebar-admin-tbody"></tbody>
+          </table>
+        </div>
+
+        <hr style="margin: 28px 0; border: none; border-top: 1px solid #e2e8f0;"/>
+
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Avisos da Barra Rolante (Topo da Página)</h3>
+        <div class="form-group">
+          <label class="form-label" for="novo-aviso-rolante-input">Adicionar Novo Texto de Aviso Rolante</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="novo-aviso-rolante-input" class="form-input" placeholder="Ex: 🏆 Olímpiadas de Matemática: inscrições até 05/11"/>
+            <button type="button" class="btn-salvar-post" onclick="adicionarAvisoRolante()">Adicionar</button>
+          </div>
+        </div>
+
+        <h4 style="margin-top: 18px; font-size: 14px; color: var(--texto-principal);">Lista de Textos Rolantes</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Texto Rolante</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="lista-avisos-rolantes-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ======================================== -->
+      <!-- SEÇÃO HORÁRIO DE AULAS                   -->
+      <!-- ======================================== -->
+      <div id="secao-admin-horario" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Gerenciar Horário de Aulas</h3>
+        
+        <form id="form-horario-admin" onsubmit="salvarHorarioSubmit(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="horario-titulo-input">Título do Horário de Aulas *</label>
+              <input type="text" id="horario-titulo-input" class="form-input" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="horario-desc-input">Subtítulo / Descrição *</label>
+              <input type="text" id="horario-desc-input" class="form-input" required/>
+            </div>
+          </div>
+
+          <h4 style="margin-top: 16px; font-size: 13px; color: var(--texto-principal);">Grade por Nível de Ensino</h4>
+          <div id="horario-turnos-inputs-container" style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+            <!-- Renderizado via JS -->
+          </div>
+          <button type="button" class="btn-card-admin" style="margin-top: 10px; width: fit-content;" onclick="adicionarLinhaHorarioAdmin()">+ Adicionar Nova Turma / Turno</button>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="horario-obs-input">Observações / Regras de Atraso</label>
+            <input type="text" id="horario-obs-input" class="form-input"/>
+          </div>
+
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">schedule</span> Salvar Horário de Aulas
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO CARDÁPIO ESCOLAR                   -->
+      <!-- ======================================== -->
+      <div id="secao-admin-cardapio" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Gerenciar Cardápio Escolar da Semana</h3>
+        
+        <form id="form-cardapio-admin" onsubmit="salvarCardapioSubmit(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="cardapio-titulo-input">Título do Cardápio *</label>
+              <input type="text" id="cardapio-titulo-input" class="form-input" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cardapio-desc-input">Subtítulo / Descrição *</label>
+              <input type="text" id="cardapio-desc-input" class="form-input" required/>
+            </div>
+          </div>
+
+          <h4 style="margin-top: 16px; font-size: 13px; color: var(--texto-principal);">Cardápio Semanal</h4>
+          <div id="cardapio-dias-inputs-container" style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+            <!-- Renderizado via JS -->
+          </div>
+          <button type="button" class="btn-card-admin" style="margin-top: 10px; width: fit-content;" onclick="adicionarLinhaCardapioAdmin()">+ Adicionar Novo Dia / Refeição</button>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="cardapio-obs-input">Observações Nutricionais / Restrições</label>
+            <input type="text" id="cardapio-obs-input" class="form-input"/>
+          </div>
+
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">restaurant</span> Salvar Cardápio Escolar
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO 4: CONTAS DE EDUCADORES / SENHAS  -->
+      <!-- ======================================== -->
+      <div id="secao-admin-educadores" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);" id="titulo-form-educador">Gerenciar Contas de Educadores & Senhas</h3>
+        
+        <form id="form-educador" onsubmit="salvarEducadorSubmit(event)">
+          <input type="hidden" id="edu-id" value=""/>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="edu-nome">Nome Completo *</label>
+              <input type="text" id="edu-nome" class="form-input" placeholder="Ex: Profª. Amanda Costa" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="edu-cargo">Cargo / Disciplina *</label>
+              <input type="text" id="edu-cargo" class="form-input" placeholder="Ex: Educadora - História" required/>
+            </div>
+          </div>
+
+          <div class="form-grid-3" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="edu-email">E-mail de Acesso *</label>
+              <input type="email" id="edu-email" class="form-input" placeholder="ex: amanda.costa@escola.com" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="edu-senha">Senha *</label>
+              <input type="text" id="edu-senha" class="form-input" placeholder="Senha123" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="edu-avatar">Emoji Avatar</label>
+              <select id="edu-avatar" class="form-select">
+                <option value="👩‍🏫">👩‍🏫 Professora</option>
+                <option value="👨‍🏫">👨‍🏫 Professor</option>
+                <option value="🏫">🏫 Administração</option>
+                <option value="📚">📚 Coordenação</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="button" class="btn-cancelar" onclick="limparFormularioEducador()">Limpar Form</button>
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">person_add</span> Salvar Educador
+            </button>
+          </div>
+        </form>
+
+        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Educadores Cadastrados no Banco JSON</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Senha</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-educadores-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DINÂMICO DE VISUALIZAÇÃO DE POSTS -->
+<div class="modal-fundo" id="modal-detalhes-dinamico" onclick="fecharModal(event)">
+  <div class="modal-janela" onclick="event.stopPropagation()">
+    <div class="modal-topo">
+      <div class="modal-topo-esq">
+        <span id="modal-dinamico-tag" class="card-tag tag-ciencias">Categoria</span>
+        <span id="modal-dinamico-tipo" class="modal-topo-texto">Publicação do Blog</span>
+      </div>
+      <button class="modal-fechar" onclick="fecharModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-corpo" id="modal-dinamico-corpo"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. FOOTER                                                    -->
+<!-- ============================================================ -->
+<footer class="rodape">
+  <div class="container">
+    <div class="rodape-grid">
+      <div>
+        <p class="rodape-marca-nome">Colégio Exemplo</p>
+        <p class="rodape-marca-desc">Educação que transforma. Ensino Fundamental e Médio de excelência desde 1990.</p>
+      </div>
+      <div class="rodape-links">
+        <a href="#" class="rodape-link">Sobre Nós</a>
+        <a href="#" class="rodape-link">Contato</a>
+        <a href="#" class="rodape-link">Matrículas</a>
+
+      </div>
+    </div>
+    <p class="rodape-copy">© 2024 Colégio Exemplo. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- LÓGICA JAVASCRIPT COMPLETA E GERENCIAMENTO DE CONTEÚDOS       -->
+<!-- ============================================================ -->
+<script>
+  // Banco de Dados embutido padrão
+  const INITIAL_DB = {
+    educadores: [
+      {
+        id: "edu-1",
+        nome: "Profª. Maria Silva",
+        email: "maria.silva@escola.com",
+        senha: "senha123",
+        cargo: "Educadora - Ciências",
+        avatar: "👩‍🏫"
+      },
+      {
+        id: "edu-2",
+        nome: "Prof. Carlos Eduardo",
+        email: "carlos.eduardo@escola.com",
+        senha: "senha123",
+        cargo: "Educador - Ed. Física",
+        avatar: "👨‍🏫"
+      },
+      {
+        id: "edu-3",
+        nome: "Administração Escolar",
+        email: "admin@escola.com",
+        senha: "admin123",
+        cargo: "Administrador do Portal",
+        avatar: "🏫"
+      }
+    ],
+    postagens: [
+      {
+        id: "post-1",
+        titulo: "Feira de Ciências 2024: alunos apresentam projetos inovadores sobre sustentabilidade",
+        categoria: "Ciências",
+        tagClass: "tag-ciencias",
+        resumo: "A Feira de Ciências deste ano terá como tema central a sustentabilidade e meio ambiente.",
+        conteudo: "A Feira de Ciências deste ano terá como tema central a sustentabilidade e meio ambiente. Os alunos de todas as turmas apresentarão projetos desenvolvidos ao longo do semestre, incluindo experimentos práticos, maquetes e apresentações multimídia.\n\nOs melhores projetos serão premiados e poderão representar a escola na Feira Regional de Ciências. A participação é obrigatória para todas as turmas e faz parte da nota do 4º bimestre.",
+        data: "30 de Outubro, 2024",
+        horario: "09h00 às 16h00",
+        local: "Ginásio da Escola",
+        publico: "Aberto a pais e comunidade",
+        imagem: "img-ciencias.jpg",
+        fotosBadge: "12 fotos",
+        autor: "Profª. Maria Silva",
+        destaque: true
+      },
+      {
+        id: "post-2",
+        titulo: "Campeonato Interclasses: inscrições para futebol e vôlei abertas",
+        categoria: "Ed. Física",
+        tagClass: "tag-esportes",
+        resumo: "As turmas do 6º ao 9º ano e Ensino Médio competirão nas modalidades de futebol, vôlei e basquete.",
+        conteudo: "O Campeonato Interclasses é o evento esportivo mais aguardado do ano! As turmas do 6º ao 9º ano e Ensino Médio competirão nas modalidades de futebol, vôlei e basquete.\n\nAs inscrições das equipes devem ser feitas com o professor de Educação Física até o dia 01/11. Cada turma pode inscrever equipes masculinas e femininas. Os jogos acontecerão no horário do intervalo e no contraturno.",
+        data: "04 de Novembro, 2024",
+        horario: "14h00 às 17h00",
+        local: "Quadra Poliesportiva",
+        publico: "Troféus e medalhas",
+        imagem: "img-esportes.jpg",
+        autor: "Prof. Carlos Eduardo",
+        destaque: false
+      },
+      {
+        id: "post-3",
+        titulo: "Semana da Leitura: feira literária com autores convidados",
+        categoria: "Português",
+        tagClass: "tag-literatura",
+        resumo: "Evento especial promovido pelo departamento de Português para incentivar o hábito da leitura.",
+        conteudo: "A Semana da Leitura é um evento especial promovido pelo departamento de Português para incentivar o hábito da leitura entre os alunos. Durante a semana, teremos atividades como:\n\n• Feira de troca de livros entre alunos\n• Oficinas de escrita criativa\n• Contação de histórias para o Fundamental I\n• Palestra com autores convidados\n• Concurso de redação com tema livre",
+        data: "11 a 15 de Novembro",
+        horario: "Manhã e Tarde",
+        local: "Biblioteca Central",
+        publico: "Toda a comunidade escolar",
+        imagem: "img-literatura.jpg",
+        autor: "Administração Escolar",
+        destaque: false
+      }
+    ],
+    avisos: [
+      "📚 Prova de Matemática do 3º bimestre: dia 28/10",
+      "🔬 Feira de Ciências: inscrições abertas até 30/10",
+      "⚽ Campeonato Interclasses começa dia 04/11",
+      "📖 Semana da Leitura: 11 a 15/11 com autores convidados"
+    ],
+    avisosSidebar: [
+      {
+        id: "aviso-1",
+        titulo: "Reunião de Pais e Mestres",
+        desc: "Dia 25/10 às 19h no auditório. Presença recomendada.",
+        cor: "var(--cor-erro)",
+        icone: "priority_high"
+      },
+      {
+        id: "aviso-2",
+        titulo: "Matrículas 2025 Abertas",
+        desc: "Garanta sua vaga para o próximo ano letivo.",
+        cor: "var(--cor-primaria)",
+        icone: "edit_document"
+      }
+    ],
+    eventosSidebar: [
+      {
+        id: "evt-1",
+        dia: "28",
+        mes: "Out",
+        nome: "Prova de Matemática — 3º Bimestre",
+        detalhe: "9º ano · Sala 12 · 08h00",
+        cor: "var(--cor-primaria)"
+      },
+      {
+        id: "evt-2",
+        dia: "30",
+        mes: "Out",
+        nome: "Feira de Ciências 2024",
+        detalhe: "Todas as turmas · Ginásio · 09h00",
+        cor: "var(--cor-secundaria)"
+      },
+      {
+        id: "evt-3",
+        dia: "04",
+        mes: "Nov",
+        nome: "Início do Campeonato Interclasses",
+        detalhe: "Futebol e Vôlei · Quadra · 14h00",
+        cor: "var(--cor-destaque)"
+      },
+      {
+        id: "evt-4",
+        dia: "11",
+        mes: "Nov",
+        nome: "Semana da Leitura",
+        detalhe: "11 a 15/Nov · Biblioteca · Manhã e Tarde",
+        cor: "var(--cor-aviso)"
+      }
+    ],
+    horarioAulas: {
+      titulo: "Horário de Aulas",
+      descricao: "Confira a grade horária das turmas para o ano letivo de 2024.",
+      turnos: [
+        {
+          turma: "Ensino Fundamental I (1º ao 5º ano)",
+          horario: "13h00 às 17h30",
+          dias: "Segunda a Sexta"
+        },
+        {
+          turma: "Ensino Fundamental II (6º ao 9º ano)",
+          horario: "07h10 às 12h35",
+          dias: "Segunda a Sexta"
+        },
+        {
+          turma: "Ensino Médio (1º ao 3º ano)",
+          horario: "07h10 às 13h10",
+          dias: "Segunda a Sexta"
+        }
+      ],
+      observacoes: "Tolerância de atraso: 10 minutos no 1º horário. Portões abrem 20 minutos antes do início das aulas."
+    },
+    cardapio: {
+      titulo: "Cardápio Escolar da Semana",
+      descricao: "Alimentação saudável e balanceada elaborada por nutricionistas escolares.",
+      dias: [
+        {
+          dia: "Segunda-feira",
+          prato: "Arroz branco, feijão carioquinha, frango grelhado ao molho de ervas e salada de alface com tomate."
+        },
+        {
+          dia: "Terça-feira",
+          prato: "Arroz integral, feijão preto, carne moída refogada com purê de batatas e cenoura ralada."
+        },
+        {
+          dia: "Quarta-feira",
+          prato: "Macarrão penne ao molho bolonhesa, salada de folhas verdes e melancia de sobremesa."
+        },
+        {
+          dia: "Quinta-feira",
+          prato: "Arroz com milho, feijão, iscas de peixe empanadas e salada de repolho roxo."
+        },
+        {
+          dia: "Sexta-feira",
+          prato: "Strogonoff de frango, arroz branco, batata palha crocante e salada tropical de frutas."
+        }
+      ],
+      observacoes: "Cardápio sujeito a pequenas alterações. Opções vegetarianas disponíveis mediante solicitação prévia."
+    }
+  };
+
+  let dbData = JSON.parse(JSON.stringify(INITIAL_DB));
+  let usuarioLogado = null;
+  let filtroCategoriaAtual = 'todas';
+
+  document.addEventListener('DOMContentLoaded', async function() {
+    await carregarBancoDados();
+    verificarSessaoSalva();
+    renderizarTudo();
+  });
+
+  async function carregarBancoDados() {
+    // 1. Tenta carregar dados sincronizados do Servidor Express (/api/dados -> data.json)
+    try {
+      const resposta = await fetch('/api/dados');
+      if (resposta.ok) {
+        const dadosServidor = await resposta.json();
+        if (dadosServidor && dadosServidor.postagens) {
+          dbData = dadosServidor;
+          salvarBancoNoLocalStorage();
+          console.log('✅ Banco de dados data.json sincronizado com o servidor!');
+          return;
+        }
+      }
+    } catch (fetchErr) {
+      console.log("Servidor backend não detectado, utilizando armazenamento local.");
+    }
+
+    // 2. Se o servidor não estiver rodando, tenta o cache local
+    try {
+      const dbSalvo = localStorage.getItem('portal_escola_db');
+      if (dbSalvo) {
+        dbData = JSON.parse(dbSalvo);
+        if (!dbData.educadores || dbData.educadores.length === 0) dbData.educadores = INITIAL_DB.educadores;
+        if (!dbData.avisosSidebar) dbData.avisosSidebar = INITIAL_DB.avisosSidebar;
+        if (!dbData.eventosSidebar) dbData.eventosSidebar = INITIAL_DB.eventosSidebar;
+        if (!dbData.horarioAulas) dbData.horarioAulas = INITIAL_DB.horarioAulas;
+        if (!dbData.cardapio) dbData.cardapio = INITIAL_DB.cardapio;
+        return;
+      }
+    } catch (err) {
+      console.warn("Erro ao ler armazenamento local:", err);
+    }
+
+    // 3. Fallback estático para data.json
+    try {
+      const resposta = await fetch('data.json');
+      if (resposta.ok) {
+        dbData = await resposta.json();
+        salvarBancoNoLocalStorage();
+        return;
+      }
+    } catch (fetchErr) {}
+
+    // 4. Último fallback para dados embutidos
+    dbData = JSON.parse(JSON.stringify(INITIAL_DB));
+    salvarBancoNoLocalStorage();
+  }
+
+  function salvarBancoNoLocalStorage() {
+    try {
+      localStorage.setItem('portal_escola_db', JSON.stringify(dbData));
+    } catch (e) {}
+  }
+
+  async function salvarBanco() {
+    // Salva instantaneamente no cache local
+    salvarBancoNoLocalStorage();
+
+    // Sincroniza com o arquivo data.json através do servidor backend
+    try {
+      const res = await fetch('/api/dados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dbData)
+      });
+      if (res.ok) {
+        console.log('💾 Banco de dados data.json gravado no disco com sucesso!');
+      }
+    } catch (err) {
+      console.log('Operando em modo local/offline.');
+    }
+  }
+
+  function verificarSessaoSalva() {
+    const sessao = sessionStorage.getItem('educador_logado');
+    if (sessao) {
+      usuarioLogado = JSON.parse(sessao);
+      atualizarInterfaceUsuario();
+    }
+  }
+
+  // ============================================================
+  // AUTENTICAÇÃO E SESSÃO
+  // ============================================================
+  function abrirModalLogin() {
+    document.getElementById('login-erro').style.display = 'none';
+    abrirModal('modal-login');
+  }
+
+  async function processarLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const senha = document.getElementById('login-senha').value.trim();
+
+    // 1. Tenta autenticação pelo servidor backend
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha })
+      });
+      if (res.ok) {
+        const resposta = await res.json();
+        if (resposta.sucesso && resposta.educador) {
+          usuarioLogado = resposta.educador;
+          sessionStorage.setItem('educador_logado', JSON.stringify(usuarioLogado));
+          fecharModal();
+          atualizarInterfaceUsuario();
+          renderizarTudo();
+          mostrarToast(`Bem-vindo(a), ${usuarioLogado.nome}!`);
+          return;
+        }
+      }
+    } catch (apiErr) {
+      // Servidor offline, prossegue com verificação local
+    }
+
+    // 2. Verificação local de fallback
+    const educadorEncontrado = dbData.educadores.find(u => 
+      u.email.toLowerCase() === email.toLowerCase() && u.senha === senha
+    );
+
+    if (educadorEncontrado) {
+      usuarioLogado = educadorEncontrado;
+      sessionStorage.setItem('educador_logado', JSON.stringify(usuarioLogado));
+      fecharModal();
+      atualizarInterfaceUsuario();
+      renderizarTudo();
+      mostrarToast(`Bem-vindo(a), ${usuarioLogado.nome}!`);
+    } else {
+      const erroDiv = document.getElementById('login-erro');
+      erroDiv.innerHTML = '<span class="material-symbols-outlined">error</span> E-mail ou senha incorretos!';
+      erroDiv.style.display = 'flex';
+    }
+  }
+
+  function fazerLogout() {
+    usuarioLogado = null;
+    sessionStorage.removeItem('educador_logado');
+    atualizarInterfaceUsuario();
+    renderizarTudo();
+    mostrarToast("Sessão encerrada.");
+  }
+
+  function atualizarInterfaceUsuario() {
+    const headerArea = document.getElementById('user-header-area');
+    const adminBar = document.getElementById('admin-bar');
+    const quickEvt = document.getElementById('btn-admin-quick-eventos');
+    const quickAvs = document.getElementById('btn-admin-quick-avisos');
+    const quickLinks = document.getElementById('btn-admin-quick-links');
+
+    if (usuarioLogado) {
+      headerArea.innerHTML = `
+        <span class="educador-logged-badge">
+          <span>${usuarioLogado.avatar || '👩‍🏫'}</span> ${usuarioLogado.nome}
+        </span>
+        <button class="btn-admin-panel" onclick="abrirPainelAdmin('posts')">
+          <span class="material-symbols-outlined">edit_note</span>
+          Painel Admin
+        </button>
+        <button class="btn-logout" onclick="fazerLogout()" title="Sair do sistema">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      `;
+      if (adminBar) adminBar.style.display = 'block';
+      if (quickEvt) quickEvt.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('eventos')">+ Gerenciar</button>`;
+      if (quickAvs) quickAvs.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('avisos')">+ Gerenciar</button>`;
+      if (quickLinks) quickLinks.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('horario')">+ Gerenciar</button>`;
+    } else {
+      headerArea.innerHTML = `
+        <button class="btn-area-educador" onclick="abrirModalLogin()">
+          <span class="material-symbols-outlined">lock</span>
+          Área do Educador
+        </button>
+      `;
+      if (adminBar) adminBar.style.display = 'none';
+      if (quickEvt) quickEvt.innerHTML = '';
+      if (quickAvs) quickAvs.innerHTML = '';
+      if (quickLinks) quickLinks.innerHTML = '';
+    }
+  }
+
+  // ============================================================
+  // RENDERIZAÇÃO DA PÁGINA INICIAL
+  // ============================================================
+  function renderizarTudo() {
+    renderizarPosts();
+    renderizarAvisos();
+    renderizarEventosSidebar();
+    renderizarAvisosSidebar();
+    renderizarLinksSidebar();
+  }
+
+  function filtrarCategoria(cat, el) {
+    filtroCategoriaAtual = cat;
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    if (el) el.classList.add('active');
+    renderizarPosts();
+  }
+
+  function renderizarPosts() {
+    const container = document.getElementById('cards-grid-container');
+    if (!container) return;
+
+    let postsFiltrados = dbData.postagens || [];
+    if (filtroCategoriaAtual !== 'todas') {
+      postsFiltrados = postsFiltrados.filter(p => p.categoria.toLowerCase() === filtroCategoriaAtual.toLowerCase());
+    }
+
+    if (postsFiltrados.length === 0) {
+      container.innerHTML = '<p style="grid-column: 1/-1; padding: 3rem 1rem; text-align: center; color: var(--texto-secundario); font-weight: 500;">Nenhuma postagem cadastrada para esta categoria.</p>';
+      return;
+    }
+
+    let html = '';
+    postsFiltrados.forEach((post, index) => {
+      const eDestaque = post.destaque || (index === 0 && filtroCategoriaAtual === 'todas');
+      const cardClasse = eDestaque ? 'card-evento card-destaque' : 'card-evento card-menor';
+      
+      const adminBtns = usuarioLogado ? `
+        <div class="card-admin-actions" onclick="event.stopPropagation()">
+          <button class="btn-card-admin" onclick="editarPost('${post.id}')" title="Editar postagem">
+            <span class="material-symbols-outlined" style="font-size:14px;">edit</span> Editar
+          </button>
+          <button class="btn-card-admin delete" onclick="excluirPostConfirm('${post.id}')" title="Excluir postagem">
+            <span class="material-symbols-outlined" style="font-size:14px;">delete</span>
+          </button>
+        </div>
+      ` : '';
+
+      html += `
+        <article class="${cardClasse}" onclick="abrirModalPostDetalhes('${post.id}')">
+          ${adminBtns}
+          <img src="${post.imagem}" alt="${post.titulo}" onerror="this.src='img-ciencias.jpg'"/>
+          <div class="card-overlay">
+            <div class="card-overlay-top">
+              <span class="card-tag ${post.tagClass || 'tag-ciencias'}">${post.categoria}</span>
+              ${post.fotosBadge ? `
+                <span class="card-badge">
+                  <span class="material-symbols-outlined">photo_library</span>
+                  ${post.fotosBadge}
+                </span>
+              ` : ''}
+            </div>
+            <div class="card-overlay-bottom">
+              <div class="card-meta">
+                <span>📍 ${post.local || 'Escola'}</span>
+                <span>·</span>
+                <span>${post.data || ''}</span>
+              </div>
+              <h2 class="card-titulo">${post.titulo}</h2>
+              <div class="card-footer">
+                <span class="card-link">Clique para saber mais →</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function renderizarAvisos() {
+    const ticker = document.getElementById('aviso-texto-ticker');
+    if (!ticker || !dbData.avisos) return;
+    const lista = [...dbData.avisos, ...dbData.avisos];
+    ticker.innerHTML = lista.map(a => `${a} &nbsp;·&nbsp; `).join('');
+  }
+
+  function renderizarEventosSidebar() {
+    const listaDiv = document.getElementById('evento-lista-sidebar');
+    if (!listaDiv || !dbData.eventosSidebar) return;
+
+    listaDiv.innerHTML = dbData.eventosSidebar.map(e => {
+      const clickAction = usuarioLogado ? `editarEventoDirect('${e.id}')` : `abrirModalEventoDetalhes('${e.id}')`;
+      const adminBtns = usuarioLogado ? `
+        <div style="margin-left: auto; display: flex; gap: 4px;" onclick="event.stopPropagation()">
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarEventoDirect('${e.id}')" title="Editar Evento"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirEventoConfirm('${e.id}')" title="Excluir Evento"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>
+        </div>
+      ` : '';
+
+      return `
+        <div class="evento-item" onclick="${clickAction}">
+          <div class="evento-data" style="background: ${e.cor || 'var(--cor-primaria)'}">
+            <span class="dia">${e.dia}</span>
+            <span class="mes">${e.mes}</span>
+          </div>
+          <div class="evento-info">
+            <p class="evento-nome">${e.nome}</p>
+            <p class="evento-detalhe">${e.detalhe}</p>
+          </div>
+          ${adminBtns}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderizarAvisosSidebar() {
+    const container = document.getElementById('aviso-lista-sidebar');
+    if (!container || !dbData.avisosSidebar) return;
+
+    container.innerHTML = dbData.avisosSidebar.map(a => {
+      const clickAction = usuarioLogado ? `editarAvisoSidebarDirect('${a.id}')` : `abrirModalAvisoDetalhes('${a.id}')`;
+      const adminBtns = usuarioLogado ? `
+        <div style="margin-left: auto; display: flex; gap: 4px;" onclick="event.stopPropagation()">
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarAvisoSidebarDirect('${a.id}')" title="Editar Aviso"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirAvisoSidebarConfirm('${a.id}')" title="Excluir Aviso"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>
+        </div>
+      ` : '';
+
+      return `
+        <div class="aviso-item" onclick="${clickAction}">
+          <div class="aviso-icone" style="background: ${a.cor || 'var(--cor-primaria)'}">
+            <span class="material-symbols-outlined" style="font-size:16px;">${a.icone || 'notifications'}</span>
+          </div>
+          <div class="aviso-info">
+            <p class="aviso-titulo-item">${a.titulo}</p>
+            <p class="aviso-desc">${a.desc}</p>
+          </div>
+          ${adminBtns}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function editarEventoDirect(id) {
+    if (!usuarioLogado) { abrirModalLogin(); return; }
+    abrirPainelAdmin('eventos');
+    editarEvento(id);
+  }
+
+  function editarAvisoSidebarDirect(id) {
+    if (!usuarioLogado) { abrirModalLogin(); return; }
+    abrirPainelAdmin('avisos');
+    editarAvisoSidebar(id);
+  }
+
+  function abrirModalEventoDetalhes(id) {
+    const evt = dbData.eventosSidebar.find(e => e.id === id);
+    if (!evt) return;
+
+    const modalCorpo = document.getElementById('modal-dinamico-corpo');
+    const modalTag = document.getElementById('modal-dinamico-tag');
+    modalTag.className = 'card-tag tag-evento';
+    modalTag.innerText = 'Evento Escolar';
+
+    const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
+    if(modalTopoTipo) modalTopoTipo.innerText = 'Agenda de Eventos';
+
+    modalCorpo.innerHTML = `
+      <p class="modal-categoria" style="color: var(--cor-primaria);">Agenda de Eventos</p>
+      <h1 class="modal-titulo">${evt.nome}</h1>
+      <div class="modal-info-extra" style="margin-top: 16px;">
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">calendar_month</span>
+          <strong>Data:</strong> ${evt.dia} de ${evt.mes}
+        </div>
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">info</span>
+          <strong>Detalhes:</strong> ${evt.detalhe}
+        </div>
+      </div>
+    `;
+    abrirModal('modal-detalhes-dinamico');
+  }
+
+  function abrirModalAvisoDetalhes(id) {
+    const a = dbData.avisosSidebar.find(item => item.id === id);
+    if (!a) return;
+
+    const modalCorpo = document.getElementById('modal-dinamico-corpo');
+    const modalTag = document.getElementById('modal-dinamico-tag');
+    modalTag.className = 'card-tag tag-literatura';
+    modalTag.innerText = 'Aviso Escolar';
+
+    const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
+    if(modalTopoTipo) modalTopoTipo.innerText = 'Comunicado Escolar';
+
+    modalCorpo.innerHTML = `
+      <p class="modal-categoria" style="color: var(--cor-aviso);">Comunicado Importante</p>
+      <h1 class="modal-titulo">${a.titulo}</h1>
+      <p class="modal-descricao" style="font-size: 16px; margin-top: 14px;">${a.desc}</p>
+    `;
+    abrirModal('modal-detalhes-dinamico');
+  }
+
+  function abrirModalPostDetalhes(postId) {
+    const post = dbData.postagens.find(p => p.id === postId);
+    if (!post) return;
+
+    const modalCorpo = document.getElementById('modal-dinamico-corpo');
+    const modalTag = document.getElementById('modal-dinamico-tag');
+    
+    modalTag.className = `card-tag ${post.tagClass || 'tag-ciencias'}`;
+    modalTag.innerText = post.categoria;
+
+    const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
+    if(modalTopoTipo) modalTopoTipo.innerText = 'Publicação do Blog';
+
+    modalCorpo.innerHTML = `
+      <p class="modal-categoria" style="color: var(--cor-primaria);">Publicado por ${post.autor || 'Educador'}</p>
+      <h1 class="modal-titulo">${post.titulo}</h1>
+      <div class="modal-descricao">
+        ${post.conteudo ? post.conteudo.replace(/\n/g, '<br/><br/>') : post.resumo}
+      </div>
+      <div class="modal-info-extra">
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">calendar_month</span>
+          <strong>Data:</strong> ${post.data || 'A definir'}
+        </div>
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">schedule</span>
+          <strong>Horário:</strong> ${post.horario || 'Horário escolar'}
+        </div>
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">location_on</span>
+          <strong>Local:</strong> ${post.local || 'Escola'}
+        </div>
+        <div class="modal-info-item">
+          <span class="material-symbols-outlined">groups</span>
+          <strong>Público:</strong> ${post.publico || 'Comunidade Escolar'}
+        </div>
+      </div>
+      <div class="modal-imagem">
+        <img src="${post.imagem}" alt="${post.titulo}" onerror="this.src='img-ciencias.jpg'"/>
+      </div>
+    `;
+
+    abrirModal('modal-detalhes-dinamico');
+  }
+
+  // ============================================================
+  // PAINEL ADMIN CMS (GERENCIADOR GERAL)
+  // ============================================================
+  function abrirPainelAdmin(secaoInicial = 'posts') {
+    if (!usuarioLogado) {
+      abrirModalLogin();
+      return;
+    }
+    alternarSecaoAdmin(secaoInicial);
+    abrirModal('modal-admin');
+  }
+
+  function abrirFormularioPost() {
+    abrirPainelAdmin('posts');
+    limparFormularioPost();
+  }
+
+  function alternarSecaoAdmin(secao) {
+    document.querySelectorAll('.admin-tab-item').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.admin-secao-panel').forEach(s => s.style.display = 'none');
+
+    const tabEl = document.getElementById(`tab-nav-${secao}`);
+    const secEl = document.getElementById(`secao-admin-${secao}`);
+
+    if (tabEl) tabEl.classList.add('active');
+    if (secEl) secEl.style.display = 'block';
+
+    if (secao === 'posts') {
+      atualizarTabelaAdminPosts();
+    } else if (secao === 'eventos') {
+      atualizarTabelaAdminEventos();
+    } else if (secao === 'avisos') {
+      atualizarTabelaAdminAvisos();
+      atualizarListaAvisosRolantesAdmin();
+    } else if (secao === 'horario') {
+      carregarFormHorarioAdmin();
+    } else if (secao === 'cardapio') {
+      carregarFormCardapioAdmin();
+    } else if (secao === 'educadores') {
+      atualizarTabelaAdminEducadores();
+    }
+  }
+
+  // --- CMS 1: POSTAGENS ---
+  function selecionarPresetImagem(val) {
+    const inputCustom = document.getElementById('post-imagem-custom');
+    if (val === 'custom') {
+      inputCustom.style.display = 'block';
+      inputCustom.required = true;
+    } else {
+      inputCustom.style.display = 'none';
+      inputCustom.required = false;
+    }
+  }
+
+  async function salvarPostagemSubmit(e) {
+    e.preventDefault();
+    if (!usuarioLogado) return;
+
+    const idExistente = document.getElementById('post-id').value;
+    const titulo = document.getElementById('post-titulo').value.trim();
+    const catValue = document.getElementById('post-categoria').value.split('|');
+    const categoria = catValue[0];
+    const tagClass = catValue[1];
+    const data = document.getElementById('post-data').value.trim();
+    const local = document.getElementById('post-local').value.trim();
+    const resumo = document.getElementById('post-resumo').value.trim();
+    const conteudo = document.getElementById('post-conteudo').value.trim();
+    const preset = document.getElementById('post-imagem-preset').value;
+    const customImg = document.getElementById('post-imagem-custom').value.trim();
+    const destaque = document.getElementById('post-destaque').checked;
+
+    const imagem = preset === 'custom' ? customImg : preset;
+
+    if (idExistente) {
+      const index = dbData.postagens.findIndex(p => p.id === idExistente);
+      if (index !== -1) {
+        dbData.postagens[index] = {
+          ...dbData.postagens[index],
+          titulo, categoria, tagClass, data, local, resumo, conteudo, imagem, destaque
+        };
+      }
+      mostrarToast("Postagem atualizada!");
+    } else {
+      const novoPost = {
+        id: 'post-' + Date.now(),
+        titulo, categoria, tagClass, resumo, conteudo, data,
+        horario: 'A definir', local: local || 'Escola', publico: 'Comunidade Escolar',
+        imagem, autor: usuarioLogado.nome, destaque
+      };
+      if (destaque) dbData.postagens.unshift(novoPost);
+      else dbData.postagens.push(novoPost);
+      mostrarToast("Nova postagem publicada!");
+    }
+
+    await salvarBanco();
+    renderizarTudo();
+    limparFormularioPost();
+    atualizarTabelaAdminPosts();
+  }
+
+  function editarPost(id) {
+    const post = dbData.postagens.find(p => p.id === id);
+    if (!post) return;
+
+    abrirPainelAdmin('posts');
+
+    document.getElementById('post-id').value = post.id;
+    document.getElementById('post-titulo').value = post.titulo;
+    document.getElementById('post-data').value = post.data || '';
+    document.getElementById('post-local').value = post.local || '';
+    document.getElementById('post-resumo').value = post.resumo || '';
+    document.getElementById('post-conteudo').value = post.conteudo || post.resumo || '';
+    document.getElementById('post-destaque').checked = !!post.destaque;
+
+    const selCat = document.getElementById('post-categoria');
+    for (let opt of selCat.options) {
+      if (opt.value.startsWith(post.categoria)) { selCat.value = opt.value; break; }
+    }
+
+    const selImg = document.getElementById('post-imagem-preset');
+    if (['img-ciencias.jpg', 'img-esportes.jpg', 'img-literatura.jpg'].includes(post.imagem)) {
+      selImg.value = post.imagem;
+      selecionarPresetImagem(post.imagem);
+    } else {
+      selImg.value = 'custom';
+      selecionarPresetImagem('custom');
+      document.getElementById('post-imagem-custom').value = post.imagem;
+    }
+  }
+
+  async function excluirPostConfirm(id) {
+    if (confirm("Tem certeza que deseja excluir esta postagem?")) {
+      dbData.postagens = dbData.postagens.filter(p => p.id !== id);
+      await salvarBanco();
+      renderizarTudo();
+      atualizarTabelaAdminPosts();
+      mostrarToast("Postagem removida.");
+    }
+  }
+
+  function limparFormularioPost() {
+    document.getElementById('form-postagem').reset();
+    document.getElementById('post-id').value = '';
+    document.getElementById('post-imagem-custom').style.display = 'none';
+  }
+
+  function atualizarTabelaAdminPosts() {
+    const tbody = document.getElementById('lista-posts-admin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = dbData.postagens.map(p => `
+      <tr>
+        <td><img src="${p.imagem}" class="post-table-img" onerror="this.src='img-ciencias.jpg'"/></td>
+        <td><strong>${p.titulo}</strong></td>
+        <td><span class="card-tag ${p.tagClass || 'tag-ciencias'}">${p.categoria}</span></td>
+        <td>${p.autor || 'Educador'}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarPost('${p.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirPostConfirm('${p.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // --- CMS 2: PRÓXIMOS EVENTOS ---
+  async function salvarEventoSubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('evt-id').value;
+    const dia = document.getElementById('evt-dia').value.trim();
+    const mes = document.getElementById('evt-mes').value.trim();
+    const nome = document.getElementById('evt-nome').value.trim();
+    const detalhe = document.getElementById('evt-detalhe').value.trim();
+    const cor = document.getElementById('evt-cor').value;
+
+    if (id) {
+      const idx = dbData.eventosSidebar.findIndex(ev => ev.id === id);
+      if (idx !== -1) {
+        dbData.eventosSidebar[idx] = { id, dia, mes, nome, detalhe, cor };
+      }
+      mostrarToast("Evento atualizado!");
+    } else {
+      const novoEvt = { id: 'evt-' + Date.now(), dia, mes, nome, detalhe, cor };
+      dbData.eventosSidebar.push(novoEvt);
+      mostrarToast("Evento adicionado!");
+    }
+
+    await salvarBanco();
+    renderizarTudo();
+    limparFormularioEvento();
+    atualizarTabelaAdminEventos();
+  }
+
+  function editarEvento(id) {
+    const evt = dbData.eventosSidebar.find(ev => ev.id === id);
+    if (!evt) return;
+
+    document.getElementById('evt-id').value = evt.id;
+    document.getElementById('evt-dia').value = evt.dia;
+    document.getElementById('evt-mes').value = evt.mes;
+    document.getElementById('evt-nome').value = evt.nome;
+    document.getElementById('evt-detalhe').value = evt.detalhe;
+    document.getElementById('evt-cor').value = evt.cor || 'var(--cor-primaria)';
+    document.getElementById('titulo-form-evento').innerText = 'Editar Evento da Sidebar';
+  }
+
+  async function excluirEventoConfirm(id) {
+    if (confirm("Remover este evento da agenda?")) {
+      dbData.eventosSidebar = dbData.eventosSidebar.filter(ev => ev.id !== id);
+      await salvarBanco();
+      renderizarTudo();
+      atualizarTabelaAdminEventos();
+      mostrarToast("Evento removido.");
+    }
+  }
+
+  function limparFormularioEvento() {
+    document.getElementById('form-evento').reset();
+    document.getElementById('evt-id').value = '';
+    document.getElementById('titulo-form-evento').innerText = 'Gerenciar Próximos Eventos (Sidebar)';
+  }
+
+  function atualizarTabelaAdminEventos() {
+    const tbody = document.getElementById('lista-eventos-admin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = dbData.eventosSidebar.map(ev => `
+      <tr>
+        <td><strong>${ev.dia} ${ev.mes}</strong></td>
+        <td>${ev.nome}</td>
+        <td>${ev.detalhe}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarEvento('${ev.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirEventoConfirm('${ev.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // --- CMS 3: AVISOS DA ESCOLA ---
+  async function salvarAvisoSidebarSubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('aviso-sidebar-id').value;
+    const titulo = document.getElementById('aviso-sidebar-titulo').value.trim();
+    const desc = document.getElementById('aviso-sidebar-desc').value.trim();
+    const iconeVal = document.getElementById('aviso-sidebar-icone').value.split('|');
+    const icone = iconeVal[0];
+    const cor = iconeVal[1];
+
+    if (id) {
+      const idx = dbData.avisosSidebar.findIndex(a => a.id === id);
+      if (idx !== -1) {
+        dbData.avisosSidebar[idx] = { id, titulo, desc, icone, cor };
+      }
+      mostrarToast("Aviso atualizado!");
+    } else {
+      const novo = { id: 'aviso-' + Date.now(), titulo, desc, icone, cor };
+      dbData.avisosSidebar.push(novo);
+      mostrarToast("Aviso adicionado!");
+    }
+
+    await salvarBanco();
+    renderizarTudo();
+    limparFormularioAvisoSidebar();
+    atualizarTabelaAdminAvisos();
+  }
+
+  function editarAvisoSidebar(id) {
+    const a = dbData.avisosSidebar.find(item => item.id === id);
+    if (!a) return;
+
+    document.getElementById('aviso-sidebar-id').value = a.id;
+    document.getElementById('aviso-sidebar-titulo').value = a.titulo;
+    document.getElementById('aviso-sidebar-desc').value = a.desc;
+  }
+
+  async function excluirAvisoSidebarConfirm(id) {
+    if (confirm("Excluir este aviso da sidebar?")) {
+      dbData.avisosSidebar = dbData.avisosSidebar.filter(a => a.id !== id);
+      await salvarBanco();
+      renderizarTudo();
+      atualizarTabelaAdminAvisos();
+      mostrarToast("Aviso removido.");
+    }
+  }
+
+  function limparFormularioAvisoSidebar() {
+    document.getElementById('form-aviso-sidebar').reset();
+    document.getElementById('aviso-sidebar-id').value = '';
+  }
+
+  function atualizarTabelaAdminAvisos() {
+    const tbody = document.getElementById('lista-avisos-sidebar-admin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = dbData.avisosSidebar.map(a => `
+      <tr>
+        <td><strong>${a.titulo}</strong></td>
+        <td>${a.desc}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarAvisoSidebar('${a.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirAvisoSidebarConfirm('${a.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  async function adicionarAvisoRolante() {
+    const input = document.getElementById('novo-aviso-rolante-input');
+    const txt = input.value.trim();
+    if (!txt) return;
+
+    dbData.avisos.push(txt);
+    input.value = '';
+    await salvarBanco();
+    renderizarTudo();
+    atualizarListaAvisosRolantesAdmin();
+    mostrarToast("Aviso rolante adicionado!");
+  }
+
+  async function excluirAvisoRolante(index) {
+    if (confirm("Remover este texto da barra de avisos?")) {
+      dbData.avisos.splice(index, 1);
+      await salvarBanco();
+      renderizarTudo();
+      atualizarListaAvisosRolantesAdmin();
+      mostrarToast("Texto rolante removido.");
+    }
+  }
+
+  function atualizarListaAvisosRolantesAdmin() {
+    const tbody = document.getElementById('lista-avisos-rolantes-admin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = dbData.avisos.map((txt, idx) => `
+      <tr>
+        <td>${txt}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirAvisoRolante(${idx})" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // --- CMS 4: CONTAS DE EDUCADORES & SENHAS ---
+  async function salvarEducadorSubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('edu-id').value;
+    const nome = document.getElementById('edu-nome').value.trim();
+    const cargo = document.getElementById('edu-cargo').value.trim();
+    const email = document.getElementById('edu-email').value.trim();
+    const senha = document.getElementById('edu-senha').value.trim();
+    const avatar = document.getElementById('edu-avatar').value;
+
+    if (id) {
+      const idx = dbData.educadores.findIndex(u => u.id === id);
+      if (idx !== -1) {
+        dbData.educadores[idx] = { id, nome, cargo, email, senha, avatar };
+      }
+      mostrarToast("Conta de educador atualizada!");
+    } else {
+      const novoEdu = { id: 'edu-' + Date.now(), nome, cargo, email, senha, avatar };
+      dbData.educadores.push(novoEdu);
+      mostrarToast("Novo educador cadastrado!");
+    }
+
+    await salvarBanco();
+    limparFormularioEducador();
+    atualizarTabelaAdminEducadores();
+  }
+
+  function editarEducador(id) {
+    const u = dbData.educadores.find(item => item.id === id);
+    if (!u) return;
+
+    document.getElementById('edu-id').value = u.id;
+    document.getElementById('edu-nome').value = u.nome;
+    document.getElementById('edu-cargo').value = u.cargo;
+    document.getElementById('edu-email').value = u.email;
+    document.getElementById('edu-senha').value = u.senha;
+    document.getElementById('edu-avatar').value = u.avatar || '👩‍🏫';
+    document.getElementById('titulo-form-educador').innerText = 'Editar Conta de Educador / Alterar Senha';
+  }
+
+  async function excluirEducadorConfirm(id) {
+    if (dbData.educadores.length <= 1) {
+      alert("Não é possível excluir a única conta de educador do sistema!");
+      return;
+    }
+    if (confirm("Tem certeza que deseja excluir este educador?")) {
+      dbData.educadores = dbData.educadores.filter(u => u.id !== id);
+      await salvarBanco();
+      atualizarTabelaAdminEducadores();
+      mostrarToast("Educador removido.");
+    }
+  }
+
+  function limparFormularioEducador() {
+    document.getElementById('form-educador').reset();
+    document.getElementById('edu-id').value = '';
+    document.getElementById('titulo-form-educador').innerText = 'Gerenciar Contas de Educadores & Senhas';
+  }
+
+  function atualizarTabelaAdminEducadores() {
+    const tbody = document.getElementById('lista-educadores-admin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = dbData.educadores.map(u => `
+      <tr>
+        <td><strong>${u.avatar || '👩‍🏫'} ${u.nome}</strong></td>
+        <td><code>${u.email}</code></td>
+        <td><code>${u.senha}</code></td>
+        <td>${u.cargo}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarEducador('${u.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirEducadorConfirm('${u.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // --- CMS 5: HORÁRIO DE AULAS & CARDÁPIO ---
+  function renderizarLinksSidebar() {
+    const container = document.getElementById('links-grid-sidebar');
+    if (!container) return;
+
+    const adminHorarioBtns = usuarioLogado ? `
+      <div style="display: flex; gap: 4px;" onclick="event.stopPropagation()">
+        <button class="btn-tbl-action btn-tbl-edit" onclick="editarHorarioDirect()" title="Editar Horário"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
+      </div>
+    ` : '';
+
+    const adminCardapioBtns = usuarioLogado ? `
+      <div style="display: flex; gap: 4px;" onclick="event.stopPropagation()">
+        <button class="btn-tbl-action btn-tbl-edit" onclick="editarCardapioDirect()" title="Editar Cardápio"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
+      </div>
+    ` : '';
+
+    container.innerHTML = `
+      <div class="link-util" onclick="abrirModalHorario()">
+        <div class="link-util-info">
+          <div class="link-util-icon"><span class="material-symbols-outlined">schedule</span></div>
+          <span>Horário de Aulas</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          ${adminHorarioBtns}
+          <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+        </div>
+      </div>
+      <div class="link-util" onclick="abrirModalCardapio()">
+        <div class="link-util-info">
+          <div class="link-util-icon" style="background: rgba(13, 148, 136, 0.1); color: var(--cor-secundaria);"><span class="material-symbols-outlined">restaurant</span></div>
+          <span>Cardápio</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          ${adminCardapioBtns}
+          <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function abrirModalHorario() {
+    const h = dbData.horarioAulas || INITIAL_DB.horarioAulas;
+    const modalCorpo = document.getElementById('modal-dinamico-corpo');
+    const modalTag = document.getElementById('modal-dinamico-tag');
+    
+    modalTag.className = 'card-tag tag-evento';
+    const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
+    if(modalTopoTipo) modalTopoTipo.innerText = 'Horário e Turnos Escolares';
+
+    const editBtn = usuarioLogado ? `
+      <button class="btn-salvar-post" style="margin-top: 18px; background: var(--cor-destaque);" onclick="fecharModal(); abrirPainelAdmin('horario');">
+        <span class="material-symbols-outlined">edit</span> Editar Horário no Modo Admin
+      </button>
+    ` : '';
+    
+    const printBtn = `
+      <button class="btn-cancelar" style="margin-top: 18px; width: 100%; border: 1px solid #cbd5e1; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="window.print()">
+        <span class="material-symbols-outlined">print</span> Imprimir Horário
+      </button>
+    `;
+
+    let turnosHtml = (h.turnos || []).map(t => `
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <strong style="font-size: 14px; color: var(--texto-principal);">${t.turma}</strong>
+          <span style="font-size: 11px; font-weight: 700; background: var(--cor-primaria); color: #fff; padding: 2px 8px; border-radius: 6px;">${t.dias}</span>
+        </div>
+        <p style="font-size: 13px; color: var(--cor-primaria); font-weight: 600;">⏰ ${t.horario}</p>
+      </div>
+    `).join('');
+
+    modalCorpo.innerHTML = `
+      <p class="modal-categoria" style="color: var(--cor-primaria);">Grade Horária Escolar</p>
+      <h1 class="modal-titulo">${h.titulo}</h1>
+      <p style="font-size: 14px; color: var(--texto-secundario); margin: 8px 0 20px;">${h.descricao}</p>
+      <div>${turnosHtml}</div>
+      ${h.observacoes ? `<p style="font-size: 12px; color: var(--texto-secundario); background: #fffbeeb3; border-left: 3px solid var(--cor-aviso); padding: 10px; border-radius: 4px; margin-top: 14px;"><strong>Observação:</strong> ${h.observacoes}</p>` : ''}
+      ${editBtn}
+      ${printBtn}
+    `;
+
+    abrirModal('modal-detalhes-dinamico');
+  }
+
+  function abrirModalCardapio() {
+    const c = dbData.cardapio || INITIAL_DB.cardapio;
+    const modalCorpo = document.getElementById('modal-dinamico-corpo');
+    const modalTag = document.getElementById('modal-dinamico-tag');
+    
+    modalTag.className = 'card-tag tag-secundaria';
+    modalTag.style.background = 'var(--cor-secundaria)';
+    const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
+    if(modalTopoTipo) modalTopoTipo.innerText = 'Alimentação e Cardápio Escolar';
+
+    const editBtn = usuarioLogado ? `
+      <button class="btn-salvar-post" style="margin-top: 18px; background: var(--cor-destaque);" onclick="fecharModal(); abrirPainelAdmin('cardapio');">
+        <span class="material-symbols-outlined">edit</span> Editar Cardápio no Modo Admin
+      </button>
+    ` : '';
+    
+    const printBtn = `
+      <button class="btn-cancelar" style="margin-top: 18px; width: 100%; border: 1px solid #cbd5e1; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="window.print()">
+        <span class="material-symbols-outlined">print</span> Imprimir Cardápio
+      </button>
+    `;
+
+    let diasHtml = (c.dias || []).map(d => `
+      <div style="background: #f8fafc; border-left: 4px solid var(--cor-secundaria); border-radius: 0 10px 10px 0; padding: 12px 14px; margin-bottom: 10px; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+        <strong style="font-size: 13px; color: var(--cor-secundaria); display: block; margin-bottom: 2px;">📅 ${d.dia}</strong>
+        <p style="font-size: 13px; color: var(--texto-principal); font-weight: 500;">${d.prato}</p>
+      </div>
+    `).join('');
+
+    modalCorpo.innerHTML = `
+      <p class="modal-categoria" style="color: var(--cor-secundaria);">Nutrição Escolar</p>
+      <h1 class="modal-titulo">${c.titulo}</h1>
+      <p style="font-size: 14px; color: var(--texto-secundario); margin: 8px 0 20px;">${c.descricao}</p>
+      <div>${diasHtml}</div>
+      ${c.observacoes ? `<p style="font-size: 12px; color: var(--texto-secundario); background: #f0fdf4; border-left: 3px solid var(--cor-secundaria); padding: 10px; border-radius: 4px; margin-top: 14px;"><strong>Informação Nutricional:</strong> ${c.observacoes}</p>` : ''}
+      ${editBtn}
+      ${printBtn}
+    `;
+
+    abrirModal('modal-detalhes-dinamico');
+  }
+
+  function editarHorarioDirect() {
+    if (!usuarioLogado) { abrirModalLogin(); return; }
+    abrirPainelAdmin('horario');
+    setTimeout(() => {
+      const el = document.getElementById('horario-titulo-input');
+      if (el) el.focus();
+    }, 100);
+  }
+
+  function editarCardapioDirect() {
+    if (!usuarioLogado) { abrirModalLogin(); return; }
+    abrirPainelAdmin('cardapio');
+    setTimeout(() => {
+      const el = document.getElementById('cardapio-titulo-input');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+
+  function carregarFormHorarioAdmin() {
+    const h = dbData.horarioAulas || INITIAL_DB.horarioAulas;
+    document.getElementById('horario-titulo-input').value = h.titulo || '';
+    document.getElementById('horario-desc-input').value = h.descricao || '';
+    document.getElementById('horario-obs-input').value = h.observacoes || '';
+
+    const container = document.getElementById('horario-turnos-inputs-container');
+    if (!container) return;
+
+    container.innerHTML = (h.turnos || []).map((t, i) => `
+      <div class="horario-linha" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 8px; align-items: end;">
+        <div>
+          <label class="form-label">Turma / Nível</label>
+          <input type="text" class="form-input h-turma" value="${t.turma}" required/>
+        </div>
+        <div>
+          <label class="form-label">Horário</label>
+          <input type="text" class="form-input h-horario" value="${t.horario}" required/>
+        </div>
+        <div>
+          <label class="form-label">Dias</label>
+          <input type="text" class="form-input h-dias" value="${t.dias}" required/>
+        </div>
+        <div>
+          <button type="button" class="btn-tbl-action btn-tbl-delete" style="height: 38px; display: flex; align-items: center; justify-content: center;" onclick="removerLinhaHorarioAdmin(this)" title="Remover Turma">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function adicionarLinhaHorarioAdmin() {
+    const container = document.getElementById('horario-turnos-inputs-container');
+    if (!container) return;
+    const div = document.createElement('div');
+    div.className = 'horario-linha';
+    div.style.cssText = 'background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 8px; display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 8px; align-items: end;';
+    div.innerHTML = `
+        <div>
+          <label class="form-label">Turma / Nível</label>
+          <input type="text" class="form-input h-turma" value="" required/>
+        </div>
+        <div>
+          <label class="form-label">Horário</label>
+          <input type="text" class="form-input h-horario" value="" required/>
+        </div>
+        <div>
+          <label class="form-label">Dias</label>
+          <input type="text" class="form-input h-dias" value="" required/>
+        </div>
+        <div>
+          <button type="button" class="btn-tbl-action btn-tbl-delete" style="height: 38px; display: flex; align-items: center; justify-content: center;" onclick="removerLinhaHorarioAdmin(this)" title="Remover Turma">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+    `;
+    container.appendChild(div);
+  }
+
+  function removerLinhaHorarioAdmin(btn) {
+    btn.closest('.horario-linha').remove();
+  }
+
+  async function salvarHorarioSubmit(e) {
+    e.preventDefault();
+    if (!usuarioLogado) return;
+
+    const titulo = document.getElementById('horario-titulo-input').value.trim();
+    const descricao = document.getElementById('horario-desc-input').value.trim();
+    const observacoes = document.getElementById('horario-obs-input').value.trim();
+
+    const turmasInputs = document.querySelectorAll('.h-turma');
+    const horariosInputs = document.querySelectorAll('.h-horario');
+    const diasInputs = document.querySelectorAll('.h-dias');
+
+    const turnos = [];
+    turmasInputs.forEach((el, i) => {
+      turnos.push({
+        turma: el.value.trim(),
+        horario: horariosInputs[i].value.trim(),
+        dias: diasInputs[i].value.trim()
+      });
+    });
+
+    dbData.horarioAulas = { titulo, descricao, turnos, observacoes };
+    await salvarBanco();
+    renderizarTudo();
+    mostrarToast("Horário de aulas atualizado!");
+  }
+
+  function carregarFormCardapioAdmin() {
+    const c = dbData.cardapio || INITIAL_DB.cardapio;
+    document.getElementById('cardapio-titulo-input').value = c.titulo || '';
+    document.getElementById('cardapio-desc-input').value = c.descricao || '';
+    document.getElementById('cardapio-obs-input').value = c.observacoes || '';
+
+    const container = document.getElementById('cardapio-dias-inputs-container');
+    if (!container) return;
+
+    container.innerHTML = (c.dias || []).map((d, i) => `
+      <div class="cardapio-linha" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 8px; display: grid; grid-template-columns: 140px 1fr auto; gap: 8px; align-items: end;">
+        <div>
+          <label class="form-label">Dia</label>
+          <input type="text" class="form-input c-dia" value="${d.dia}" required/>
+        </div>
+        <div>
+          <label class="form-label">Refeição / Pratos</label>
+          <input type="text" class="form-input c-prato" value="${d.prato}" required/>
+        </div>
+        <div>
+          <button type="button" class="btn-tbl-action btn-tbl-delete" style="height: 38px; display: flex; align-items: center; justify-content: center;" onclick="removerLinhaCardapioAdmin(this)" title="Remover Dia">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function adicionarLinhaCardapioAdmin() {
+    const container = document.getElementById('cardapio-dias-inputs-container');
+    if (!container) return;
+    const div = document.createElement('div');
+    div.className = 'cardapio-linha';
+    div.style.cssText = 'background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 8px; display: grid; grid-template-columns: 140px 1fr auto; gap: 8px; align-items: end;';
+    div.innerHTML = `
+        <div>
+          <label class="form-label">Dia</label>
+          <input type="text" class="form-input c-dia" value="" required/>
+        </div>
+        <div>
+          <label class="form-label">Refeição / Pratos</label>
+          <input type="text" class="form-input c-prato" value="" required/>
+        </div>
+        <div>
+          <button type="button" class="btn-tbl-action btn-tbl-delete" style="height: 38px; display: flex; align-items: center; justify-content: center;" onclick="removerLinhaCardapioAdmin(this)" title="Remover Dia">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+    `;
+    container.appendChild(div);
+  }
+
+  function removerLinhaCardapioAdmin(btn) {
+    btn.closest('.cardapio-linha').remove();
+  }
+
+  async function salvarCardapioSubmit(e) {
+    e.preventDefault();
+    if (!usuarioLogado) return;
+
+    const titulo = document.getElementById('cardapio-titulo-input').value.trim();
+    const descricao = document.getElementById('cardapio-desc-input').value.trim();
+    const observacoes = document.getElementById('cardapio-obs-input').value.trim();
+
+    const diasInputs = document.querySelectorAll('.c-dia');
+    const pratosInputs = document.querySelectorAll('.c-prato');
+
+    const dias = [];
+    diasInputs.forEach((el, i) => {
+      dias.push({
+        dia: el.value.trim(),
+        prato: pratosInputs[i].value.trim()
+      });
+    });
+
+    dbData.cardapio = { titulo, descricao, dias, observacoes };
+    await salvarBanco();
+    renderizarTudo();
+    mostrarToast("Cardápio escolar atualizado!");
+  }
+
+  // AUXILIARES DE MODAL
+  function abrirModal(id) {
+    document.getElementById(id).classList.add('aberto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.querySelectorAll('.modal-fundo').forEach(m => m.classList.remove('aberto'));
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') fecharModal();
+  });
+
+  function mostrarToast(mensagem) {
+    let toast = document.getElementById('toast-notificacao');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast-notificacao';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #0f172a;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        z-index: 2000;
+        transition: opacity 0.3s, transform 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<span class="material-symbols-outlined" style="color:#10b981">check_circle</span> ${mensagem}`;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
