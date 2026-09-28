@@ -129,19 +129,7 @@ ul { list-style: none; }
   font-weight: 500;
   letter-spacing: 0.02em;
 }
-.btn-contato {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--cor-secundaria);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-.btn-contato:hover { background: #0b7f74; }
+
 
 .nav-materias {
   background: var(--bg-card);
@@ -937,6 +925,224 @@ ul { list-style: none; }
   text-align: center;
   padding-top: 16px;
 }
+/* ============================================================ */
+/*  CARD RESUMO                                                  */
+/* ============================================================ */
+.card-resumo {
+  font-size: 12px;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.45;
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-destaque .card-resumo { -webkit-line-clamp: 3; font-size: 13px; }
+
+/* ============================================================ */
+/*  NAVEGAÇÃO COM SETAS                                         */
+/* ============================================================ */
+.cards-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.cards-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-secundario);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.cards-nav-btn:hover {
+  background: var(--cor-primaria);
+  color: #fff;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+}
+
+/* ============================================================ */
+/*  BARRA DE TÓPICOS MELHORADA                                  */
+/* ============================================================ */
+.nav-materias .container::-webkit-scrollbar { display: none; }
+.nav-actions-sep {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f0;
+  margin: 0 8px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ============================================================ */
+/*  SEÇÃO SOBRE NÓS                                             */
+/* ============================================================ */
+.sobre-nos-section {
+  background: #fff;
+  padding: 56px 0;
+  border-top: 1px solid #e2e8f0;
+}
+.sobre-nos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .sobre-nos-grid { grid-template-columns: 1fr; }
+  .sobre-nos-img-wrap { order: -1; }
+}
+.sobre-nos-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--cor-primaria);
+}
+.sobre-nos-titulo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--texto-principal);
+  margin-top: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.sobre-nos-desc {
+  font-size: 14px;
+  color: var(--texto-secundario);
+  line-height: 1.75;
+  margin-top: 14px;
+}
+.sobre-nos-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-item strong {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--cor-primaria);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.1;
+}
+.stat-item span {
+  font-size: 11px;
+  color: var(--texto-secundario);
+  font-weight: 500;
+  margin-top: 2px;
+}
+.sobre-nos-img-wrap img {
+  border-radius: 16px;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+}
+
+/* ============================================================ */
+/*  SEÇÃO INTERCLASSE                                           */
+/* ============================================================ */
+.interclasse-section {
+  background: var(--bg-pagina);
+  padding: 48px 0;
+  border-top: 1px solid #e2e8f0;
+}
+.interclasse-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.interclasse-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 768px) { .interclasse-grid { grid-template-columns: 1fr; } }
+.intcl-card {
+  background: #fff;
+  border-radius: var(--raio);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  border-left: 4px solid var(--cor-destaque);
+  transition: box-shadow 0.2s;
+}
+.intcl-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+.intcl-time {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--texto-principal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.intcl-time.right { text-align: right; }
+.intcl-placar {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-width: 90px;
+  border: 1px solid #e2e8f0;
+  line-height: 1.2;
+}
+.intcl-status-ao-vivo {
+  display: inline-block;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  animation: pulse-live 1.5s ease-in-out infinite;
+}
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.intcl-meta {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--texto-secundario);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+.intcl-modalidade-header {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin: 20px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e2e8f0;
+}
 </style>
 </head>
 
@@ -995,12 +1201,6 @@ ul { list-style: none; }
         <span class="masthead-subtitulo">Educação que transforma — Ensino Fundamental e Médio</span>
       </div>
     </div>
-    <div class="masthead-right">
-      <button class="btn-contato">
-        <span class="material-symbols-outlined">mail</span>
-        Fale Conosco
-      </button>
-    </div>
   </div>
 </header>
 
@@ -1020,12 +1220,23 @@ ul { list-style: none; }
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico DS', this)">Técnico DS</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico ADM', this)">Técnico ADM</a>
     
-    <div style="margin-left: auto; display: flex; gap: 8px; padding: 4px 0;">
+    <div class="nav-actions-sep"></div>
+    <span id="nav-admin-link" style="display:none;">
+      <a href="/admin.html" target="_blank" class="nav-link nav-link-admin"
+         style="color: var(--cor-destaque); font-weight: 700; border-bottom: 2px solid var(--cor-destaque);">
+        <span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">admin_panel_settings</span>
+        Painel Admin
+      </a>
+    </span>
+    <div class="nav-actions-sep"></div>
+    <div style="display: flex; gap: 8px; padding: 4px 0; flex-shrink: 0;">
       <button class="nav-btn-action" onclick="abrirModalHorario()" title="Ver Horário de Aulas">
-        <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span> Horário
+        <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span>
+        <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
       </button>
       <button class="nav-btn-action btn-cardapio" onclick="abrirModalCardapio()" title="Ver Cardápio Escolar">
-        <span class="material-symbols-outlined" style="font-size: 18px;">restaurant</span> Cardápio
+        <span class="material-symbols-outlined" style="font-size: 18px;">restaurant</span>
+        <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
       </button>
     </div>
   </div>
@@ -1054,7 +1265,17 @@ ul { list-style: none; }
     <div class="conteudo-grid">
 
       <!-- COLUNA ESQUERDA: GRID DINÂMICO DE POSTS -->
-      <div class="cards-grid" id="cards-grid-container"></div>
+      <div>
+        <div class="cards-nav">
+          <button class="cards-nav-btn" id="btn-cards-prev" onclick="navegarCards(-1)" aria-label="Anterior">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button class="cards-nav-btn" id="btn-cards-next" onclick="navegarCards(1)" aria-label="Próximo">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+        <div class="cards-grid" id="cards-grid-container"></div>
+      </div>
 
       <!-- COLUNA DIREITA: SIDEBAR DE EVENTOS E AVISOS -->
       <aside class="sidebar">
@@ -1196,7 +1417,13 @@ ul { list-style: none; }
           <span class="material-symbols-outlined">restaurant</span> Cardápio Escolar
         </button>
         <button type="button" class="admin-tab-item" id="tab-nav-educadores" onclick="alternarSecaoAdmin('educadores')">
-          <span class="material-symbols-outlined">group</span> Contas & Senhas
+          <span class="material-symbols-outlined">group</span> Contas &amp; Senhas
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-interclasse" onclick="alternarSecaoAdmin('interclasse')">
+          <span class="material-symbols-outlined">sports</span> Interclasse
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-historico" onclick="alternarSecaoAdmin('historico')">
+          <span class="material-symbols-outlined">history</span> Histórico de Edições
         </button>
       </div>
 
@@ -1254,15 +1481,27 @@ ul { list-style: none; }
 
           <div class="form-grid-2" style="margin-top: 14px;">
             <div class="form-group">
-              <label class="form-label" for="post-imagem-preset">Imagem da Postagem</label>
-              <select id="post-imagem-preset" class="form-select" onchange="selecionarPresetImagem(this.value)">
-                <option value="img-ciencias.jpg">Imagem Padrão — Ciências</option>
-                <option value="img-esportes.jpg">Imagem Padrão — Esportes / Ed. Física</option>
-                <option value="img-literatura.jpg">Imagem Padrão — Literatura / Biblioteca</option>
-                <option value="custom">Link/URL Personalizado de Imagem</option>
-              </select>
-              <input type="text" id="post-imagem-custom" class="form-input" style="margin-top: 8px; display: none;" placeholder="Cole a URL da imagem..."/>
+            <label class="form-label" for="post-imagem-preset">Imagem da Postagem</label>
+            <select id="post-imagem-preset" class="form-select" onchange="selecionarPresetImagem(this.value)">
+              <option value="img-ciencias.jpg">Imagem Padrão — Ciências</option>
+              <option value="img-esportes.jpg">Imagem Padrão — Esportes / Ed. Física</option>
+              <option value="img-literatura.jpg">Imagem Padrão — Literatura / Biblioteca</option>
+              <option value="upload">📁 Enviar Imagem (JPG ou PNG)</option>
+              <option value="custom">Link/URL Personalizado de Imagem</option>
+            </select>
+            <!-- Upload de arquivo -->
+            <div id="post-imagem-upload-area" style="display:none; margin-top: 8px;">
+              <input type="file" id="post-imagem-file" accept=".jpg,.jpeg,.png" class="form-input"
+                     onchange="previewImagemUpload(this)" style="padding: 6px;"/>
+              <p style="font-size:11px;color:var(--texto-secundario);margin-top:4px;">Máximo 5MB. Formatos: JPG, PNG.</p>
+              <div id="post-imagem-preview" style="margin-top: 8px; display:none; align-items: center; gap: 10px;">
+                <img id="post-imagem-preview-img" style="max-height: 80px; border-radius: 8px; border: 1px solid #e2e8f0;"/>
+                <span id="post-imagem-preview-nome" style="font-size:11px; color: var(--texto-secundario);"></span>
+              </div>
             </div>
+            <!-- URL personalizada -->
+            <input type="text" id="post-imagem-custom" class="form-input" style="margin-top: 8px; display: none;" placeholder="Cole a URL da imagem..."/>
+          </div>
 
             <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
               <label class="checkbox-container">
@@ -1289,6 +1528,7 @@ ul { list-style: none; }
                 <th>Título</th>
                 <th>Categoria</th>
                 <th>Autor</th>
+                <th>Última Modificação</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -1575,6 +1815,114 @@ ul { list-style: none; }
         </div>
       </div>
 
+      <!-- ======================================== -->
+      <!-- SEÇÃO: INTERCLASSE                       -->
+      <!-- ======================================== -->
+      <div id="secao-admin-interclasse" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Tabela de Esportes — Interclasse</h3>
+        <form id="form-interclasse" onsubmit="salvarInterclasseSubmit(event)">
+          <input type="hidden" id="intcl-id" value=""/>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label" for="intcl-modalidade">Modalidade *</label>
+              <select id="intcl-modalidade" class="form-select" required>
+                <option value="Futebol">⚽ Futebol</option>
+                <option value="Vôlei">🏐 Vôlei</option>
+                <option value="Basquete">🏀 Basquete</option>
+                <option value="Handebol">🤾 Handebol</option>
+                <option value="Atletismo">🏃 Atletismo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="intcl-turmaA">Turma A *</label>
+              <input type="text" id="intcl-turmaA" class="form-input" placeholder="Ex: 3º A" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="intcl-turmaB">Turma B *</label>
+              <input type="text" id="intcl-turmaB" class="form-input" placeholder="Ex: 3º B" required/>
+            </div>
+          </div>
+          <div class="form-grid-3" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="intcl-placarA">Placar Turma A</label>
+              <input type="number" id="intcl-placarA" class="form-input" min="0" value="0"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="intcl-placarB">Placar Turma B</label>
+              <input type="number" id="intcl-placarB" class="form-input" min="0" value="0"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="intcl-status">Status da Partida</label>
+              <select id="intcl-status" class="form-select">
+                <option value="agendado">🗓️ Agendado</option>
+                <option value="ao-vivo">🔴 Ao Vivo</option>
+                <option value="encerrado">✅ Encerrado</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2" style="margin-top: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="intcl-data">Data da Partida *</label>
+              <input type="text" id="intcl-data" class="form-input" placeholder="Ex: 25/10/2026" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="intcl-local">Local</label>
+              <input type="text" id="intcl-local" class="form-input" placeholder="Ex: Quadra Principal"/>
+            </div>
+          </div>
+          <div class="form-actions" style="margin-top: 18px;">
+            <button type="button" class="btn-cancelar" onclick="limparFormInterclasse()">Limpar</button>
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">sports</span> Salvar Partida
+            </button>
+          </div>
+        </form>
+        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Partidas Cadastradas</h4>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>Modalidade</th>
+                <th>Turma A</th>
+                <th>Placar</th>
+                <th>Turma B</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-interclasse-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- SEÇÃO: HISTÓRICO DE EDIÇÕES              -->
+      <!-- ======================================== -->
+      <div id="secao-admin-historico" class="admin-secao-panel" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 15px; color: var(--texto-principal); margin: 0;">Histórico Completo de Postagens</h3>
+            <p style="font-size: 12px; color: var(--texto-secundario); margin-top: 4px;">Registro de quem criou e quem editou cada postagem, com data e hora exata.</p>
+          </div>
+          <button class="btn-salvar-post" style="background: var(--cor-secundaria);" onclick="atualizarTabelaAdminHistorico()">
+            <span class="material-symbols-outlined">refresh</span> Atualizar
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th style="width:50px;">Img</th>
+                <th>Postagem</th>
+                <th colspan="3">Timeline de Edições (quem criou / quem editou / horário)</th>
+              </tr>
+            </thead>
+            <tbody id="lista-historico-admin-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1595,6 +1943,75 @@ ul { list-style: none; }
   </div>
 </div>
 
+<!-- MODAL: SOBRE NÓS -->
+<div class="modal-fundo" id="modal-sobre-nos" onclick="fecharModal(event)">
+  <div class="modal-janela modal-janela-lg" onclick="event.stopPropagation()">
+    <div class="modal-topo" style="background: var(--bg-header-grad); color: #fff;">
+      <div class="modal-topo-esq">
+        <span class="material-symbols-outlined" style="color: #60a5fa;">school</span>
+        <span style="font-weight: 700; font-size: 16px;">Sobre o Colégio</span>
+      </div>
+      <button class="modal-fechar" style="color: #fff;" onclick="fecharModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <div class="sobre-nos-grid">
+        <div class="sobre-nos-texto">
+          <span class="sobre-nos-label">Quem Somos</span>
+          <h2 class="sobre-nos-titulo">Sobre o Colégio Exemplo</h2>
+          <p class="sobre-nos-desc">
+            Fundado em 1990, o Colégio Exemplo é uma instituição de ensino comprometida com
+            a formação integral dos estudantes. Oferecemos Ensino Fundamental e Médio com
+            metodologias modernas, professores qualificados e infraestrutura de excelência.
+          </p>
+          <p class="sobre-nos-desc">
+            Nossa missão é desenvolver cidadãos críticos, criativos e éticos, preparados
+            para os desafios do século XXI. Acreditamos que a educação de qualidade transforma
+            vidas e comunidades.
+          </p>
+          <div class="sobre-nos-stats">
+            <div class="stat-item">
+              <strong>+30</strong>
+              <span>Anos de história</span>
+            </div>
+            <div class="stat-item">
+              <strong>+800</strong>
+              <span>Alunos matriculados</span>
+            </div>
+            <div class="stat-item">
+              <strong>60+</strong>
+              <span>Educadores</span>
+            </div>
+            <div class="stat-item">
+              <strong>98%</strong>
+              <span>Aprovados no ENEM</span>
+            </div>
+          </div>
+        </div>
+        <div class="sobre-nos-img-wrap">
+          <img src="img-ciencias.jpg" alt="Colégio Exemplo — Ambiente Escolar"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO: INTERCLASSE -->
+<section id="interclasse" class="interclasse-section">
+  <div class="container">
+    <div class="interclasse-header">
+      <div>
+        <span class="sobre-nos-label">Competição Escolar</span>
+        <h2 class="sobre-nos-titulo" style="margin-top:4px;">&#9917; Interclasse 2026</h2>
+      </div>
+    </div>
+    <div id="interclasse-publico-container">
+      <p style="text-align:center;color:#94a3b8;padding:32px;">Nenhuma partida cadastrada ainda.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============================================================ -->
 <!-- 7. FOOTER                                                    -->
 <!-- ============================================================ -->
@@ -1606,10 +2023,7 @@ ul { list-style: none; }
         <p class="rodape-marca-desc">Educação que transforma. Ensino Fundamental e Médio de excelência desde 1990.</p>
       </div>
       <div class="rodape-links">
-        <a href="#" class="rodape-link">Sobre Nós</a>
-        <a href="#" class="rodape-link">Contato</a>
-        <a href="#" class="rodape-link">Matrículas</a>
-
+        <a href="javascript:void(0)" class="rodape-link" onclick="abrirModal('modal-sobre-nos');">Sobre Nós</a>
       </div>
     </div>
     <p class="rodape-copy">© 2024 Colégio Exemplo. Todos os direitos reservados.</p>
@@ -1840,6 +2254,7 @@ ul { list-style: none; }
         if (!dbData.eventosSidebar) dbData.eventosSidebar = INITIAL_DB.eventosSidebar;
         if (!dbData.horarioAulas) dbData.horarioAulas = INITIAL_DB.horarioAulas;
         if (!dbData.cardapio) dbData.cardapio = INITIAL_DB.cardapio;
+        if (!dbData.interclasse) dbData.interclasse = [];
         return;
       }
     } catch (err) {
@@ -1963,6 +2378,7 @@ ul { list-style: none; }
     const quickEvt = document.getElementById('btn-admin-quick-eventos');
     const quickAvs = document.getElementById('btn-admin-quick-avisos');
     const quickLinks = document.getElementById('btn-admin-quick-links');
+    const navAdminLink = document.getElementById('nav-admin-link');
 
     if (usuarioLogado) {
       headerArea.innerHTML = `
@@ -1981,6 +2397,8 @@ ul { list-style: none; }
       if (quickEvt) quickEvt.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('eventos')">+ Gerenciar</button>`;
       if (quickAvs) quickAvs.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('avisos')">+ Gerenciar</button>`;
       if (quickLinks) quickLinks.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('horario')">+ Gerenciar</button>`;
+      // Mostrar aba admin no nav
+      if (navAdminLink) navAdminLink.style.display = 'inline';
     } else {
       headerArea.innerHTML = `
         <button class="btn-area-educador" onclick="abrirModalLogin()">
@@ -1992,6 +2410,8 @@ ul { list-style: none; }
       if (quickEvt) quickEvt.innerHTML = '';
       if (quickAvs) quickAvs.innerHTML = '';
       if (quickLinks) quickLinks.innerHTML = '';
+      // Ocultar aba admin no nav
+      if (navAdminLink) navAdminLink.style.display = 'none';
     }
   }
 
@@ -2004,12 +2424,25 @@ ul { list-style: none; }
     renderizarEventosSidebar();
     renderizarAvisosSidebar();
     renderizarLinksSidebar();
+    renderizarInterclassePublico();
   }
 
   function filtrarCategoria(cat, el) {
     filtroCategoriaAtual = cat;
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
     if (el) el.classList.add('active');
+    renderizarPosts();
+  }
+
+  let paginaCards = 0;
+  const CARDS_POR_PAGINA = 3;
+
+  function navegarCards(direcao) {
+    const posts = (dbData.postagens || []).filter(p =>
+      filtroCategoriaAtual === 'todas' || p.categoria.toLowerCase() === filtroCategoriaAtual.toLowerCase()
+    );
+    const totalPaginas = Math.max(1, Math.ceil(posts.length / CARDS_POR_PAGINA));
+    paginaCards = Math.max(0, Math.min(paginaCards + direcao, totalPaginas - 1));
     renderizarPosts();
   }
 
@@ -2027,11 +2460,16 @@ ul { list-style: none; }
       return;
     }
 
+    // Paginação
+    const inicio = paginaCards * CARDS_POR_PAGINA;
+    const paginados = postsFiltrados.slice(inicio, inicio + CARDS_POR_PAGINA);
+    const totalPaginas = Math.max(1, Math.ceil(postsFiltrados.length / CARDS_POR_PAGINA));
+
     let html = '';
-    postsFiltrados.forEach((post, index) => {
-      const eDestaque = post.destaque || (index === 0 && filtroCategoriaAtual === 'todas');
+    paginados.forEach((post, index) => {
+      const eDestaque = post.destaque || (index === 0 && paginaCards === 0 && filtroCategoriaAtual === 'todas');
       const cardClasse = eDestaque ? 'card-evento card-destaque' : 'card-evento card-menor';
-      
+
       const adminBtns = usuarioLogado ? `
         <div class="card-admin-actions" onclick="event.stopPropagation()">
           <button class="btn-card-admin" onclick="editarPost('${post.id}')" title="Editar postagem">
@@ -2064,6 +2502,7 @@ ul { list-style: none; }
                 <span>${post.data || ''}</span>
               </div>
               <h2 class="card-titulo">${post.titulo}</h2>
+              ${post.resumo ? `<p class="card-resumo">${post.resumo}</p>` : ''}
               <div class="card-footer">
                 <span class="card-link">Clique para saber mais →</span>
               </div>
@@ -2074,6 +2513,12 @@ ul { list-style: none; }
     });
 
     container.innerHTML = html;
+
+    // Atualiza botões de navegação
+    const btnPrev = document.getElementById('btn-cards-prev');
+    const btnNext = document.getElementById('btn-cards-next');
+    if (btnPrev) btnPrev.disabled = paginaCards === 0;
+    if (btnNext) btnNext.disabled = paginaCards >= totalPaginas - 1;
   }
 
   function renderizarAvisos() {
@@ -2217,8 +2662,21 @@ ul { list-style: none; }
     modalCorpo.innerHTML = `
       <p class="modal-categoria" style="color: var(--cor-primaria);">Publicado por ${post.autor || 'Educador'}</p>
       <h1 class="modal-titulo">${post.titulo}</h1>
+      ${post.resumo ? `
+        <p style="
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--texto-principal);
+          background: #f0f7ff;
+          border-left: 4px solid var(--cor-primaria);
+          padding: 12px 16px;
+          border-radius: 0 8px 8px 0;
+          margin: 14px 0;
+          line-height: 1.6;
+        ">${post.resumo}</p>
+      ` : ''}
       <div class="modal-descricao">
-        ${post.conteudo ? post.conteudo.replace(/\n/g, '<br/><br/>') : post.resumo}
+        ${post.conteudo ? post.conteudo.replace(/\n/g, '<br/><br/>') : ''}
       </div>
       <div class="modal-info-extra">
         <div class="modal-info-item">
@@ -2286,18 +2744,58 @@ ul { list-style: none; }
       carregarFormCardapioAdmin();
     } else if (secao === 'educadores') {
       atualizarTabelaAdminEducadores();
+    } else if (secao === 'interclasse') {
+      atualizarTabelaAdminInterclasse();
+    } else if (secao === 'historico') {
+      atualizarTabelaAdminHistorico();
     }
   }
 
   // --- CMS 1: POSTAGENS ---
   function selecionarPresetImagem(val) {
     const inputCustom = document.getElementById('post-imagem-custom');
+    const uploadArea = document.getElementById('post-imagem-upload-area');
     if (val === 'custom') {
+      if (uploadArea) uploadArea.style.display = 'none';
       inputCustom.style.display = 'block';
       inputCustom.required = true;
+    } else if (val === 'upload') {
+      inputCustom.style.display = 'none';
+      inputCustom.required = false;
+      if (uploadArea) uploadArea.style.display = 'block';
     } else {
       inputCustom.style.display = 'none';
       inputCustom.required = false;
+      if (uploadArea) uploadArea.style.display = 'none';
+    }
+  }
+
+  async function previewImagemUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const preview = document.getElementById('post-imagem-preview');
+    const previewImg = document.getElementById('post-imagem-preview-img');
+    const previewNome = document.getElementById('post-imagem-preview-nome');
+    if (preview && previewImg) {
+      previewImg.src = URL.createObjectURL(file);
+      if (previewNome) previewNome.textContent = file.name;
+      preview.style.display = 'flex';
+    }
+    // Upload para o servidor
+    try {
+      const fd = new FormData();
+      fd.append('imagem', file);
+      const res = await fetch('/api/upload-imagem', { method: 'POST', body: fd });
+      if (res.ok) {
+        const data = await res.json();
+        window._uploadedImagePath = data.caminho;
+        mostrarToast('Imagem enviada com sucesso!');
+      } else {
+        const err = await res.json();
+        mostrarToast('Erro: ' + (err.erro || 'Falha no upload'));
+      }
+    } catch(e) {
+      mostrarToast('Erro ao enviar imagem. Verifique o servidor.');
     }
   }
 
@@ -2318,14 +2816,31 @@ ul { list-style: none; }
     const customImg = document.getElementById('post-imagem-custom').value.trim();
     const destaque = document.getElementById('post-destaque').checked;
 
-    const imagem = preset === 'custom' ? customImg : preset;
+    const imagem = preset === 'custom' ? customImg :
+                   (preset === 'upload' ? (window._uploadedImagePath || 'img-ciencias.jpg') : preset);
+
+    const agora = new Date().toISOString();
+    const modificadoPor = usuarioLogado ? usuarioLogado.nome : 'Educador';
 
     if (idExistente) {
       const index = dbData.postagens.findIndex(p => p.id === idExistente);
       if (index !== -1) {
+        // Acumula histórico de edições
+        const hist = dbData.postagens[index].historicoEdicoes || [
+          // Se não tinha histórico, cria entrada de criação retroativa
+          {
+            acao: 'criou',
+            editor: dbData.postagens[index].autor || 'Desconhecido',
+            timestamp: dbData.postagens[index].criadoEm || dbData.postagens[index].ultimaModificacao || agora
+          }
+        ];
+        hist.push({ acao: 'editou', editor: modificadoPor, timestamp: agora });
         dbData.postagens[index] = {
           ...dbData.postagens[index],
-          titulo, categoria, tagClass, data, local, resumo, conteudo, imagem, destaque
+          titulo, categoria, tagClass, data, local, resumo, conteudo, imagem, destaque,
+          ultimaModificacao: agora,
+          modificadoPor,
+          historicoEdicoes: hist
         };
       }
       mostrarToast("Postagem atualizada!");
@@ -2334,12 +2849,18 @@ ul { list-style: none; }
         id: 'post-' + Date.now(),
         titulo, categoria, tagClass, resumo, conteudo, data,
         horario: 'A definir', local: local || 'Escola', publico: 'Comunidade Escolar',
-        imagem, autor: usuarioLogado.nome, destaque
+        imagem, autor: modificadoPor, destaque,
+        criadoEm: agora,
+        ultimaModificacao: agora,
+        modificadoPor,
+        historicoEdicoes: [{ acao: 'criou', editor: modificadoPor, timestamp: agora }]
       };
       if (destaque) dbData.postagens.unshift(novoPost);
       else dbData.postagens.push(novoPost);
       mostrarToast("Nova postagem publicada!");
     }
+
+    window._uploadedImagePath = null;
 
     await salvarBanco();
     renderizarTudo();
@@ -2397,18 +2918,28 @@ ul { list-style: none; }
     const tbody = document.getElementById('lista-posts-admin-tbody');
     if (!tbody) return;
 
-    tbody.innerHTML = dbData.postagens.map(p => `
-      <tr>
-        <td><img src="${p.imagem}" class="post-table-img" onerror="this.src='img-ciencias.jpg'"/></td>
-        <td><strong>${p.titulo}</strong></td>
-        <td><span class="card-tag ${p.tagClass || 'tag-ciencias'}">${p.categoria}</span></td>
-        <td>${p.autor || 'Educador'}</td>
-        <td>
-          <button class="btn-tbl-action btn-tbl-edit" onclick="editarPost('${p.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
-          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirPostConfirm('${p.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = dbData.postagens.map(p => {
+      let ultimaMod = '—';
+      if (p.ultimaModificacao) {
+        const d = new Date(p.ultimaModificacao);
+        const dataPart = d.toLocaleDateString('pt-BR');
+        const horaPart = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        ultimaMod = `<span style="font-size:11px">${dataPart} às ${horaPart}</span><br/><span style="font-size:10px;color:var(--cor-destaque);">${p.modificadoPor || p.autor || 'Educador'}</span>`;
+      }
+      return `
+        <tr>
+          <td><img src="${p.imagem}" class="post-table-img" onerror="this.src='img-ciencias.jpg'"/></td>
+          <td><strong>${p.titulo}</strong></td>
+          <td><span class="card-tag ${p.tagClass || 'tag-ciencias'}">${p.categoria}</span></td>
+          <td>${p.autor || 'Educador'}</td>
+          <td>${ultimaMod}</td>
+          <td>
+            <button class="btn-tbl-action btn-tbl-edit" onclick="editarPost('${p.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+            <button class="btn-tbl-action btn-tbl-delete" onclick="excluirPostConfirm('${p.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
   // --- CMS 2: PRÓXIMOS EVENTOS ---
@@ -3033,6 +3564,265 @@ ul { list-style: none; }
       toast.style.transform = 'translateY(10px)';
     }, 3000);
   }
+
+
+
+  // ============================================================
+  // INTERCLASSE — CRUD e RENDER PÚBLICO
+  // ============================================================
+  async function salvarInterclasseSubmit(e) {
+    e.preventDefault();
+    if (!usuarioLogado) return;
+    const id = document.getElementById('intcl-id').value;
+    const modalidade = document.getElementById('intcl-modalidade').value;
+    const turmaA = document.getElementById('intcl-turmaA').value.trim();
+    const turmaB = document.getElementById('intcl-turmaB').value.trim();
+    const placarA = parseInt(document.getElementById('intcl-placarA').value) || 0;
+    const placarB = parseInt(document.getElementById('intcl-placarB').value) || 0;
+    const status = document.getElementById('intcl-status').value;
+    const data = document.getElementById('intcl-data').value.trim();
+    const local = document.getElementById('intcl-local').value.trim();
+
+    if (!dbData.interclasse) dbData.interclasse = [];
+
+    if (id) {
+      const idx = dbData.interclasse.findIndex(p => p.id === id);
+      if (idx !== -1) dbData.interclasse[idx] = { id, modalidade, turmaA, turmaB, placarA, placarB, status, data, local };
+      mostrarToast('Partida atualizada!');
+    } else {
+      dbData.interclasse.push({ id: 'intcl-' + Date.now(), modalidade, turmaA, turmaB, placarA, placarB, status, data, local });
+      mostrarToast('Partida cadastrada!');
+    }
+
+    await salvarBanco();
+    limparFormInterclasse();
+    atualizarTabelaAdminInterclasse();
+    renderizarInterclassePublico();
+  }
+
+  function editarInterclasse(id) {
+    const p = (dbData.interclasse || []).find(item => item.id === id);
+    if (!p) return;
+    document.getElementById('intcl-id').value = p.id;
+    document.getElementById('intcl-modalidade').value = p.modalidade;
+    document.getElementById('intcl-turmaA').value = p.turmaA;
+    document.getElementById('intcl-turmaB').value = p.turmaB;
+    document.getElementById('intcl-placarA').value = p.placarA || 0;
+    document.getElementById('intcl-placarB').value = p.placarB || 0;
+    document.getElementById('intcl-status').value = p.status || 'agendado';
+    document.getElementById('intcl-data').value = p.data || '';
+    document.getElementById('intcl-local').value = p.local || '';
+  }
+
+  async function excluirInterclasseConfirm(id) {
+    if (confirm('Remover esta partida?')) {
+      dbData.interclasse = (dbData.interclasse || []).filter(p => p.id !== id);
+      await salvarBanco();
+      atualizarTabelaAdminInterclasse();
+      renderizarInterclassePublico();
+      mostrarToast('Partida removida.');
+    }
+  }
+
+  function limparFormInterclasse() {
+    document.getElementById('form-interclasse').reset();
+    document.getElementById('intcl-id').value = '';
+  }
+
+  function atualizarTabelaAdminInterclasse() {
+    const tbody = document.getElementById('lista-interclasse-admin-tbody');
+    if (!tbody) return;
+    const lista = dbData.interclasse || [];
+    if (lista.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px;">Nenhuma partida cadastrada ainda.</td></tr>';
+      return;
+    }
+    const statusLabel = { 'agendado': '🗓️ Agendado', 'ao-vivo': '🔴 Ao Vivo', 'encerrado': '✅ Encerrado' };
+    tbody.innerHTML = lista.map(p => `
+      <tr>
+        <td><strong>${p.modalidade}</strong></td>
+        <td>${p.turmaA}</td>
+        <td style="text-align:center;font-weight:700;">${p.placarA} × ${p.placarB}</td>
+        <td>${p.turmaB}</td>
+        <td>${p.data || '—'}</td>
+        <td>${statusLabel[p.status] || p.status}</td>
+        <td>
+          <button class="btn-tbl-action btn-tbl-edit" onclick="editarInterclasse('${p.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
+          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirInterclasseConfirm('${p.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function renderizarInterclassePublico() {
+    const container = document.getElementById('interclasse-publico-container');
+    if (!container) return;
+    const lista = dbData.interclasse || [];
+    if (lista.length === 0) {
+      container.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:32px;">Nenhuma partida cadastrada ainda.</p>';
+      return;
+    }
+
+    // Agrupar por modalidade
+    const grupos = {};
+    lista.forEach(p => {
+      if (!grupos[p.modalidade]) grupos[p.modalidade] = [];
+      grupos[p.modalidade].push(p);
+    });
+
+    const statusLabel = { 'agendado': 'Agendado', 'ao-vivo': 'Ao Vivo', 'encerrado': 'Encerrado' };
+    const iconeModalidade = { 'Futebol': '⚽', 'Vôlei': '🏀', 'Basquete': '🏀', 'Handebol': '🤾', 'Atletismo': '🏃' };
+
+    let html = '';
+    for (const [mod, partidas] of Object.entries(grupos)) {
+      html += `<div class="intcl-modalidade-header">${iconeModalidade[mod] || '🏅'} ${mod}</div>`;
+      html += '<div class="interclasse-grid">';
+      partidas.forEach(p => {
+        const aoVivo = p.status === 'ao-vivo';
+        html += `
+          <div class="intcl-card">
+            <div>
+              <div class="intcl-time">${p.turmaA}</div>
+              <div class="intcl-meta">${p.data || ''}</div>
+            </div>
+            <div class="intcl-placar">
+              ${aoVivo ? `<div class="intcl-status-ao-vivo">AO VIVO</div>` : ''}
+              <div>${p.placarA} : ${p.placarB}</div>
+              <div style="font-size:10px;color:var(--texto-secundario);margin-top:2px;">${statusLabel[p.status] || p.status}</div>
+            </div>
+            <div>
+              <div class="intcl-time right">${p.turmaB}</div>
+              <div class="intcl-meta" style="justify-content:flex-end;">${p.local || ''}</div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+
+  // ============================================================
+  // TOGGLE SEÇÃO SOBRE NÓS
+  // ============================================================
+  function toggleSobreNos(linkEl) {
+    const secao = document.getElementById('sobre-nos');
+    if (!secao) return;
+
+    const visivel = secao.style.display !== 'none';
+
+    if (visivel) {
+      // Esconder
+      secao.style.opacity = '0';
+      secao.style.transform = 'translateY(-12px)';
+      secao.style.transition = 'opacity 0.3s, transform 0.3s';
+      setTimeout(() => { secao.style.display = 'none'; }, 300);
+      linkEl.classList.remove('active');
+    } else {
+      // Mostrar
+      secao.style.display = 'block';
+      secao.style.opacity = '0';
+      secao.style.transform = 'translateY(-12px)';
+      secao.style.transition = 'opacity 0.3s, transform 0.3s';
+      // Força reflow para a animação funcionar
+      secao.getBoundingClientRect();
+      secao.style.opacity = '1';
+      secao.style.transform = 'translateY(0)';
+      linkEl.classList.add('active');
+      // Rola suavemente até a seção
+      setTimeout(() => {
+        secao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  }
+
+
+  // ============================================================
+  // HISTÓRICO DE EDIÇÕES
+  // ============================================================
+  function formatarDataHora(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    const data = d.toLocaleDateString('pt-BR');
+    const hora = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    return `${data} às ${hora}`;
+  }
+
+  function atualizarTabelaAdminHistorico() {
+    const tbody = document.getElementById('lista-historico-admin-tbody');
+    if (!tbody) return;
+
+    const posts = dbData.postagens || [];
+    if (posts.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align:center; padding: 32px; color: #94a3b8;">
+            <span class="material-symbols-outlined" style="font-size:40px; display:block; margin-bottom:8px;">history</span>
+            Nenhuma postagem encontrada.
+          </td>
+        </tr>`;
+      return;
+    }
+
+    // Ordena por atividade mais recente primeiro
+    const ordenados = [...posts].sort((a, b) => {
+      const da = new Date(a.ultimaModificacao || a.criadoEm || 0);
+      const db2 = new Date(b.ultimaModificacao || b.criadoEm || 0);
+      return db2 - da;
+    });
+
+    let html = '';
+    ordenados.forEach(p => {
+      // Monta o histórico: usa array se existir, senão reconstrói dos campos legados
+      let hist = p.historicoEdicoes;
+      if (!hist || hist.length === 0) {
+        hist = [{ acao: 'criou', editor: p.autor || 'Desconhecido', timestamp: p.criadoEm || p.ultimaModificacao || null }];
+        if (p.modificadoPor && p.ultimaModificacao && p.ultimaModificacao !== p.criadoEm) {
+          hist.push({ acao: 'editou', editor: p.modificadoPor, timestamp: p.ultimaModificacao });
+        }
+      }
+
+      // Linha principal do post
+      html += `
+        <tr style="background: #f8fafc; border-top: 3px solid var(--cor-primaria);">
+          <td style="padding: 10px 8px;">
+            <img src="${p.imagem}" class="post-table-img" onerror="this.src='img-ciencias.jpg'"/>
+          </td>
+          <td style="padding: 10px 8px;">
+            <strong style="font-size:13px;">${p.titulo}</strong>
+            ${p.destaque ? `<span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:4px;margin-left:4px;">★ Destaque</span>` : ''}
+            <br/><span class="card-tag ${p.tagClass || 'tag-ciencias'}" style="font-size:10px;margin-top:4px;">${p.categoria}</span>
+          </td>
+          <td colspan="3" style="padding: 10px 8px;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              ${hist.map((h, i) => {
+                const isCriou = h.acao === 'criou';
+                const cor = isCriou ? '#15803d' : '#c2410c';
+                const bg = isCriou ? '#f0fdf4' : '#fff7ed';
+                const borda = isCriou ? '#bbf7d0' : '#fed7aa';
+                const icone = isCriou ? '✅' : '✏️';
+                const label = isCriou ? 'Criou' : `Edição #${i}`;
+                return `
+                  <div style="display:flex; align-items:center; gap:10px; background:${bg}; border:1px solid ${borda}; border-radius:8px; padding:6px 12px;">
+                    <span style="font-size:16px;">${icone}</span>
+                    <div style="flex:1;">
+                      <span style="font-size:11px; font-weight:700; color:${cor};">${label}</span>
+                      <span style="font-size:12px; font-weight:600; color: var(--texto-principal); margin-left:8px;">${h.editor}</span>
+                    </div>
+                    <span style="font-size:10px; color:#64748b; white-space:nowrap;">${h.timestamp ? formatarDataHora(h.timestamp) : '—'}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = html;
+  }
+
 </script>
 
 </body>

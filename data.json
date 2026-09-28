@@ -1,69 +1,86 @@
 {
   "educadores": [
     {
-      "id": "edu-1",
-      "nome": "Profª. Maria Silva",
-      "email": "maria.silva@escola.com",
-      "senha": "senha123",
-      "cargo": "Educadora - Ciências",
-      "avatar": "👩‍🏫"
-    },
-    {
-      "id": "edu-2",
-      "nome": "Prof. Carlos Eduardo",
-      "email": "carlos.eduardo@escola.com",
-      "senha": "senha123",
-      "cargo": "Educador - Ed. Física",
-      "avatar": "👨‍🏫"
-    },
-    {
       "id": "edu-3",
       "nome": "Administração Escolar",
       "email": "admin@escola.com",
       "senha": "admin123",
       "cargo": "Administrador do Portal",
       "avatar": "🏫"
-    }
-  ],
-  "postagens": [],
-  "avisos": [
-    "📚 Prova de Matemática do 3º bimestre: dia 28/10",
-    "🔬 Feira de Ciências: inscrições abertas até 30/10",
-    "⚽ Campeonato Interclasses começa dia 04/11",
-    "📖 Semana da Leitura: 11 a 15/11 com autores convidados"
-  ],
-  "avisosSidebar": [
-    {
-      "id": "aviso-1",
-      "titulo": "Reunião de Pais e Mestres",
-      "desc": "Dia 25/10 às 19h no auditório. Presença recomendada.",
-      "cor": "var(--cor-erro)",
-      "icone": "priority_high"
     },
     {
-      "id": "aviso-2",
-      "titulo": "Matrículas 2025 Abertas",
-      "desc": "Garanta sua vaga para o próximo ano letivo.",
-      "cor": "var(--cor-primaria)",
-      "icone": "edit_document"
+      "id": "edu-1790361799841",
+      "nome": "Nicolle",
+      "cargo": "Professora",
+      "email": "nicolle@educacao.com",
+      "senha": "nicolle123",
+      "avatar": "👩‍🏫"
     }
   ],
+  "postagens": [
+    {
+      "id": "post-1790374302176",
+      "titulo": "teste",
+      "categoria": "Matemática",
+      "tagClass": "tag-evento",
+      "resumo": "teste",
+      "conteudo": "teste",
+      "data": "teste",
+      "horario": "A definir",
+      "local": "teste 2",
+      "publico": "Comunidade Escolar",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUi_gmPE-lnySxs82qtNQHnLOnfcZPYsFQuhZYyRUykQ&s=10",
+      "autor": "Administração Escolar",
+      "destaque": false,
+      "ultimaModificacao": "2026-09-28T18:33:29.919Z",
+      "modificadoPor": "Administração Escolar"
+    },
+    {
+      "id": "post-1790374271373",
+      "titulo": "aaaa",
+      "categoria": "Ciências",
+      "tagClass": "tag-ciencias",
+      "resumo": "a",
+      "conteudo": "aaa",
+      "data": "aa",
+      "horario": "A definir",
+      "local": "aaaaaa",
+      "publico": "Comunidade Escolar",
+      "imagem": "img-upload-1790620453404.png",
+      "autor": "Administração Escolar",
+      "destaque": false,
+      "ultimaModificacao": "2026-09-28T18:34:14.959Z",
+      "modificadoPor": "Administração Escolar"
+    }
+  ],
+  "avisos": [
+    "Projeto dona bertha",
+    "projeto jornal bertha",
+    "programa de jornal",
+    "ia do heytor"
+  ],
+  "interclasse": [
+    {
+      "id": "intcl-1790618138400",
+      "modalidade": "Vôlei",
+      "turmaA": "3a",
+      "turmaB": "3b",
+      "placarA": 0,
+      "placarB": 0,
+      "status": "agendado",
+      "data": "28/09",
+      "local": "Quadra"
+    }
+  ],
+  "avisosSidebar": [],
   "eventosSidebar": [
     {
-      "id": "evt-3",
-      "dia": "04",
-      "mes": "Nov",
-      "nome": "Início do Campeonato Interclasses",
-      "detalhe": "Futebol e Vôlei · Quadra · 14h00",
-      "cor": "var(--cor-destaque)"
-    },
-    {
-      "id": "evt-4",
-      "dia": "11",
-      "mes": "Nov",
-      "nome": "Semana da Leitura",
-      "detalhe": "11 a 15/Nov · Biblioteca · Manhã e Tarde",
-      "cor": "var(--cor-aviso)"
+      "id": "evt-1790376457793",
+      "dia": "25",
+      "mes": "out",
+      "nome": "atividade",
+      "detalhe": "3a",
+      "cor": "var(--cor-primaria)"
     }
   ],
   "horarioAulas": {

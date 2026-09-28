@@ -3,6 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,42 @@ const DB_PATH = path.join(__dirname, 'data.json');
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ============================================================
+// CONFIGURAÇÃO DE UPLOAD DE IMAGENS (multer)
+// ============================================================
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, path.join(__dirname, 'public')),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const nome = 'img-upload-' + Date.now() + ext;
+    cb(null, nome);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png'];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error('Apenas arquivos JPG e PNG são permitidos.'));
+  }
+});
+
+// Rota de upload de imagem
+app.post('/api/upload-imagem', upload.single('imagem'), (req, res) => {
+  if (!req.file) return res.status(400).json({ erro: 'Nenhum arquivo enviado.' });
+  res.json({ sucesso: true, caminho: req.file.filename });
+});
+
+// Tratamento de erro do multer
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError || err.message) {
+    return res.status(400).json({ erro: err.message });
+  }
+  next(err);
+});
 
 // ============================================================
 // FUNÇÕES DE LEITURA/ESCRITA DO BANCO DE DADOS (data.json)
