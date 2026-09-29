@@ -438,6 +438,68 @@ app.delete('/api/educadores/:id', (req, res) => {
 });
 
 // ============================================================
+// API: CURIOSIDADES
+// ============================================================
+app.get('/api/curiosidades', (req, res) => {
+  const db = lerBanco();
+  if (!db) return res.status(500).json({ erro: 'Erro interno' });
+  res.json(db.curiosidades || []);
+});
+
+app.post('/api/curiosidades', (req, res) => {
+  const db = lerBanco();
+  if (!db) return res.status(500).json({ erro: 'Erro interno' });
+
+  if (!db.curiosidades) db.curiosidades = [];
+  const nova = { id: 'cur-' + Date.now(), ...req.body };
+  db.curiosidades.push(nova);
+
+  if (salvarBanco(db)) {
+    res.status(201).json(nova);
+  } else {
+    res.status(500).json({ erro: 'Erro ao salvar' });
+  }
+});
+
+app.put('/api/curiosidades/:id', (req, res) => {
+  const db = lerBanco();
+  if (!db) return res.status(500).json({ erro: 'Erro interno' });
+
+  if (!db.curiosidades) db.curiosidades = [];
+  const index = db.curiosidades.findIndex(c => c.id === req.params.id);
+  if (index === -1) return res.status(404).json({ erro: 'Curiosidade não encontrada' });
+
+  db.curiosidades[index] = { id: req.params.id, ...req.body };
+
+  if (salvarBanco(db)) {
+    res.json(db.curiosidades[index]);
+  } else {
+    res.status(500).json({ erro: 'Erro ao salvar' });
+  }
+});
+
+app.delete('/api/curiosidades/:id', (req, res) => {
+  const db = lerBanco();
+  if (!db) return res.status(500).json({ erro: 'Erro interno' });
+
+  if (!db.curiosidades) db.curiosidades = [];
+  db.curiosidades = db.curiosidades.filter(c => c.id !== req.params.id);
+
+  if (salvarBanco(db)) {
+    res.json({ sucesso: true });
+  } else {
+    res.status(500).json({ erro: 'Erro ao salvar' });
+  }
+});
+
+// ============================================================
+// ROTA: Painel Admin
+// ============================================================
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
+
+// ============================================================
 // FALLBACK: Serve index.html para rotas não-API
 // ============================================================
 app.use((req, res) => {

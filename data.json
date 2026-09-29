@@ -19,6 +19,40 @@
   ],
   "postagens": [
     {
+      "id": "post-1790710347031",
+      "titulo": "aaaaa",
+      "categoria": "Tecnico DS",
+      "tagClass": "tag-ciencias",
+      "resumo": "aaaabbbbccccc",
+      "conteudo": "aaaaa",
+      "data": "hoje",
+      "local": "quadra",
+      "imagem": "img-ciencias.jpg",
+      "destaque": false,
+      "publico": "Comunidade Escolar",
+      "autor": "Administração Escolar",
+      "criadoEm": "2026-09-29T19:32:27.030Z",
+      "ultimaModificacao": "2026-09-29T19:36:00.504Z",
+      "historicoEdicoes": [
+        {
+          "acao": "criou",
+          "editor": "Administração Escolar",
+          "timestamp": "2026-09-29T19:32:27.030Z"
+        },
+        {
+          "acao": "editou",
+          "editor": "Administração Escolar",
+          "timestamp": "2026-09-29T19:35:45.381Z"
+        },
+        {
+          "acao": "editou",
+          "editor": "Administração Escolar",
+          "timestamp": "2026-09-29T19:36:00.504Z"
+        }
+      ],
+      "modificadoPor": "Administração Escolar"
+    },
+    {
       "id": "post-1790374302176",
       "titulo": "teste",
       "categoria": "Matemática",
@@ -29,11 +63,23 @@
       "horario": "A definir",
       "local": "teste 2",
       "publico": "Comunidade Escolar",
-      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUi_gmPE-lnySxs82qtNQHnLOnfcZPYsFQuhZYyRUykQ&s=10",
+      "imagem": "img-upload-1790624980495.png",
       "autor": "Administração Escolar",
       "destaque": false,
-      "ultimaModificacao": "2026-09-28T18:33:29.919Z",
-      "modificadoPor": "Administração Escolar"
+      "ultimaModificacao": "2026-09-28T19:49:42.089Z",
+      "modificadoPor": "Administração Escolar",
+      "historicoEdicoes": [
+        {
+          "acao": "criou",
+          "editor": "Administração Escolar",
+          "timestamp": "2026-09-28T18:33:29.919Z"
+        },
+        {
+          "acao": "editou",
+          "editor": "Administração Escolar",
+          "timestamp": "2026-09-28T19:49:42.089Z"
+        }
+      ]
     },
     {
       "id": "post-1790374271373",
@@ -54,10 +100,7 @@
     }
   ],
   "avisos": [
-    "Projeto dona bertha",
-    "projeto jornal bertha",
-    "programa de jornal",
-    "ia do heytor"
+    "curiosidades bertha"
   ],
   "interclasse": [
     {
@@ -73,16 +116,7 @@
     }
   ],
   "avisosSidebar": [],
-  "eventosSidebar": [
-    {
-      "id": "evt-1790376457793",
-      "dia": "25",
-      "mes": "out",
-      "nome": "atividade",
-      "detalhe": "3a",
-      "cor": "var(--cor-primaria)"
-    }
-  ],
+  "eventosSidebar": [],
   "horarioAulas": {
     "titulo": "Horário de Aulas",
     "descricao": "Confira a grade horária das turmas para o ano letivo de 2024.",
@@ -131,5 +165,38 @@
       }
     ],
     "observacoes": "Cardápio sujeito a pequenas alterações. Opções vegetarianas disponíveis mediante solicitação prévia."
-  }
+  },
+  "formsLinks": {
+    "musica": ""
+  },
+  "curiosidades": [
+    {
+      "id": "cur-1",
+      "titulo": "Quem foi Bertha Lutz?",
+      "categoria": "Ciência & História",
+      "texto": "Bertha Lutz foi uma das maiores cientistas brasileiras e zoóloga de renome mundial, pioneira na pesquisa de anfíbios no Museu Nacional e líder histórica na conquista dos direitos e do voto das mulheres no Brasil.",
+      "icone": "psychology"
+    },
+    {
+      "id": "cur-2",
+      "titulo": "O Som no Espaço",
+      "categoria": "Física",
+      "texto": "No vácuo do espaço sideral quase não existem moléculas para propagar ondas sonoras. Por isso, mesmo as maiores explosões de estrelas e supernovas acontecem em silêncio absoluto!",
+      "icone": "rocket_launch"
+    },
+    {
+      "id": "cur-3",
+      "titulo": "A Rede Subterrânea das Árvores",
+      "categoria": "Botânica",
+      "texto": "Através de redes de fungos micorrízicos no solo, as árvores compartilham água, nutrientes essenciais e até sinais químicos de alerta contra ataques de pragas entre si.",
+      "icone": "forest"
+    },
+    {
+      "id": "cur-4",
+      "titulo": "O Poder do Cérebro Humano",
+      "categoria": "Biologia",
+      "texto": "Apesar de representar somente cerca de 2% do peso do corpo humano, o cérebro é responsável por consumir mais de 20% de toda a energia e glicose diárias.",
+      "icone": "neurology"
+    }
+  ]
 }

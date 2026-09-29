@@ -1,243 +1,451 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel Administrativo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-  <style>
-    :root {
-      --azul:#2563eb; --verde:#15803d; --laranja:#c2410c;
-      --amarelo:#92400e; --cinza:#64748b; --borda:#e2e8f0;
-      --bg:#f1f5f9; --card:#fff;
-      --grad:linear-gradient(135deg,#0f172a 0%,#1e3a5f 60%,#1d4ed8 100%);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:#0f172a;min-height:100vh}
-
-    /* HEADER */
-    .hdr{background:var(--grad);color:#fff;height:60px;padding:0 28px;
-      display:flex;align-items:center;justify-content:space-between;
-      position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-    .hdr-l{display:flex;align-items:center;gap:12px}
-    .hdr-logo{width:36px;height:36px;background:rgba(255,255,255,.15);border-radius:10px;
-      display:flex;align-items:center;justify-content:center}
-    .hdr-title{font-size:15px;font-weight:700}
-    .hdr-sub{font-size:11px;color:#94a3b8;margin-top:1px}
-    .hdr-r{display:flex;align-items:center;gap:10px}
-    .badge-adm{background:#f59e0b;color:#000;font-size:10px;font-weight:800;
-      padding:2px 10px;border-radius:99px}
-    .btn-back{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);
-      color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;
-      padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;
-      text-decoration:none;transition:.2s}
-    .btn-back:hover{background:rgba(255,255,255,.22)}
-    .btn-exit{background:#ef4444;color:#fff;border:none;border-radius:8px;
-      padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;
-      display:flex;align-items:center;gap:6px;transition:.2s;font-family:inherit}
-    .btn-exit:hover{background:#dc2626}
-
-    /* LAYOUT */
-    .layout{display:flex;min-height:calc(100vh - 60px)}
-    .sidebar{width:220px;background:#fff;border-right:1px solid var(--borda);
-      padding:16px 10px;display:flex;flex-direction:column;gap:3px;
-      position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
-    .sb-label{font-size:9px;font-weight:700;text-transform:uppercase;
-      letter-spacing:1px;color:#94a3b8;padding:10px 8px 4px}
-    .sb-btn{display:flex;align-items:center;gap:10px;padding:9px 12px;
-      border-radius:8px;font-size:13px;font-weight:500;color:var(--cinza);
-      cursor:pointer;border:none;background:none;width:100%;text-align:left;
-      transition:.15s;font-family:inherit}
-    .sb-btn:hover{background:#f1f5f9;color:#0f172a}
-    .sb-btn.active{background:#eff6ff;color:var(--azul);font-weight:700}
-    .sb-btn .material-symbols-outlined{font-size:18px}
-
-    /* MAIN */
-    .main{flex:1;padding:28px 32px;overflow-y:auto}
-    .secao{display:none}.secao.on{display:block}
-
-    /* STATS */
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-      gap:14px;margin-bottom:24px}
-    .stat{background:var(--card);border:1px solid var(--borda);border-radius:12px;
-      padding:16px 18px;display:flex;align-items:center;gap:14px}
-    .stat-ico{width:42px;height:42px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;font-size:20px}
-    .stat strong{font-size:22px;font-weight:800}
-    .stat span{font-size:11px;color:var(--cinza);display:block}
-
-    /* TABLE CARD */
-    .tcard{background:var(--card);border:1px solid var(--borda);border-radius:12px;overflow:hidden}
-    .thead-bar{padding:14px 20px;border-bottom:1px solid var(--borda);
-      display:flex;align-items:center;justify-content:space-between}
-    .thead-bar h3{font-size:14px;font-weight:700}
-    .thead-bar p{font-size:11px;color:var(--cinza);margin-top:2px}
-    table{width:100%;border-collapse:collapse}
-    th{background:#f8fafc;font-size:10px;font-weight:700;color:var(--cinza);
-      text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;
-      text-align:left;border-bottom:1px solid var(--borda)}
-    td{padding:12px 14px;font-size:13px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
-    tr:last-child td{border-bottom:none}
-    tr:hover td{background:#fafafa}
-    .thumb{width:42px;height:42px;object-fit:cover;border-radius:8px}
-
-    /* BADGES */
-    .badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;
-      font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
-    .b-green{background:#f0fdf4;color:var(--verde);border:1px solid #bbf7d0}
-    .b-orange{background:#fff7ed;color:var(--laranja);border:1px solid #fed7aa}
-
-    /* TIMELINE */
-    .tl{display:flex;flex-direction:column;gap:5px}
-    .tl-item{display:flex;align-items:center;gap:8px;border-radius:7px;padding:5px 10px}
-    .tl-item.criou{background:#f0fdf4;border:1px solid #bbf7d0}
-    .tl-item.editou{background:#fff7ed;border:1px solid #fed7aa}
-    .tl-lbl{font-size:10px;font-weight:700}
-    .tl-who{font-size:12px;font-weight:600;flex:1}
-    .tl-when{font-size:10px;color:var(--cinza);white-space:nowrap}
-
-    /* REFRESH BTN */
-    .btn-ref{display:flex;align-items:center;gap:6px;background:#0d9488;
-      color:#fff;border:none;border-radius:8px;padding:8px 14px;
-      font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
-    .btn-ref:hover{opacity:.9}
-
-    /* LOGIN OVERLAY */
-    #lov{position:fixed;inset:0;background:var(--grad);
-      display:flex;align-items:center;justify-content:center;z-index:999}
-    .lbox{background:#fff;border-radius:18px;padding:36px 32px;width:340px;
-      box-shadow:0 25px 60px rgba(0,0,0,.4)}
-    .lbox h2{font-size:19px;margin-bottom:18px}
-    .fg{margin-bottom:14px}
-    .fg label{font-size:11px;font-weight:600;display:block;margin-bottom:5px}
-    .fg input{width:100%;padding:10px 13px;border:1.5px solid var(--borda);
-      border-radius:8px;font-size:13px;font-family:inherit}
-    .fg input:focus{outline:none;border-color:var(--azul)}
-    .btn-login{width:100%;padding:11px;background:var(--azul);color:#fff;
-      border:none;border-radius:9px;font-size:14px;font-weight:700;
-      cursor:pointer;font-family:inherit;transition:.2s}
-    .btn-login:hover{background:#1d4ed8}
-    .lerro{display:none;color:#ef4444;font-size:12px;margin-top:8px;font-weight:600}
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Painel Administrativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--az:#1a73e8;--aze:#1557b0;--vd:#10b981;--rx:#8b5cf6;--er:#ef4444;--bg:#f0f4f8;--cd:#fff;--bd:#e2e8f0;--tx:#1e293b;--tx2:#64748b;--gd:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+.material-symbols-outlined{vertical-align:middle}
+#lov{position:fixed;inset:0;background:var(--gd);display:flex;align-items:center;justify-content:center;z-index:9999}
+.lbox{background:#fff;border-radius:20px;padding:38px 34px;width:355px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lbox-logo{width:50px;height:50px;background:var(--gd);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:25px;margin-bottom:16px}
+.lbox h2{font-size:19px;font-weight:800;margin-bottom:3px}
+.lbox .sub{font-size:12px;color:var(--tx2);margin-bottom:20px}
+.fg{margin-bottom:12px}
+.fg label{font-size:11px;font-weight:600;display:block;margin-bottom:4px;color:var(--tx2);text-transform:uppercase;letter-spacing:.04em}
+.fg input{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:inherit;transition:border-color .2s}
+.fg input:focus{outline:none;border-color:var(--az)}
+.btn-login{width:100%;padding:11px;background:var(--az);color:#fff;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-login:hover{background:var(--aze)}
+.lerro{display:none;color:var(--er);font-size:12px;margin-top:8px;font-weight:600}
+.hdr{background:var(--gd);color:#fff;height:57px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 14px rgba(0,0,0,.3)}
+.hdr-l{display:flex;align-items:center;gap:11px}
+.hdr-logo{width:33px;height:33px;background:rgba(255,255,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.hdr-title{font-size:14px;font-weight:700}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.badge-adm{background:#f59e0b;color:#000;font-size:10px;font-weight:800;padding:2px 10px;border-radius:99px}
+.btn-back{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 13px;font-size:12px;font-weight:600;text-decoration:none;transition:.2s}
+.btn-back:hover{background:rgba(255,255,255,.22)}
+.btn-exit{background:var(--er);color:#fff;border-radius:8px;padding:5px 13px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;transition:.2s}
+.btn-exit:hover{background:#dc2626}
+.layout{display:flex;min-height:calc(100vh - 57px)}
+.sidebar{width:225px;background:var(--cd);border-right:1px solid var(--bd);padding:13px 9px;display:flex;flex-direction:column;gap:2px;position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;flex-shrink:0}
+.sb-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;padding:10px 7px 3px}
+.sb-btn{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:8px;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;width:100%;text-align:left;transition:.15s}
+.sb-btn:hover{background:#f1f5f9;color:var(--tx)}
+.sb-btn.active{background:#eff6ff;color:var(--az);font-weight:700}
+.sb-btn .material-symbols-outlined{font-size:18px;flex-shrink:0}
+.main{flex:1;padding:24px 28px;overflow-y:auto}
+.secao{display:none}.secao.on{display:block}
+.tcard{background:var(--cd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.thead-bar{padding:12px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
+.thead-bar h3{font-size:14px;font-weight:700}
+.thead-bar p{font-size:11px;color:var(--tx2);margin-top:1px}
+table{width:100%;border-collapse:collapse}
+th{background:#f8fafc;font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;padding:8px 13px;text-align:left;border-bottom:1px solid var(--bd)}
+td{padding:9px 13px;font-size:13px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.thumb{width:38px;height:38px;object-fit:cover;border-radius:8px}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.b-green{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.b-orange{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+.b-blue{background:#eff6ff;color:var(--az);border:1px solid #bfdbfe}
+.b-ag{background:#eff6ff;color:var(--az);border:1px solid #bfdbfe}
+.b-ej{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.b-en{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.tl{display:flex;flex-direction:column;gap:3px}
+.tl-item{display:flex;align-items:center;gap:5px;border-radius:6px;padding:3px 7px;font-size:11px}
+.tl-item.criou{background:#f0fdf4;border:1px solid #bbf7d0}
+.tl-item.editou{background:#fff7ed;border:1px solid #fed7aa}
+.tl-lbl{font-weight:700}.tl-who{font-weight:600;flex:1}.tl-when{color:var(--tx2);white-space:nowrap}
+.bp{display:inline-flex;align-items:center;gap:5px;background:var(--az);color:#fff;padding:7px 13px;border-radius:8px;font-size:12px;font-weight:600;transition:.2s;cursor:pointer;border:none;font-family:inherit}
+.bp:hover{background:var(--aze)}.bp.g{background:var(--vd)}.bp.g:hover{background:#059669}
+.bp.r{background:var(--rx)}.bp.r:hover{background:#7c3aed}
+.bp.d{background:var(--er)}.bp.d:hover{background:#dc2626}
+.bp.sm{padding:5px 9px;font-size:11px;border-radius:6px}
+.bs{display:inline-flex;align-items:center;gap:5px;background:#f1f5f9;color:var(--tx);padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--bd);transition:.2s;cursor:pointer;font-family:inherit}
+.bs:hover{background:#e2e8f0}
+.fc{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:14px}
+.ft{font-size:15px;font-weight:700;margin-bottom:13px;display:flex;align-items:center;gap:7px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.fgr{display:flex;flex-direction:column;gap:4px}
+.fl{font-size:11px;font-weight:600;color:var(--tx2);text-transform:uppercase;letter-spacing:.04em}
+.fi,.fsel,.fta{padding:8px 11px;border:1.5px solid var(--bd);border-radius:8px;font-size:13px;font-family:inherit;color:var(--tx);transition:border-color .2s;width:100%}
+.fi:focus,.fsel:focus,.fta:focus{outline:none;border-color:var(--az)}
+.fta{resize:vertical;min-height:72px}
+.faction{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}
+.chip{display:flex;align-items:center;gap:7px;background:#f8fafc;border:1px solid var(--bd);border-radius:8px;padding:7px 11px;margin-bottom:6px}
+.chip span.t{flex:1;font-size:13px}
+.stbox{background:#f8fafc;border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin-top:14px}
+.srow{display:flex;align-items:center;gap:7px;font-size:12px;margin-bottom:4px}
+.srow:last-child{margin-bottom:0}
+.lturno,.ldia{display:grid;gap:7px;align-items:end;background:#f8fafc;border:1px solid var(--bd);padding:8px;border-radius:8px;margin-bottom:6px}
+.lturno{grid-template-columns:1fr 1fr 1fr auto}
+.ldia{grid-template-columns:140px 1fr auto}
+.sep{height:1px;background:var(--bd);margin:16px 0}
+@media(max-width:768px){.layout{flex-direction:column}.sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap}.main{padding:13px}.fg2,.fg3{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="lov">
   <div class="lbox">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-      <span class="material-symbols-outlined" style="font-size:28px;color:var(--azul);">admin_panel_settings</span>
-      <div>
-        <h2 style="margin:0">Acesso Restrito</h2>
-        <p style="font-size:12px;color:var(--cinza);">Somente educadores autorizados</p>
-      </div>
-    </div>
-    <div class="fg">
-      <label>E-mail</label>
-      <input type="email" id="li-email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')login()"/>
-    </div>
-    <div class="fg">
-      <label>Senha</label>
-      <input type="password" id="li-senha" placeholder="senha" onkeydown="if(event.key==='Enter')login()"/>
-    </div>
+    <div class="lbox-logo"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+    <h2>Acesso Restrito</h2>
+    <p class="sub">Somente educadores autorizados.</p>
+    <div class="fg"><label>E-mail</label><input type="email" id="li-e" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')login()"/></div>
+    <div class="fg"><label>Senha</label><input type="password" id="li-s" placeholder="senha" onkeydown="if(event.key==='Enter')login()"/></div>
     <button class="btn-login" onclick="login()">Entrar no Painel</button>
-    <p class="lerro" id="li-erro">Email ou senha incorretos.</p>
-    <p style="font-size:11px;color:#94a3b8;margin-top:14px;text-align:center;">
-      <a href="/" style="color:var(--azul);">Voltar ao site</a>
-    </p>
+    <p class="lerro" id="li-err">E-mail ou senha incorretos.</p>
+    <p style="font-size:11px;color:#94a3b8;margin-top:12px;text-align:center"><a href="/" style="color:var(--az)">Voltar ao site</a></p>
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="hdr" id="hdr" style="display:none">
   <div class="hdr-l">
-    <div class="hdr-logo">
-      <span class="material-symbols-outlined" style="font-size:20px">admin_panel_settings</span>
-    </div>
-    <div>
-      <div class="hdr-title">Painel Administrativo</div>
-      <div class="hdr-sub" id="hdr-user">...</div>
-    </div>
+    <div class="hdr-logo"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+    <div><div class="hdr-title">Painel Administrativo</div><div class="hdr-sub" id="hdr-user">...</div></div>
   </div>
   <div class="hdr-r">
     <span class="badge-adm">ADMIN</span>
-    <a href="/" class="btn-back">
-      <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>Voltar ao site
-    </a>
-    <button class="btn-exit" onclick="sair()">
-      <span class="material-symbols-outlined" style="font-size:16px">logout</span>Sair
-    </button>
+    <a href="/" class="btn-back"><span class="material-symbols-outlined" style="font-size:15px">arrow_back</span>Voltar ao site</a>
+    <button class="btn-exit" onclick="sair()"><span class="material-symbols-outlined" style="font-size:15px">logout</span>Sair</button>
   </div>
 </header>
 
-<!-- LAYOUT -->
 <div class="layout" id="lay" style="display:none">
   <aside class="sidebar">
-    <div class="sb-label">Relatórios</div>
-    <button class="sb-btn active" id="sb-h" onclick="nav('h')">
-      <span class="material-symbols-outlined">history</span>Histórico de Edições
-    </button>
-    <button class="sb-btn" id="sb-p" onclick="nav('p')">
-      <span class="material-symbols-outlined">article</span>Postagens
-    </button>
+    <div class="sb-label">Conteudo</div>
+    <button class="sb-btn active" id="sb-posts" onclick="nav('posts')"><span class="material-symbols-outlined">newspaper</span>Postagens</button>
+    <button class="sb-btn" id="sb-eventos" onclick="nav('eventos')"><span class="material-symbols-outlined">calendar_month</span>Eventos</button>
+    <button class="sb-btn" id="sb-avisos" onclick="nav('avisos')"><span class="material-symbols-outlined">campaign</span>Avisos</button>
+    <div class="sb-label">Configuracoes</div>
+    <button class="sb-btn" id="sb-horario" onclick="nav('horario')"><span class="material-symbols-outlined">schedule</span>Horario de Aulas</button>
+    <button class="sb-btn" id="sb-cardapio" onclick="nav('cardapio')"><span class="material-symbols-outlined">restaurant</span>Cardapio Escolar</button>
+    <button class="sb-btn" id="sb-curiosidades" onclick="nav('curiosidades')"><span class="material-symbols-outlined">auto_awesome</span>Curiosidades</button>
+    <button class="sb-btn" id="sb-forms" onclick="nav('forms')"><span class="material-symbols-outlined">link</span>Links dos Forms</button>
+    <div class="sb-label">Administracao</div>
+    <button class="sb-btn" id="sb-educadores" onclick="nav('educadores')"><span class="material-symbols-outlined">group</span>Contas e Senhas</button>
+    <button class="sb-btn" id="sb-interclasse" onclick="nav('interclasse')"><span class="material-symbols-outlined">sports</span>Interclasse</button>
+    <button class="sb-btn" id="sb-historico" onclick="nav('historico')"><span class="material-symbols-outlined">history</span>Historico</button>
     <div class="sb-label">Atalhos</div>
-    <button class="sb-btn" onclick="window.open('/','_blank')">
-      <span class="material-symbols-outlined">open_in_new</span>Abrir Site
-    </button>
+    <button class="sb-btn" onclick="window.open('/','_blank')"><span class="material-symbols-outlined">open_in_new</span>Ver o Site</button>
   </aside>
-
   <main class="main">
 
-    <!-- HISTÓRICO -->
-    <div class="secao on" id="s-h">
-      <div class="tcard">
-        <div class="thead-bar">
-          <div>
-            <h3>Histórico Completo de Edições</h3>
-            <p>Quem criou e quem editou cada postagem, com data e hora.</p>
+    <!-- POSTAGENS -->
+    <div class="secao on" id="s-posts">
+      <div class="fc">
+        <div class="ft" id="ttl-post"><span class="material-symbols-outlined" style="color:var(--az)">add_circle</span>Nova Postagem</div>
+        <form id="frm-post" onsubmit="salvarPost(event)">
+          <input type="hidden" id="p-id"/>
+          <div class="fg2">
+            <div class="fgr"><label class="fl">Titulo *</label><input type="text" id="p-titulo" class="fi" required placeholder="Titulo da postagem"/></div>
+            <div class="fgr"><label class="fl">Categoria *</label><select id="p-cat" class="fsel" required><option value="">Selecione...</option><option>Portugues</option><option>Matematica</option><option>Ciencias</option><option>Historia</option><option>Geografia</option><option>Ed. Fisica</option><option>Artes</option><option>Tecnico DS</option><option>Tecnico ADM</option></select></div>
           </div>
-          <button class="btn-ref" onclick="renderH()">
-            <span class="material-symbols-outlined">refresh</span>Atualizar
-          </button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Img</th>
-              <th>Postagem</th>
-              <th>Categoria</th>
-              <th>Timeline de Edições</th>
-            </tr>
-          </thead>
-          <tbody id="tb-h"><tr><td colspan="4" style="text-align:center;padding:24px;color:#94a3b8">Carregando...</td></tr></tbody>
-        </table>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Resumo *</label><input type="text" id="p-resumo" class="fi" required placeholder="Resumo curto para o card"/></div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Conteudo *</label><textarea id="p-cont" class="fta" rows="4" required placeholder="Texto completo..."></textarea></div>
+          <div class="fg3" style="margin-top:10px">
+            <div class="fgr"><label class="fl">Data</label><input type="text" id="p-data" class="fi" placeholder="30 de Out, 2024"/></div>
+            <div class="fgr"><label class="fl">Local</label><input type="text" id="p-local" class="fi" placeholder="Ginasio"/></div>
+            <div class="fgr" style="grid-column:1/-1;margin-top:4px">
+              <label class="fl">Imagem da Postagem</label>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <input type="text" id="p-img" class="fi" placeholder="img-ciencias.jpg" style="flex:1;min-width:160px" oninput="prevImg(this.value)"/>
+                <label class="bp" style="cursor:pointer;white-space:nowrap;margin:0">
+                  <span class="material-symbols-outlined">upload</span>Enviar Imagem
+                  <input type="file" id="p-img-file" accept="image/jpeg,image/png" style="display:none" onchange="uploadImagem(this)"/>
+                </label>
+              </div>
+              <div id="p-img-prev" style="margin-top:8px;display:none">
+                <img id="p-img-prev-el" src="" style="max-height:100px;max-width:200px;border-radius:8px;border:1px solid var(--bd);object-fit:cover"/>
+                <span id="p-img-upload-status" style="font-size:11px;color:var(--tx2);display:block;margin-top:4px"></span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:7px;margin-top:10px"><input type="checkbox" id="p-dest" style="width:14px;height:14px;cursor:pointer"/><label for="p-dest" style="font-size:13px;font-weight:600;cursor:pointer">Marcar como destaque</label></div>
+          <div class="faction">
+            <button type="submit" class="bp"><span class="material-symbols-outlined">save</span>Salvar Postagem</button>
+            <button type="button" class="bs" onclick="limparPost()"><span class="material-symbols-outlined">clear</span>Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div class="tcard">
+        <div class="thead-bar"><div><h3>Postagens Cadastradas</h3><p>Clique em editar para modificar.</p></div><button class="bp sm" onclick="renderPosts()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
+        <table><thead><tr><th>Img</th><th>Titulo</th><th>Cat.</th><th>Autor</th><th>Dest.</th><th>Acoes</th></tr></thead><tbody id="tb-posts"></tbody></table>
       </div>
     </div>
 
-    <!-- POSTAGENS -->
-    <div class="secao" id="s-p">
-      <div class="stats" id="st"></div>
-      <div class="tcard">
-        <div class="thead-bar">
-          <div>
-            <h3>Todas as Postagens</h3>
-            <p>Listagem completa com autor e última modificação.</p>
+    <!-- EVENTOS -->
+    <div class="secao" id="s-eventos">
+      <div class="fc">
+        <div class="ft" id="ttl-evt"><span class="material-symbols-outlined" style="color:var(--vd)">calendar_month</span>Novo Evento</div>
+        <form id="frm-evt" onsubmit="salvarEvt(event)">
+          <input type="hidden" id="e-id"/>
+          <div class="fg3">
+            <div class="fgr"><label class="fl">Dia *</label><input type="text" id="e-dia" class="fi" required placeholder="28"/></div>
+            <div class="fgr"><label class="fl">Mes *</label><input type="text" id="e-mes" class="fi" required placeholder="Out"/></div>
+            <div class="fgr"><label class="fl">Cor</label><select id="e-cor" class="fsel"><option value="var(--cor-primaria)">Azul</option><option value="var(--cor-secundaria)">Verde</option><option value="var(--cor-destaque)">Roxo</option><option value="var(--cor-aviso)">Amarelo</option><option value="var(--cor-erro)">Vermelho</option></select></div>
           </div>
-          <button class="btn-ref" onclick="renderP()">
-            <span class="material-symbols-outlined">refresh</span>Atualizar
-          </button>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Nome *</label><input type="text" id="e-nome" class="fi" required placeholder="Prova de Matematica"/></div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Detalhe</label><input type="text" id="e-det" class="fi" placeholder="9o ano - Sala 12 - 08h00"/></div>
+          <div class="faction">
+            <button type="submit" class="bp g"><span class="material-symbols-outlined">save</span>Salvar Evento</button>
+            <button type="button" class="bs" onclick="limparEvt()">Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div class="tcard">
+        <div class="thead-bar"><div><h3>Proximos Eventos</h3></div><button class="bp sm" onclick="renderEvts()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
+        <table><thead><tr><th>Data</th><th>Evento</th><th>Detalhe</th><th>Acoes</th></tr></thead><tbody id="tb-evt"></tbody></table>
+      </div>
+    </div>
+
+    <!-- AVISOS -->
+    <div class="secao" id="s-avisos">
+      <div class="fc">
+        <div class="ft"><span class="material-symbols-outlined" style="color:var(--az)">campaign</span>Avisos Rolantes (ticker)</div>
+        <div class="fgr">
+          <label class="fl">Novo Aviso</label>
+          <div style="display:flex;gap:7px"><input type="text" id="av-inp" class="fi" placeholder="Prova de Matematica dia 28/10" style="flex:1"/><button type="button" class="bp" onclick="addAviso()"><span class="material-symbols-outlined">add</span>Adicionar</button></div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Img</th><th>Título</th><th>Categoria</th>
-              <th>Autor</th><th>Criado em</th><th>Última Edição</th><th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="tb-p"><tr><td colspan="7" style="text-align:center;padding:24px;color:#94a3b8">Carregando...</td></tr></tbody>
-        </table>
+        <div id="lista-av" style="margin-top:12px"></div>
+        <div class="faction"><button type="button" class="bp" onclick="salvarAvisos()"><span class="material-symbols-outlined">save</span>Salvar Avisos</button></div>
+      </div>
+      <div class="fc">
+        <div class="ft"><span class="material-symbols-outlined" style="color:var(--rx)">notifications_active</span>Avisos Importantes (sidebar)</div>
+        <form id="frm-avsb" onsubmit="salvarAvisoSb(event)">
+          <input type="hidden" id="asb-id"/>
+          <div class="fg2">
+            <div class="fgr"><label class="fl">Titulo *</label><input type="text" id="asb-tit" class="fi" required placeholder="Reuniao de Pais"/></div>
+            <div class="fgr"><label class="fl">Icone (Material)</label><input type="text" id="asb-ico" class="fi" placeholder="priority_high"/></div>
+          </div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Descricao *</label><input type="text" id="asb-desc" class="fi" required placeholder="Descricao breve"/></div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Cor</label><select id="asb-cor" class="fsel"><option value="var(--cor-erro)">Vermelho</option><option value="var(--cor-primaria)">Azul</option><option value="var(--cor-destaque)">Roxo</option><option value="var(--cor-aviso)">Amarelo</option><option value="var(--cor-secundaria)">Verde</option></select></div>
+          <div class="faction">
+            <button type="submit" class="bp r"><span class="material-symbols-outlined">save</span>Salvar</button>
+            <button type="button" class="bs" onclick="limparAvisoSb()">Limpar</button>
+          </div>
+        </form>
+        <div class="sep"></div>
+        <table><thead><tr><th>Titulo</th><th>Descricao</th><th>Acoes</th></tr></thead><tbody id="tb-avsb"></tbody></table>
+      </div>
+    </div>
+
+    <!-- HORARIO -->
+    <div class="secao" id="s-horario">
+      <div class="fc">
+        <div class="ft"><span class="material-symbols-outlined" style="color:var(--az)">schedule</span>Horario de Aulas</div>
+        <form id="frm-hor" onsubmit="salvarHorario(event)">
+          <div class="fg2">
+            <div class="fgr"><label class="fl">Titulo *</label><input type="text" id="hor-tit" class="fi" required/></div>
+            <div class="fgr"><label class="fl">Descricao</label><input type="text" id="hor-desc" class="fi"/></div>
+          </div>
+          <div style="margin-top:13px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <label class="fl">Turnos / Turmas</label>
+              <button type="button" class="bp sm" onclick="addTurno()"><span class="material-symbols-outlined" style="font-size:13px">add</span>Turno</button>
+            </div>
+            <div id="turnos-cont"></div>
+          </div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Observacoes</label><textarea id="hor-obs" class="fta" rows="2"></textarea></div>
+          <div class="faction"><button type="submit" class="bp"><span class="material-symbols-outlined">save</span>Salvar Horario</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- CARDAPIO -->
+    <div class="secao" id="s-cardapio">
+      <div class="fc">
+        <div class="ft"><span class="material-symbols-outlined" style="color:var(--vd)">restaurant</span>Cardapio Escolar</div>
+        <form id="frm-card" onsubmit="salvarCardapio(event)">
+          <div class="fg2">
+            <div class="fgr"><label class="fl">Titulo *</label><input type="text" id="cd-tit" class="fi" required/></div>
+            <div class="fgr"><label class="fl">Subtitulo</label><input type="text" id="cd-desc" class="fi"/></div>
+          </div>
+          <div style="margin-top:13px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <label class="fl">Cardapio por Dia</label>
+              <button type="button" class="bp sm g" onclick="addDia()"><span class="material-symbols-outlined" style="font-size:13px">add</span>Dia</button>
+            </div>
+            <div id="dias-cont"></div>
+          </div>
+          <div class="fgr" style="margin-top:10px"><label class="fl">Observacoes</label><input type="text" id="cd-obs" class="fi"/></div>
+          <div class="faction"><button type="submit" class="bp g"><span class="material-symbols-outlined">save</span>Salvar Cardapio</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- CURIOSIDADES -->
+    <div class="secao" id="s-curiosidades">
+      <div class="fc">
+        <div class="ft" style="justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span class="material-symbols-outlined" style="color:#f59e0b">auto_awesome</span>
+            <span>Curiosidades do Portal</span>
+          </div>
+          <span id="cur-contador-badge" class="badge b-orange">0 cadastradas</span>
+        </div>
+        <p style="font-size:12px;color:var(--tx2);margin-bottom:16px">Gerencie as curiosidades exibidas no popup da página inicial e na barra lateral dos estudantes.</p>
+
+        <!-- Formulário adicionar/editar -->
+        <form id="frm-cur" onsubmit="salvarCuriosidade(event)" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px;margin-bottom:22px;transition:border-color .2s">
+          <input type="hidden" id="cur-id"/>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div style="font-size:14px;font-weight:700;color:var(--tx);display:flex;align-items:center;gap:6px" id="cur-form-title">
+              <span class="material-symbols-outlined" style="color:var(--az);font-size:18px">add_circle</span>Nova Curiosidade
+            </div>
+            <span id="cur-edit-badge" style="display:none;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;border:1px solid #fde68a">Editando item existente</span>
+          </div>
+
+          <div class="fg2" style="margin-bottom:12px">
+            <div class="fgr">
+              <label class="fl">Título *</label>
+              <input type="text" id="cur-titulo" class="fi" placeholder="Ex: O Som no Espaço Sideral" required/>
+            </div>
+            <div class="fgr">
+              <label class="fl">Categoria *</label>
+              <input type="text" id="cur-categoria" class="fi" placeholder="Ex: Física & Astronomia" required/>
+            </div>
+          </div>
+
+          <div class="fgr" style="margin-bottom:12px">
+            <label class="fl">Texto da Curiosidade *</label>
+            <textarea id="cur-texto" class="fta" rows="3" placeholder="Fato interessante, histórico ou científico..." required></textarea>
+          </div>
+
+          <div class="fgr" style="margin-bottom:14px">
+            <label class="fl">Ícone (Material Symbols)</label>
+            <div style="display:flex;gap:10px;align-items:center">
+              <div id="cur-ico-preview" style="width:38px;height:38px;border-radius:8px;background:rgba(245,158,11,.15);color:#d97706;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(245,158,11,.3)">
+                <span class="material-symbols-outlined" id="cur-ico-preview-icon" style="font-size:22px">auto_awesome</span>
+              </div>
+              <input type="text" id="cur-icone" class="fi" placeholder="Ex: rocket_launch, psychology, forest..." oninput="atualizarIcoPreview(this.value)" style="flex:1"/>
+            </div>
+            <!-- Sugestões rápidas de ícones -->
+            <div style="display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <span style="font-size:11px;color:var(--tx2);font-weight:600">Sugestões rápidas:</span>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('psychology')"><span class="material-symbols-outlined" style="font-size:14px">psychology</span>Mente</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('rocket_launch')"><span class="material-symbols-outlined" style="font-size:14px">rocket_launch</span>Espaço</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('forest')"><span class="material-symbols-outlined" style="font-size:14px">forest</span>Natureza</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('neurology')"><span class="material-symbols-outlined" style="font-size:14px">neurology</span>Cérebro</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('biotech')"><span class="material-symbols-outlined" style="font-size:14px">biotech</span>Ciência</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('history_edu')"><span class="material-symbols-outlined" style="font-size:14px">history_edu</span>História</button>
+              <button type="button" class="bs" style="padding:2px 8px;font-size:11px" onclick="escolherIco('lightbulb')"><span class="material-symbols-outlined" style="font-size:14px">lightbulb</span>Ideia</button>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:16px">
+            <button type="submit" class="bp g" id="cur-btn-salvar"><span class="material-symbols-outlined">save</span>Salvar Curiosidade</button>
+            <button type="button" class="bs" onclick="cancelarEdicaoCur()"><span class="material-symbols-outlined" style="font-size:15px">close</span>Cancelar</button>
+          </div>
+        </form>
+
+        <!-- Lista de curiosidades -->
+        <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+          <span class="material-symbols-outlined" style="font-size:18px;color:var(--tx2)">list</span>Curiosidades Cadastradas
+        </div>
+        <div id="cur-lista"></div>
+      </div>
+    </div>
+
+    <!-- LINKS DOS FORMS -->
+    <div class="secao" id="s-forms">
+      <div class="fc">
+        <div class="ft"><span class="material-symbols-outlined" style="color:var(--rx)">link</span>Links dos Google Forms</div>
+        <p style="font-size:12px;color:var(--tx2);margin-bottom:16px">Cole os links dos formularios. Aparecem automaticamente na sidebar do site para os alunos.</p>
+        <form id="frm-forms" onsubmit="salvarForms(event)">
+          <div class="fgr" style="margin-bottom:14px">
+            <label class="fl"><span class="material-symbols-outlined" style="font-size:13px;vertical-align:middle;color:#8b5cf6">library_music</span> Sugestoes de Musica</label>
+            <div style="display:flex;gap:7px;align-items:center">
+              <input type="url" id="f-musica" class="fi" placeholder="https://forms.gle/..." style="flex:1"/>
+              <a id="fp-musica" href="#" target="_blank" style="display:none;font-size:12px;color:var(--az);white-space:nowrap;align-items:center;gap:4px;text-decoration:none"><span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>Testar</a>
+            </div>
+          </div>
+          <div class="faction"><button type="submit" class="bp r"><span class="material-symbols-outlined">save</span>Salvar Links</button></div>
+        </form>
+        <div class="stbox">
+          <p style="font-size:12px;font-weight:700;margin-bottom:8px">Status na sidebar do site:</p>
+          <div class="srow"><span class="material-symbols-outlined" style="color:#8b5cf6;font-size:15px">library_music</span><span style="color:var(--tx2)">Sugestoes de Musica:</span><span id="fs-musica" style="font-weight:600">-</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTAS E SENHAS -->
+    <div class="secao" id="s-educadores">
+      <div class="fc">
+        <div class="ft" id="ttl-edu"><span class="material-symbols-outlined" style="color:var(--az)">person_add</span>Novo Educador</div>
+        <form id="frm-edu" onsubmit="salvarEdu(event)">
+          <input type="hidden" id="edu-id"/>
+          <div class="fg2">
+            <div class="fgr"><label class="fl">Nome Completo *</label><input type="text" id="edu-nome" class="fi" required placeholder="Profa. Amanda"/></div>
+            <div class="fgr"><label class="fl">Cargo *</label><input type="text" id="edu-cargo" class="fi" required placeholder="Educadora - Historia"/></div>
+          </div>
+          <div class="fg3" style="margin-top:10px">
+            <div class="fgr"><label class="fl">E-mail *</label><input type="email" id="edu-email" class="fi" required placeholder="email@escola.com"/></div>
+            <div class="fgr"><label class="fl">Senha *</label><input type="text" id="edu-senha" class="fi" required placeholder="Senha123"/></div>
+            <div class="fgr"><label class="fl">Avatar</label><select id="edu-av" class="fsel"><option value="&#x1F469;&#x200D;&#x1F3EB;">Professora</option><option value="&#x1F468;&#x200D;&#x1F3EB;">Professor</option><option value="&#x1F3EB;">Administracao</option><option value="&#x1F4DA;">Coordenacao</option></select></div>
+          </div>
+          <div class="faction">
+            <button type="submit" class="bp"><span class="material-symbols-outlined">save</span>Salvar</button>
+            <button type="button" class="bs" onclick="limparEdu()">Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div class="tcard">
+        <div class="thead-bar"><div><h3>Educadores Cadastrados</h3></div><button class="bp sm" onclick="renderEdu()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
+        <table><thead><tr><th></th><th>Nome</th><th>E-mail</th><th>Cargo</th><th>Acoes</th></tr></thead><tbody id="tb-edu"></tbody></table>
+      </div>
+    </div>
+
+    <!-- INTERCLASSE -->
+    <div class="secao" id="s-interclasse">
+      <div class="fc">
+        <div class="ft" id="ttl-int"><span class="material-symbols-outlined" style="color:var(--vd)">sports</span>Nova Partida</div>
+        <form id="frm-int" onsubmit="salvarPartida(event)">
+          <input type="hidden" id="int-id"/>
+          <div class="fg3">
+            <div class="fgr"><label class="fl">Modalidade *</label><input type="text" id="int-mod" class="fi" required placeholder="Futebol"/></div>
+            <div class="fgr"><label class="fl">Data</label><input type="text" id="int-data" class="fi" placeholder="30/11"/></div>
+            <div class="fgr"><label class="fl">Local</label><input type="text" id="int-local" class="fi" placeholder="Quadra"/></div>
+          </div>
+          <div class="fg2" style="margin-top:10px">
+            <div class="fgr"><label class="fl">Turma A *</label><input type="text" id="int-ta" class="fi" required placeholder="3A"/></div>
+            <div class="fgr"><label class="fl">Turma B *</label><input type="text" id="int-tb" class="fi" required placeholder="3B"/></div>
+          </div>
+          <div class="fg3" style="margin-top:10px">
+            <div class="fgr"><label class="fl">Placar A</label><input type="number" id="int-pa" class="fi" value="0" min="0"/></div>
+            <div class="fgr"><label class="fl">Placar B</label><input type="number" id="int-pb" class="fi" value="0" min="0"/></div>
+            <div class="fgr"><label class="fl">Status</label><select id="int-st" class="fsel"><option value="agendado">Agendado</option><option value="emjogo">Em Jogo</option><option value="encerrado">Encerrado</option></select></div>
+          </div>
+          <div class="faction">
+            <button type="submit" class="bp g"><span class="material-symbols-outlined">save</span>Salvar</button>
+            <button type="button" class="bs" onclick="limparInt()">Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div class="tcard">
+        <div class="thead-bar"><div><h3>Partidas</h3></div><button class="bp sm" onclick="renderInter()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
+        <table><thead><tr><th>Modalidade</th><th>Turma A</th><th>Placar</th><th>Turma B</th><th>Data</th><th>Status</th><th>Acoes</th></tr></thead><tbody id="tb-int"></tbody></table>
+      </div>
+    </div>
+
+    <!-- HISTORICO -->
+    <div class="secao" id="s-historico">
+      <div class="tcard">
+        <div class="thead-bar"><div><h3>Historico Completo de Postagens</h3><p>Quem criou e editou cada postagem.</p></div><button class="bp sm" onclick="renderHist()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
+        <table><thead><tr><th>Img</th><th>Postagem</th><th>Categoria</th><th>Timeline de Edicoes</th></tr></thead><tbody id="tb-hist"></tbody></table>
       </div>
     </div>
 
@@ -245,128 +453,329 @@
 </div>
 
 <script>
-  let db = null;
+let db=null,user=null;
+addEventListener('DOMContentLoaded',async()=>{
+  const s=sessionStorage.getItem('educador_logado');
+  if(s){try{await iniciar(JSON.parse(s));return}catch(e){}}
+  document.getElementById('lov').style.display='flex';
+});
+async function login(){
+  const em=document.getElementById('li-e').value.trim(),sn=document.getElementById('li-s').value.trim(),er=document.getElementById('li-err');
+  er.style.display='none';
+  try{
+    const r=await fetch('/api/dados');db=await r.json();
+    const u=db.educadores.find(x=>x.email.toLowerCase()===em.toLowerCase()&&x.senha===sn);
+    if(u){sessionStorage.setItem('educador_logado',JSON.stringify(u));await iniciar(u);}
+    else er.style.display='block';
+  }catch(e){er.textContent='Erro ao conectar.';er.style.display='block';}
+}
+async function iniciar(u){
+  user=u;
+  document.getElementById('lov').style.display='none';
+  document.getElementById('hdr').style.display='flex';
+  document.getElementById('lay').style.display='flex';
+  document.getElementById('hdr-user').textContent=(u.avatar||'')+' '+u.nome+' - '+(u.cargo||'Educador');
+  if(!db){const r=await fetch('/api/dados');db=await r.json();}
+  nav('posts');
+}
+function sair(){sessionStorage.removeItem('educador_logado');location.href='/';}
+async function salvarBanco(){
+  try{await fetch('/api/dados',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(db)});}catch(e){}
+}
+function nav(id){
+  document.querySelectorAll('.secao').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  const s=document.getElementById('s-'+id),b=document.getElementById('sb-'+id);
+  if(s)s.classList.add('on');if(b)b.classList.add('active');
+  ({posts:renderPosts,eventos:renderEvts,avisos:()=>{renderAvRol();renderAvSb();},horario:carregarHor,cardapio:carregarCard,curiosidades:renderCuriosidades,forms:carregarForms,educadores:renderEdu,interclasse:renderInter,historico:renderHist}[id]||(() => {}))();
+}
+function fmt(iso){if(!iso)return '-';const d=new Date(iso);return d.toLocaleDateString('pt-BR')+' as '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
+function toast(msg){
+  let t=document.getElementById('_t');
+  if(!t){t=document.createElement('div');t.id='_t';t.style.cssText='position:fixed;bottom:20px;right:20px;background:#0f172a;color:#fff;padding:10px 17px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:9999;transition:opacity .3s;display:flex;align-items:center;gap:7px;';document.body.appendChild(t);}
+  t.innerHTML='<span class="material-symbols-outlined" style="color:#10b981">check_circle</span>'+msg;
+  t.style.opacity='1';setTimeout(()=>{t.style.opacity='0';},3000);
+}
 
-  /* ── BOOT ── */
-  addEventListener('DOMContentLoaded', async () => {
-    const s = sessionStorage.getItem('educador_logado');
-    if (s) { try { await start(JSON.parse(s)); return; } catch(e){} }
-    document.getElementById('lov').style.display = 'flex';
-  });
+/* POSTAGENS */
+function renderPosts(){
+  const tb=document.getElementById('tb-posts'),pp=db?.postagens||[];
+  if(!pp.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:#94a3b8">Nenhuma postagem.</td></tr>';return;}
+  tb.innerHTML=pp.map(p=>`<tr>
+    <td><img src="${p.imagem||'img-ciencias.jpg'}" class="thumb" onerror="this.src='img-ciencias.jpg'"/></td>
+    <td><strong>${p.titulo}</strong><br><span style="font-size:11px;color:#94a3b8">${(p.resumo||'').slice(0,50)}...</span></td>
+    <td><span class="badge b-blue">${p.categoria}</span></td>
+    <td style="font-size:12px">${p.autor||'-'}</td>
+    <td>${p.destaque?'<span class="badge b-orange">Dest.</span>':'-'}</td>
+    <td style="white-space:nowrap">
+      <button class="bp sm" onclick="editarPost('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button>
+      <button class="bp sm d" style="margin-left:3px" onclick="excluirPost('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button>
+    </td></tr>`).join('');
+}
+function editarPost(id){
+  const p=(db.postagens||[]).find(x=>x.id===id);if(!p)return;
+  document.getElementById('p-id').value=p.id;document.getElementById('p-titulo').value=p.titulo||'';document.getElementById('p-cat').value=p.categoria||'';document.getElementById('p-resumo').value=p.resumo||'';document.getElementById('p-cont').value=p.conteudo||'';document.getElementById('p-data').value=p.data||'';document.getElementById('p-local').value=p.local||'';document.getElementById('p-img').value=p.imagem||'';document.getElementById('p-dest').checked=!!p.destaque;
+  document.getElementById('ttl-post').innerHTML='<span class="material-symbols-outlined" style="color:var(--az)">edit</span>Editando Postagem';window.scrollTo(0,0);
+}
+async function salvarPost(e){
+  e.preventDefault();const id=document.getElementById('p-id').value,agora=new Date().toISOString();
+  const d={titulo:document.getElementById('p-titulo').value.trim(),categoria:document.getElementById('p-cat').value,tagClass:'tag-ciencias',resumo:document.getElementById('p-resumo').value.trim(),conteudo:document.getElementById('p-cont').value.trim(),data:document.getElementById('p-data').value.trim(),local:document.getElementById('p-local').value.trim(),imagem:document.getElementById('p-img').value.trim()||'img-ciencias.jpg',destaque:document.getElementById('p-dest').checked,publico:'Comunidade Escolar'};
+  if(!db.postagens)db.postagens=[];
+  if(id){const idx=db.postagens.findIndex(x=>x.id===id);if(idx>-1){const old=db.postagens[idx];const h=old.historicoEdicoes||[{acao:'criou',editor:old.autor||'?',timestamp:old.criadoEm||agora}];h.push({acao:'editou',editor:user.nome,timestamp:agora});db.postagens[idx]={...old,...d,ultimaModificacao:agora,modificadoPor:user.nome,historicoEdicoes:h};}}
+  else{db.postagens.unshift({id:'post-'+Date.now(),...d,autor:user.nome,criadoEm:agora,ultimaModificacao:agora,historicoEdicoes:[{acao:'criou',editor:user.nome,timestamp:agora}]});}
+  await salvarBanco();limparPost();renderPosts();toast('Postagem salva!');
+}
+async function excluirPost(id){if(!confirm('Excluir esta postagem?'))return;db.postagens=db.postagens.filter(x=>x.id!==id);await salvarBanco();renderPosts();toast('Postagem removida.');}
+function limparPost(){document.getElementById('frm-post').reset();document.getElementById('p-id').value='';document.getElementById('ttl-post').innerHTML='<span class="material-symbols-outlined" style="color:var(--az)">add_circle</span>Nova Postagem';}
 
-  /* ── LOGIN ── */
-  async function login() {
-    const em = document.getElementById('li-email').value.trim();
-    const sn = document.getElementById('li-senha').value.trim();
-    const er = document.getElementById('li-erro');
-    er.style.display = 'none';
-    try {
-      const r = await fetch('/api/dados');
-      db = await r.json();
-      const u = db.educadores.find(x => x.email === em && x.senha === sn);
-      if (u) { sessionStorage.setItem('educador_logado', JSON.stringify(u)); await start(u); }
-      else { er.style.display = 'block'; }
-    } catch(e) { er.textContent = 'Erro ao conectar.'; er.style.display = 'block'; }
+/* EVENTOS */
+function renderEvts(){
+  const tb=document.getElementById('tb-evt'),ev=db?.eventosSidebar||[];
+  if(!ev.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;padding:20px;color:#94a3b8">Nenhum evento.</td></tr>';return;}
+  tb.innerHTML=ev.map(e=>`<tr><td><strong style="font-size:16px;color:var(--az)">${e.dia}</strong> <span style="font-size:11px">${e.mes}</span></td><td><strong>${e.nome}</strong></td><td style="font-size:12px">${e.detalhe||'-'}</td>
+    <td style="white-space:nowrap"><button class="bp sm" onclick="editarEvt('${e.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button><button class="bp sm d" style="margin-left:3px" onclick="excluirEvt('${e.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button></td></tr>`).join('');
+}
+function editarEvt(id){const e=(db.eventosSidebar||[]).find(x=>x.id===id);if(!e)return;document.getElementById('e-id').value=e.id;document.getElementById('e-dia').value=e.dia||'';document.getElementById('e-mes').value=e.mes||'';document.getElementById('e-nome').value=e.nome||'';document.getElementById('e-det').value=e.detalhe||'';document.getElementById('e-cor').value=e.cor||'var(--cor-primaria)';document.getElementById('ttl-evt').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">edit</span>Editando Evento';window.scrollTo(0,0);}
+async function salvarEvt(e){e.preventDefault();const id=document.getElementById('e-id').value;const d={dia:document.getElementById('e-dia').value.trim(),mes:document.getElementById('e-mes').value.trim(),nome:document.getElementById('e-nome').value.trim(),detalhe:document.getElementById('e-det').value.trim(),cor:document.getElementById('e-cor').value};if(!db.eventosSidebar)db.eventosSidebar=[];if(id){const idx=db.eventosSidebar.findIndex(x=>x.id===id);if(idx>-1)db.eventosSidebar[idx]={...db.eventosSidebar[idx],...d};}else{db.eventosSidebar.push({id:'evt-'+Date.now(),...d});}await salvarBanco();limparEvt();renderEvts();toast('Evento salvo!');}
+async function excluirEvt(id){if(!confirm('Excluir?'))return;db.eventosSidebar=db.eventosSidebar.filter(x=>x.id!==id);await salvarBanco();renderEvts();toast('Evento removido.');}
+function limparEvt(){document.getElementById('frm-evt').reset();document.getElementById('e-id').value='';document.getElementById('ttl-evt').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">calendar_month</span>Novo Evento';}
+
+/* AVISOS */
+function renderAvRol(){const av=db?.avisos||[];const c=document.getElementById('lista-av');c.innerHTML=av.map((a,i)=>`<div class="chip"><span class="t">${a}</span><button onclick="rmAviso(${i})" style="color:var(--er)"><span class="material-symbols-outlined" style="font-size:16px">close</span></button></div>`).join('')||'<p style="font-size:12px;color:#94a3b8">Nenhum aviso.</p>';}
+function addAviso(){const inp=document.getElementById('av-inp'),v=inp.value.trim();if(!v)return;if(!db.avisos)db.avisos=[];db.avisos.push(v);inp.value='';renderAvRol();}
+function rmAviso(i){db.avisos.splice(i,1);renderAvRol();}
+async function salvarAvisos(){await salvarBanco();toast('Avisos salvos!');}
+function renderAvSb(){const tb=document.getElementById('tb-avsb'),av=db?.avisosSidebar||[];if(!av.length){tb.innerHTML='<tr><td colspan="3" style="text-align:center;padding:12px;color:#94a3b8">Nenhum aviso sidebar.</td></tr>';return;}tb.innerHTML=av.map(a=>`<tr><td><strong>${a.titulo}</strong></td><td style="font-size:12px">${a.desc||'-'}</td><td style="white-space:nowrap"><button class="bp sm" onclick="editarAvSb('${a.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button><button class="bp sm d" style="margin-left:3px" onclick="excluirAvSb('${a.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button></td></tr>`).join('');}
+function editarAvSb(id){const a=(db.avisosSidebar||[]).find(x=>x.id===id);if(!a)return;document.getElementById('asb-id').value=a.id;document.getElementById('asb-tit').value=a.titulo||'';document.getElementById('asb-desc').value=a.desc||'';document.getElementById('asb-ico').value=a.icone||'';document.getElementById('asb-cor').value=a.cor||'var(--cor-erro)';window.scrollTo(0,0);}
+async function salvarAvisoSb(e){e.preventDefault();const id=document.getElementById('asb-id').value;const d={titulo:document.getElementById('asb-tit').value.trim(),desc:document.getElementById('asb-desc').value.trim(),icone:document.getElementById('asb-ico').value.trim()||'notifications',cor:document.getElementById('asb-cor').value};if(!db.avisosSidebar)db.avisosSidebar=[];if(id){const idx=db.avisosSidebar.findIndex(x=>x.id===id);if(idx>-1)db.avisosSidebar[idx]={...db.avisosSidebar[idx],...d};}else{db.avisosSidebar.push({id:'aviso-'+Date.now(),...d});}await salvarBanco();limparAvisoSb();renderAvSb();toast('Aviso sidebar salvo!');}
+async function excluirAvSb(id){if(!confirm('Excluir?'))return;db.avisosSidebar=db.avisosSidebar.filter(x=>x.id!==id);await salvarBanco();renderAvSb();toast('Aviso removido.');}
+function limparAvisoSb(){document.getElementById('frm-avsb').reset();document.getElementById('asb-id').value='';}
+
+/* HORARIO */
+function carregarHor(){const h=db?.horarioAulas||{};document.getElementById('hor-tit').value=h.titulo||'';document.getElementById('hor-desc').value=h.descricao||'';document.getElementById('hor-obs').value=h.observacoes||'';document.getElementById('turnos-cont').innerHTML=(h.turnos||[]).map(t=>tHtml(t)).join('');}
+function tHtml(t={}){return `<div class="lturno"><div><label class="fl">Turma</label><input type="text" class="fi t-turma" value="${t.turma||''}"/></div><div><label class="fl">Horario</label><input type="text" class="fi t-hor" value="${t.horario||''}"/></div><div><label class="fl">Dias</label><input type="text" class="fi t-dias" value="${t.dias||''}"/></div><button type="button" onclick="this.closest('.lturno').remove()" style="color:var(--er);align-self:flex-end;padding-bottom:2px"><span class="material-symbols-outlined">delete</span></button></div>`;}
+function addTurno(){document.getElementById('turnos-cont').insertAdjacentHTML('beforeend',tHtml());}
+async function salvarHorario(e){e.preventDefault();const turnos=[...document.querySelectorAll('.lturno')].map(el=>({turma:el.querySelector('.t-turma').value.trim(),horario:el.querySelector('.t-hor').value.trim(),dias:el.querySelector('.t-dias').value.trim()}));db.horarioAulas={titulo:document.getElementById('hor-tit').value.trim(),descricao:document.getElementById('hor-desc').value.trim(),observacoes:document.getElementById('hor-obs').value.trim(),turnos};await salvarBanco();toast('Horario salvo!');}
+
+/* CARDAPIO */
+function carregarCard(){const c=db?.cardapio||{};document.getElementById('cd-tit').value=c.titulo||'';document.getElementById('cd-desc').value=c.descricao||'';document.getElementById('cd-obs').value=c.observacoes||'';document.getElementById('dias-cont').innerHTML=(c.dias||[]).map(d=>dHtml(d)).join('');}
+function dHtml(d={}){return `<div class="ldia"><div><label class="fl">Dia</label><input type="text" class="fi cd-dia" value="${d.dia||''}"/></div><div><label class="fl">Pratos</label><input type="text" class="fi cd-prato" value="${d.prato||''}"/></div><button type="button" onclick="this.closest('.ldia').remove()" style="color:var(--er);align-self:flex-end;padding-bottom:2px"><span class="material-symbols-outlined">delete</span></button></div>`;}
+function addDia(){document.getElementById('dias-cont').insertAdjacentHTML('beforeend',dHtml());}
+async function salvarCardapio(e){e.preventDefault();const dias=[...document.querySelectorAll('.ldia')].map(el=>({dia:el.querySelector('.cd-dia').value.trim(),prato:el.querySelector('.cd-prato').value.trim()}));db.cardapio={titulo:document.getElementById('cd-tit').value.trim(),descricao:document.getElementById('cd-desc').value.trim(),observacoes:document.getElementById('cd-obs').value.trim(),dias};await salvarBanco();toast('Cardapio salvo!');}
+
+/* FORMS LINKS */
+function carregarForms(){
+  const fl=db?.formsLinks||{};
+  const iM=document.getElementById('f-musica');
+  if(iM)iM.value=fl.musica||'';
+  atualizarStatusForms();
+  iM&&iM.addEventListener('input',function(){const a=document.getElementById('fp-musica');if(a){a.href=this.value||'#';a.style.display=this.value?'flex':'none';}});
+}
+function atualizarStatusForms(){
+  const fl=db?.formsLinks||{};
+  const sm=document.getElementById('fs-musica');
+  if(sm){sm.textContent=fl.musica?'Configurado':'Sem link';sm.style.color=fl.musica?'#8b5cf6':'var(--er)';}
+  const pm=document.getElementById('fp-musica');
+  if(pm){pm.href=fl.musica||'#';pm.style.display=fl.musica?'flex':'none';}
+}
+async function salvarForms(e){
+  e.preventDefault();
+  const musica=(document.getElementById('f-musica')?.value||'').trim();
+  if(!db.formsLinks)db.formsLinks={};
+  db.formsLinks.musica=musica;
+  await salvarBanco();atualizarStatusForms();toast('Links dos Forms salvos!');
+}
+
+/* CURIOSIDADES */
+function renderCuriosidades(){
+  cancelarEdicaoCur();
+  const lista=db?.curiosidades||[];
+  const el=document.getElementById('cur-lista');
+  const badge=document.getElementById('cur-contador-badge');
+  if(badge)badge.textContent=`${lista.length} ${lista.length===1?'cadastrada':'cadastradas'}`;
+
+  if(!lista.length){
+    el.innerHTML='<div style="text-align:center;padding:24px;color:#94a3b8;font-size:13px;background:#f8fafc;border-radius:10px;border:1px dashed #cbd5e1"><span class="material-symbols-outlined" style="font-size:36px;display:block;margin-bottom:8px;color:#cbd5e1">auto_awesome</span>Nenhuma curiosidade cadastrada ainda. Adicione uma no formulário acima!</div>';
+    return;
   }
 
-  async function start(u) {
-    document.getElementById('lov').style.display = 'none';
-    document.getElementById('hdr').style.display = 'flex';
-    document.getElementById('lay').style.display = 'flex';
-    document.getElementById('hdr-user').textContent = (u.avatar||'') + ' ' + u.nome + ' — ' + (u.cargo||'Educador');
-    if (!db) { const r = await fetch('/api/dados'); db = await r.json(); }
-    renderH();
+  el.innerHTML=lista.map((c,i)=>`
+    <div style="display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid #e2e8f0;border-left:4px solid #f59e0b;border-radius:10px;padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:transform .15s" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='none'">
+      <div style="width:38px;height:38px;border-radius:8px;background:rgba(245,158,11,.15);color:#d97706;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <span class="material-symbols-outlined" style="font-size:22px">${c.icone||'lightbulb'}</span>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+          <strong style="font-size:14px;color:var(--tx)">${c.titulo||'Sem título'}</strong>
+          <span style="font-size:10px;font-weight:700;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:99px;border:1px solid #fde68a">${c.categoria||'Geral'}</span>
+        </div>
+        <p style="font-size:12px;color:var(--tx2);line-height:1.5;margin:0">${c.texto||''}</p>
+      </div>
+      <div style="display:flex;gap:4px;flex-shrink:0">
+        <button class="bp sm" onclick="editarCuriosidade(${i})" title="Editar"><span class="material-symbols-outlined" style="font-size:14px">edit</span></button>
+        <button class="bp sm d" onclick="excluirCuriosidade(${i})" title="Excluir"><span class="material-symbols-outlined" style="font-size:14px">delete</span></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escolherIco(ico){
+  const inp=document.getElementById('cur-icone');
+  if(inp)inp.value=ico;
+  atualizarIcoPreview(ico);
+}
+
+function atualizarIcoPreview(ico){
+  const el=document.getElementById('cur-ico-preview-icon');
+  if(el)el.textContent=ico.trim()||'auto_awesome';
+}
+
+function editarCuriosidade(i){
+  const c=(db.curiosidades||[])[i];
+  if(!c)return;
+  document.getElementById('cur-id').value=i;
+  document.getElementById('cur-titulo').value=c.titulo||'';
+  document.getElementById('cur-categoria').value=c.categoria||'';
+  document.getElementById('cur-texto').value=c.texto||'';
+  document.getElementById('cur-icone').value=c.icone||'';
+  atualizarIcoPreview(c.icone||'auto_awesome');
+
+  document.getElementById('cur-form-title').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd);font-size:18px">edit</span>Editar Curiosidade';
+  document.getElementById('cur-edit-badge').style.display='inline-block';
+  document.getElementById('cur-btn-salvar').innerHTML='<span class="material-symbols-outlined">check</span>Atualizar Curiosidade';
+  document.getElementById('frm-cur').style.borderColor='#f59e0b';
+  document.getElementById('frm-cur').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function cancelarEdicaoCur(){
+  document.getElementById('cur-id').value='';
+  document.getElementById('cur-titulo').value='';
+  document.getElementById('cur-categoria').value='';
+  document.getElementById('cur-texto').value='';
+  document.getElementById('cur-icone').value='';
+  atualizarIcoPreview('auto_awesome');
+
+  const ft=document.getElementById('cur-form-title');
+  if(ft)ft.innerHTML='<span class="material-symbols-outlined" style="color:var(--az);font-size:18px">add_circle</span>Nova Curiosidade';
+  const badge=document.getElementById('cur-edit-badge');
+  if(badge)badge.style.display='none';
+  const btn=document.getElementById('cur-btn-salvar');
+  if(btn)btn.innerHTML='<span class="material-symbols-outlined">save</span>Salvar Curiosidade';
+  const frm=document.getElementById('frm-cur');
+  if(frm)frm.style.borderColor='#e2e8f0';
+}
+
+async function salvarCuriosidade(e){
+  e.preventDefault();
+  if(!db.curiosidades)db.curiosidades=[];
+  const idx=document.getElementById('cur-id').value;
+  const obj={
+    id:'cur-'+Date.now(),
+    titulo:document.getElementById('cur-titulo').value.trim(),
+    categoria:document.getElementById('cur-categoria').value.trim(),
+    texto:document.getElementById('cur-texto').value.trim(),
+    icone:document.getElementById('cur-icone').value.trim()||'auto_awesome'
+  };
+
+  if(idx!==''){
+    obj.id=db.curiosidades[idx]?.id||obj.id;
+    db.curiosidades[parseInt(idx,10)]=obj;
+  }else{
+    db.curiosidades.push(obj);
   }
 
-  function sair() { sessionStorage.removeItem('educador_logado'); location.href = '/'; }
+  await salvarBanco();
+  toast(idx!==''?'Curiosidade atualizada!':'Curiosidade adicionada!');
+  cancelarEdicaoCur();
+  renderCuriosidades();
+}
 
-  /* ── NAV ── */
-  function nav(id) {
-    document.querySelectorAll('.secao').forEach(s => s.classList.remove('on'));
-    document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('s-'+id).classList.add('on');
-    document.getElementById('sb-'+id).classList.add('active');
-    if (id==='h') renderH();
-    if (id==='p') renderP();
-  }
+async function excluirCuriosidade(i){
+  if(!confirm('Deseja realmente excluir esta curiosidade?'))return;
+  db.curiosidades.splice(i,1);
+  await salvarBanco();
+  toast('Curiosidade excluída!');
+  renderCuriosidades();
+}
 
-  /* ── UTILS ── */
-  function fmt(iso) {
-    if (!iso) return '—';
-    const d = new Date(iso);
-    return d.toLocaleDateString('pt-BR') + ' às ' +
-      d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  }
+/* EDUCADORES */
+function renderEdu(){
+  const tb=document.getElementById('tb-edu'),ed=db?.educadores||[];
+  if(!ed.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:14px;color:#94a3b8">Nenhum educador.</td></tr>';return;}
+  tb.innerHTML=ed.map(e=>`<tr><td style="font-size:20px">${e.avatar||'?'}</td><td><strong>${e.nome}</strong></td><td style="font-size:12px">${e.email}</td><td style="font-size:12px">${e.cargo||'-'}</td>
+    <td style="white-space:nowrap"><button class="bp sm" onclick="editarEdu('${e.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button><button class="bp sm d" style="margin-left:3px" onclick="excluirEdu('${e.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button></td></tr>`).join('');
+}
+function editarEdu(id){const e=(db.educadores||[]).find(x=>x.id===id);if(!e)return;document.getElementById('edu-id').value=e.id;document.getElementById('edu-nome').value=e.nome||'';document.getElementById('edu-cargo').value=e.cargo||'';document.getElementById('edu-email').value=e.email||'';document.getElementById('edu-senha').value=e.senha||'';document.getElementById('edu-av').value=e.avatar||'';document.getElementById('ttl-edu').innerHTML='<span class="material-symbols-outlined" style="color:var(--az)">edit</span>Editando Educador';window.scrollTo(0,0);}
+async function salvarEdu(e){e.preventDefault();const id=document.getElementById('edu-id').value;const d={nome:document.getElementById('edu-nome').value.trim(),cargo:document.getElementById('edu-cargo').value.trim(),email:document.getElementById('edu-email').value.trim(),senha:document.getElementById('edu-senha').value.trim(),avatar:document.getElementById('edu-av').value};if(!db.educadores)db.educadores=[];if(id){const idx=db.educadores.findIndex(x=>x.id===id);if(idx>-1)db.educadores[idx]={...db.educadores[idx],...d};}else{db.educadores.push({id:'edu-'+Date.now(),...d});}await salvarBanco();limparEdu();renderEdu();toast('Educador salvo!');}
+async function excluirEdu(id){if(id===user?.id){alert('Nao e possivel excluir sua propria conta.');return;}if(!confirm('Excluir este educador?'))return;db.educadores=db.educadores.filter(x=>x.id!==id);await salvarBanco();renderEdu();toast('Educador removido.');}
+function limparEdu(){document.getElementById('frm-edu').reset();document.getElementById('edu-id').value='';document.getElementById('ttl-edu').innerHTML='<span class="material-symbols-outlined" style="color:var(--az)">person_add</span>Novo Educador';}
 
-  /* ── HISTÓRICO ── */
-  function renderH() {
-    const tb = document.getElementById('tb-h');
-    const posts = (db && db.postagens) || [];
-    if (!posts.length) {
-      tb.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:24px;color:#94a3b8">Nenhuma postagem.</td></tr>';
-      return;
+/* INTERCLASSE */
+function renderInter(){
+  const tb=document.getElementById('tb-int'),pp=db?.interclasse||[];
+  if(!pp.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;padding:14px;color:#94a3b8">Nenhuma partida.</td></tr>';return;}
+  const bs={agendado:'b-ag',emjogo:'b-ej',encerrado:'b-en'};
+  tb.innerHTML=pp.map(p=>`<tr><td><strong>${p.modalidade}</strong></td><td><strong>${p.turmaA}</strong></td><td style="text-align:center"><strong style="font-size:15px">${p.placarA||0} x ${p.placarB||0}</strong></td><td><strong>${p.turmaB}</strong></td><td style="font-size:12px">${p.data||'-'}</td><td><span class="badge ${bs[p.status]||'b-ag'}">${p.status||'agendado'}</span></td>
+    <td style="white-space:nowrap"><button class="bp sm" onclick="editarInt('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button><button class="bp sm d" style="margin-left:3px" onclick="excluirInt('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button></td></tr>`).join('');
+}
+function editarInt(id){const p=(db.interclasse||[]).find(x=>x.id===id);if(!p)return;document.getElementById('int-id').value=p.id;document.getElementById('int-mod').value=p.modalidade||'';document.getElementById('int-data').value=p.data||'';document.getElementById('int-local').value=p.local||'';document.getElementById('int-ta').value=p.turmaA||'';document.getElementById('int-tb').value=p.turmaB||'';document.getElementById('int-pa').value=p.placarA||0;document.getElementById('int-pb').value=p.placarB||0;document.getElementById('int-st').value=p.status||'agendado';document.getElementById('ttl-int').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">edit</span>Editando Partida';window.scrollTo(0,0);}
+async function salvarPartida(e){e.preventDefault();const id=document.getElementById('int-id').value;const d={modalidade:document.getElementById('int-mod').value.trim(),data:document.getElementById('int-data').value.trim(),local:document.getElementById('int-local').value.trim(),turmaA:document.getElementById('int-ta').value.trim(),turmaB:document.getElementById('int-tb').value.trim(),placarA:parseInt(document.getElementById('int-pa').value)||0,placarB:parseInt(document.getElementById('int-pb').value)||0,status:document.getElementById('int-st').value};if(!db.interclasse)db.interclasse=[];if(id){const idx=db.interclasse.findIndex(x=>x.id===id);if(idx>-1)db.interclasse[idx]={...db.interclasse[idx],...d};}else{db.interclasse.push({id:'intcl-'+Date.now(),...d});}await salvarBanco();limparInt();renderInter();toast('Partida salva!');}
+async function excluirInt(id){if(!confirm('Excluir partida?'))return;db.interclasse=db.interclasse.filter(x=>x.id!==id);await salvarBanco();renderInter();toast('Partida removida.');}
+function limparInt(){document.getElementById('frm-int').reset();document.getElementById('int-id').value='';document.getElementById('ttl-int').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">sports</span>Nova Partida';}
+
+/* HISTORICO */
+function renderHist(){
+  const tb=document.getElementById('tb-hist'),pp=db?.postagens||[];
+  if(!pp.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;padding:20px;color:#94a3b8">Nenhuma postagem.</td></tr>';return;}
+  const ord=[...pp].sort((a,b)=>new Date(b.ultimaModificacao||0)-new Date(a.ultimaModificacao||0));
+  tb.innerHTML=ord.map(p=>{
+    let h=p.historicoEdicoes;
+    if(!h||!h.length){h=[{acao:'criou',editor:p.autor||'?',timestamp:p.criadoEm||p.ultimaModificacao||null}];if(p.modificadoPor&&p.ultimaModificacao&&p.ultimaModificacao!==p.criadoEm)h.push({acao:'editou',editor:p.modificadoPor,timestamp:p.ultimaModificacao});}
+    const tl=h.map((x,i)=>{const c=x.acao==='criou';return `<div class="tl-item ${c?'criou':'editou'}"><span>${c?'&#x2705;':'&#x270F;&#xFE0F;'}</span><span class="tl-lbl" style="color:${c?'#15803d':'#c2410c'}">${c?'Criou':'Ed.#'+i}</span><span class="tl-who">${x.editor}</span><span class="tl-when">${fmt(x.timestamp)}</span></div>`;}).join('');
+    return `<tr><td><img src="${p.imagem||'img-ciencias.jpg'}" class="thumb" onerror="this.src='img-ciencias.jpg'"/></td><td><strong>${p.titulo}</strong>${p.destaque?'<span class="badge b-orange" style="margin-left:5px">Dest.</span>':''}</td><td><span class="badge b-blue">${p.categoria}</span></td><td><div class="tl">${tl}</div></td></tr>`;
+  }).join('');
+}
+
+/* UPLOAD DE IMAGEM */
+async function uploadImagem(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const status = document.getElementById('p-img-upload-status');
+  const prev = document.getElementById('p-img-prev');
+  const prevEl = document.getElementById('p-img-prev-el');
+  status.textContent = 'Enviando...';
+  status.style.color = 'var(--tx2)';
+  prev.style.display = 'block';
+  prevEl.src = URL.createObjectURL(file);
+  const form = new FormData();
+  form.append('imagem', file);
+  try {
+    const r = await fetch('/api/upload-imagem', { method: 'POST', body: form });
+    const data = await r.json();
+    if (data.caminho) {
+      document.getElementById('p-img').value = data.caminho;
+      status.textContent = '✅ ' + data.caminho + ' — imagem enviada com sucesso!';
+      status.style.color = 'var(--vd)';
+    } else {
+      status.textContent = '❌ Erro: ' + (data.erro || 'falha no upload');
+      status.style.color = 'var(--er)';
     }
-    const ord = [...posts].sort((a,b) =>
-      new Date(b.ultimaModificacao||b.criadoEm||0) - new Date(a.ultimaModificacao||a.criadoEm||0)
-    );
-    tb.innerHTML = ord.map(p => {
-      let h = p.historicoEdicoes;
-      if (!h || !h.length) {
-        h = [{acao:'criou', editor: p.autor||'Desconhecido', timestamp: p.criadoEm||p.ultimaModificacao||null}];
-        if (p.modificadoPor && p.ultimaModificacao && p.ultimaModificacao !== p.criadoEm)
-          h.push({acao:'editou', editor: p.modificadoPor, timestamp: p.ultimaModificacao});
-      }
-      const tl = h.map((x,i) => {
-        const c = x.acao==='criou';
-        return `<div class="tl-item ${c?'criou':'editou'}">
-          <span style="font-size:13px">${c?'✅':'✏️'}</span>
-          <span class="tl-lbl" style="color:${c?'#15803d':'#c2410c'}">${c?'Criou':'Edição #'+i}</span>
-          <span class="tl-who">${x.editor}</span>
-          <span class="tl-when">${fmt(x.timestamp)}</span>
-        </div>`;
-      }).join('');
-      return `<tr>
-        <td><img src="${p.imagem}" class="thumb" onerror="this.src='img-ciencias.jpg'"/></td>
-        <td><strong>${p.titulo}</strong>${p.destaque?'<span class="badge b-orange" style="margin-left:4px">★ Dest.</span>':''}</td>
-        <td><span style="font-size:11px;font-weight:700;color:var(--azul)">${p.categoria}</span></td>
-        <td><div class="tl">${tl}</div></td>
-      </tr>`;
-    }).join('');
+  } catch (e) {
+    status.textContent = '❌ Erro de conexão.';
+    status.style.color = 'var(--er)';
   }
-
-  /* ── POSTAGENS ── */
-  function renderP() {
-    const posts = (db && db.postagens) || [];
-    document.getElementById('st').innerHTML = `
-      <div class="stat"><div class="stat-ico" style="background:#eff6ff;color:var(--azul)">📰</div>
-        <div><strong>${posts.length}</strong><span>Postagens</span></div></div>
-      <div class="stat"><div class="stat-ico" style="background:#f0fdf4;color:var(--verde)">✅</div>
-        <div><strong>${posts.filter(p=>!p.historicoEdicoes||p.historicoEdicoes.length<=1).length}</strong><span>Nunca editadas</span></div></div>
-      <div class="stat"><div class="stat-ico" style="background:#fff7ed;color:var(--laranja)">✏️</div>
-        <div><strong>${posts.filter(p=>p.historicoEdicoes&&p.historicoEdicoes.length>1).length}</strong><span>Editadas</span></div></div>
-      <div class="stat"><div class="stat-ico" style="background:#fef3c7;color:var(--amarelo)">★</div>
-        <div><strong>${posts.filter(p=>p.destaque).length}</strong><span>Em destaque</span></div></div>`;
-    const tb = document.getElementById('tb-p');
-    if (!posts.length) {
-      tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:#94a3b8">Nenhuma postagem.</td></tr>';
-      return;
-    }
-    const ord = [...posts].sort((a,b) =>
-      new Date(b.ultimaModificacao||b.criadoEm||0) - new Date(a.ultimaModificacao||a.criadoEm||0)
-    );
-    tb.innerHTML = ord.map(p => {
-      const ed = p.historicoEdicoes && p.historicoEdicoes.length > 1;
-      return `<tr>
-        <td><img src="${p.imagem}" class="thumb" onerror="this.src='img-ciencias.jpg'"/></td>
-        <td><strong>${p.titulo}</strong></td>
-        <td style="font-size:11px;font-weight:600;color:var(--azul)">${p.categoria}</td>
-        <td><strong>${p.autor||'—'}</strong></td>
-        <td style="font-size:11px;color:#475569">${fmt(p.criadoEm||p.ultimaModificacao)}</td>
-        <td style="font-size:11px;color:#475569">${ed?fmt(p.ultimaModificacao):'—'}</td>
-        <td>${ed?`<span class="badge b-orange">✏️ ${p.modificadoPor}</span>`:'<span class="badge b-green">✅ Original</span>'}</td>
-      </tr>`;
-    }).join('');
+  input.value = '';
+}
+function prevImg(url) {
+  const prev = document.getElementById('p-img-prev');
+  const prevEl = document.getElementById('p-img-prev-el');
+  if (url && url.trim()) {
+    prev.style.display = 'block';
+    prevEl.src = url.trim();
+  } else {
+    prev.style.display = 'none';
   }
+}
 </script>
 </body>
 </html>

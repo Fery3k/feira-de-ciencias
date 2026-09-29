@@ -1143,6 +1143,296 @@ ul { list-style: none; }
   padding-bottom: 6px;
   border-bottom: 2px solid #e2e8f0;
 }
+
+/* ============================================================ */
+/*  NAVBARS DE FORMULÁRIOS (DICAS E MÚSICA)                     */
+/* ============================================================ */
+.nav-forms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.nav-form-bar {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.nav-form-bar.nav-escola {
+  background: linear-gradient(90deg, #ecfdf5 0%, #f0fdf4 100%);
+  border-top: 3px solid #10b981;
+}
+.nav-form-bar.nav-musica {
+  background: linear-gradient(90deg, #faf5ff 0%, #f3e8ff 100%);
+  border-top: 3px solid #8b5cf6;
+}
+.nav-form-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.nav-form-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-form-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.nav-escola .nav-form-icon { background: rgba(16,185,129,0.15); }
+.nav-musica .nav-form-icon { background: rgba(139,92,246,0.15); }
+.nav-form-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.nav-escola .nav-form-title { color: #065f46; }
+.nav-musica .nav-form-title { color: #4c1d95; }
+.nav-form-subtitle {
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.nav-escola .nav-form-subtitle { color: #059669; }
+.nav-musica .nav-form-subtitle { color: #7c3aed; }
+.nav-form-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nav-form-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.nav-escola .nav-form-link {
+  background: #10b981;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+.nav-escola .nav-form-link:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16,185,129,0.4);
+}
+.nav-musica .nav-form-link {
+  background: #8b5cf6;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+}
+.nav-musica .nav-form-link:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139,92,246,0.4);
+}
+.nav-form-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+.nav-escola .nav-form-badge {
+  background: rgba(16,185,129,0.12);
+  color: #065f46;
+}
+.nav-musica .nav-form-badge {
+  background: rgba(139,92,246,0.12);
+  color: #4c1d95;
+}
+.nav-form-anonimo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  opacity: 0.75;
+  background: rgba(0,0,0,0.06);
+  color: #475569;
+}
+
+/* ============================================================ */
+/*  POPUP DE CURIOSIDADES                                       */
+/* ============================================================ */
+#popup-curiosidades {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+#popup-curiosidades.aberto {
+  opacity: 1;
+  pointer-events: all;
+}
+.popup-cur-caixa {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.22), 0 0 0 1px rgba(245,158,11,0.12);
+  overflow: hidden;
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(.22,.68,0,1.2);
+}
+#popup-curiosidades.aberto .popup-cur-caixa {
+  transform: translateY(0) scale(1);
+}
+.popup-cur-topo {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  padding: 20px 22px 16px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.popup-cur-topo-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.popup-cur-topo-texto { flex: 1; }
+.popup-cur-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.popup-cur-titulo {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.3;
+}
+.popup-cur-categoria {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+.popup-cur-fechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255,255,255,0.22);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.popup-cur-fechar:hover { background: rgba(255,255,255,0.38); }
+.popup-cur-corpo {
+  padding: 20px 22px;
+}
+.popup-cur-texto {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.65;
+  min-height: 80px;
+}
+.popup-cur-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px 18px;
+  border-top: 1px solid #f1f5f9;
+  gap: 10px;
+}
+.popup-cur-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.popup-cur-nav button {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.popup-cur-nav button:hover {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #fff;
+}
+.popup-cur-indicador {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+.popup-cur-btn-fechar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.18s;
+}
+.popup-cur-btn-fechar:hover { opacity: 0.88; }
+
 </style>
 </head>
 
@@ -1159,33 +1449,15 @@ ul { list-style: none; }
       <span>📧 contato@colegioexemplo.com.br</span>
     </div>
     <div class="header-top-right" id="user-header-area">
-      <button class="btn-area-educador" onclick="abrirModalLogin()">
-        <span class="material-symbols-outlined">lock</span>
-        Área do Educador
+      <button class="btn-area-educador" onclick="window.open('/admin.html','_blank')">
+        <span class="material-symbols-outlined">admin_panel_settings</span>
+        Painel Admin
       </button>
     </div>
   </div>
 </div>
 
-<!-- BARRA DE ADMINISTRADOR -->
-<div id="admin-bar" class="admin-bar-banner" style="display: none;">
-  <div class="container admin-bar-content">
-    <div class="admin-bar-info">
-      <span class="material-symbols-outlined">admin_panel_settings</span>
-      <span><strong>Modo Admin Ativo:</strong> Gerencie postagens, eventos da agenda, avisos e contas de educadores.</span>
-    </div>
-    <div class="admin-bar-btns">
-      <button class="btn-novo-post" onclick="abrirFormularioPost()">
-        <span class="material-symbols-outlined">add_circle</span>
-        Nova Postagem
-      </button>
-      <button class="btn-gerenciar" onclick="abrirPainelAdmin('posts')">
-        <span class="material-symbols-outlined">manage_search</span>
-        Painel Geral de Gestão
-      </button>
-    </div>
-  </div>
-</div>
+
 
 <!-- ============================================================ -->
 <!-- 2. MASTHEAD                                                  -->
@@ -1220,15 +1492,7 @@ ul { list-style: none; }
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico DS', this)">Técnico DS</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico ADM', this)">Técnico ADM</a>
     
-    <div class="nav-actions-sep"></div>
-    <span id="nav-admin-link" style="display:none;">
-      <a href="/admin.html" target="_blank" class="nav-link nav-link-admin"
-         style="color: var(--cor-destaque); font-weight: 700; border-bottom: 2px solid var(--cor-destaque);">
-        <span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">admin_panel_settings</span>
-        Painel Admin
-      </a>
-    </span>
-    <div class="nav-actions-sep"></div>
+
     <div style="display: flex; gap: 8px; padding: 4px 0; flex-shrink: 0;">
       <button class="nav-btn-action" onclick="abrirModalHorario()" title="Ver Horário de Aulas">
         <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span>
@@ -1331,17 +1595,111 @@ ul { list-style: none; }
           </div>
         </div>
 
+        <!-- CURIOSIDADES -->
+        <div class="sidebar-bloco">
+          <div class="sidebar-header">
+            <div class="sidebar-header-left">
+              <span class="material-symbols-outlined" style="color: #f59e0b;">auto_awesome</span>
+              <span class="sidebar-titulo">Curiosidades</span>
+            </div>
+          </div>
+          <div class="links-grid">
+            <div class="link-util" role="button" tabindex="0" onclick="abrirPopupCuriosidades()" onkeydown="if(event.key==='Enter') abrirPopupCuriosidades()">
+              <div class="link-util-info">
+                <div class="link-util-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
+                  <span class="material-symbols-outlined">psychology</span>
+                </div>
+                <div>
+                  <div style="font-size:13px; font-weight:600; color: var(--texto-principal);">Ver Curiosidades</div>
+                  <div style="font-size:10px; color: var(--texto-secundario); margin-top:1px;">
+                    <span class="material-symbols-outlined" style="font-size:11px; vertical-align:middle;">menu_book</span>
+                    Fatos, ciência &amp; história
+                  </div>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUGESTÕES DE MÚSICA -->
+        <div class="sidebar-bloco">
+          <div class="sidebar-header">
+            <div class="sidebar-header-left">
+              <span class="material-symbols-outlined" style="color: #8b5cf6;">library_music</span>
+              <span class="sidebar-titulo">Sugestões de Música</span>
+            </div>
+          </div>
+          <div class="links-grid">
+            <a href="#" target="_blank" rel="noopener noreferrer" id="btn-form-musica"
+               class="link-util" style="text-decoration: none;">
+              <div class="link-util-info">
+                <div class="link-util-icon" style="background: rgba(139,92,246,0.12); color: #8b5cf6;">
+                  <span class="material-symbols-outlined">music_note</span>
+                </div>
+                <div>
+                  <div style="font-size:13px; font-weight:600; color: var(--texto-principal);">Sugerir música</div>
+                  <div style="font-size:10px; color: var(--texto-secundario); margin-top:1px;">
+                    <span class="material-symbols-outlined" style="font-size:11px; vertical-align:middle;">lock</span>
+                    Anônimo &amp; privado
+                  </div>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px; color: var(--texto-secundario);">chevron_right</span>
+            </a>
+          </div>
+        </div>
+
       </aside>
     </div>
   </div>
 </main>
 
 <!-- ============================================================ -->
+<!-- POPUP AUTOMÁTICO DE CURIOSIDADES                             -->
+<!-- ============================================================ -->
+<div id="popup-curiosidades" onclick="fecharPopupCuriosidades(event)">
+  <div class="popup-cur-caixa" onclick="event.stopPropagation()">
+    <div class="popup-cur-topo">
+      <div class="popup-cur-topo-icone">
+        <span class="material-symbols-outlined" id="popup-cur-icone" style="font-size:24px;">psychology</span>
+      </div>
+      <div class="popup-cur-topo-texto">
+        <div class="popup-cur-label">✨ Curiosidade do Dia</div>
+        <div class="popup-cur-titulo" id="popup-cur-titulo">Carregando...</div>
+        <span class="popup-cur-categoria" id="popup-cur-categoria"></span>
+      </div>
+      <button class="popup-cur-fechar" onclick="fecharPopupCuriosidades()" title="Fechar">
+        <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+      </button>
+    </div>
+    <div class="popup-cur-corpo">
+      <p class="popup-cur-texto" id="popup-cur-texto"></p>
+    </div>
+    <div class="popup-cur-rodape">
+      <div class="popup-cur-nav">
+        <button onclick="navegarCuriosidade(-1)" title="Anterior">
+          <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
+        </button>
+        <span class="popup-cur-indicador" id="popup-cur-indicador">1 / 1</span>
+        <button onclick="navegarCuriosidade(1)" title="Próxima">
+          <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+        </button>
+      </div>
+      <button class="popup-cur-btn-fechar" onclick="fecharPopupCuriosidades()">
+        <span class="material-symbols-outlined" style="font-size:15px;">check</span>
+        Entendido!
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
 <!-- 6. MODAIS DO SISTEMA                                         -->
 <!-- ============================================================ -->
 
-<!-- MODAL: LOGIN DO EDUCADOR -->
-<div class="modal-fundo" id="modal-login" onclick="fecharModal(event)">
+<!-- modal-login removido: acesso via /admin -->
+<div class="modal-fundo" id="modal-login" style="display:none" onclick="fecharModal(event)">
   <div class="modal-janela modal-janela-sm" onclick="event.stopPropagation()">
     <div class="modal-topo" style="background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); color: #fff;">
       <div class="modal-topo-esq">
@@ -1385,8 +1743,8 @@ ul { list-style: none; }
   </div>
 </div>
 
-<!-- MODAL: PAINEL ADMIN COMPLETO (CMS) -->
-<div class="modal-fundo" id="modal-admin" onclick="fecharModal(event)">
+<!-- modal-admin removido: acesso via /admin -->
+<div class="modal-fundo" id="modal-admin" style="display:none" onclick="fecharModal(event)"><div></div>
   <div class="modal-janela modal-janela-lg" onclick="event.stopPropagation()">
     <div class="modal-topo">
       <div class="modal-topo-esq">
@@ -1424,6 +1782,9 @@ ul { list-style: none; }
         </button>
         <button type="button" class="admin-tab-item" id="tab-nav-historico" onclick="alternarSecaoAdmin('historico')">
           <span class="material-symbols-outlined">history</span> Histórico de Edições
+        </button>
+        <button type="button" class="admin-tab-item" id="tab-nav-forms" onclick="alternarSecaoAdmin('forms')">
+          <span class="material-symbols-outlined">link</span> Links dos Forms
         </button>
       </div>
 
@@ -1923,6 +2284,55 @@ ul { list-style: none; }
         </div>
       </div>
 
+      <!-- ======================================== -->
+      <!-- SEÇÃO: LINKS DOS GOOGLE FORMS            -->
+      <!-- ======================================== -->
+      <div id="secao-admin-forms" class="admin-secao-panel" style="display: none;">
+        <h3 style="font-size: 15px; margin-bottom: 6px; color: var(--texto-principal);">Links dos Google Forms</h3>
+        <p style="font-size: 12px; color: var(--texto-secundario); margin-bottom: 20px;">
+          Cole aqui os links dos formulários do Google. Eles aparecerão automaticamente na sidebar para os alunos.
+        </p>
+
+        <form id="form-forms-links" onsubmit="salvarFormsLinksSubmit(event)">
+
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label" for="forms-link-musica">
+              <span class="material-symbols-outlined" style="font-size:15px; vertical-align:middle; color:#8b5cf6;">library_music</span>
+              Link — Sugestões de Música
+            </label>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="url" id="forms-link-musica" class="form-input"
+                placeholder="https://forms.gle/..."
+                style="flex:1;"/>
+              <a id="forms-preview-musica" href="#" target="_blank"
+                 style="display:none; font-size:12px; color: var(--cor-primaria); white-space:nowrap;"
+                 title="Abrir formulário">
+                <span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle;">open_in_new</span> Testar
+              </a>
+            </div>
+            <p style="font-size:11px; color: var(--texto-secundario); margin-top:4px;">⚠️ Cole o link completo do Google Forms (começa com https://)</p>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-salvar-post">
+              <span class="material-symbols-outlined">save</span> Salvar Links
+            </button>
+          </div>
+        </form>
+
+        <!-- Status atual -->
+        <div style="margin-top:24px; padding:14px 16px; background:#f8fafc; border-radius:10px; border:1px solid #e2e8f0;">
+          <p style="font-size:12px; font-weight:700; color: var(--texto-principal); margin-bottom:10px;">Status atual na sidebar:</p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px;">
+              <span class="material-symbols-outlined" style="color:#8b5cf6; font-size:16px;">library_music</span>
+              <span style="color: var(--texto-secundario);">Sugestões de Música:</span>
+              <span id="forms-status-musica" style="font-weight:600;">Sem link configurado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -2036,6 +2446,11 @@ ul { list-style: none; }
 <script>
   // Banco de Dados embutido padrão
   const INITIAL_DB = {
+    formsLinks: {
+      curiosidades: '',
+      escola: '',
+      musica: ''
+    },
     educadores: [
       {
         id: "edu-1",
@@ -2255,6 +2670,7 @@ ul { list-style: none; }
         if (!dbData.horarioAulas) dbData.horarioAulas = INITIAL_DB.horarioAulas;
         if (!dbData.cardapio) dbData.cardapio = INITIAL_DB.cardapio;
         if (!dbData.interclasse) dbData.interclasse = [];
+        if (!dbData.formsLinks) dbData.formsLinks = INITIAL_DB.formsLinks;
         return;
       }
     } catch (err) {
@@ -2313,8 +2729,7 @@ ul { list-style: none; }
   // AUTENTICAÇÃO E SESSÃO
   // ============================================================
   function abrirModalLogin() {
-    document.getElementById('login-erro').style.display = 'none';
-    abrirModal('modal-login');
+    window.location.href = '/admin';
   }
 
   async function processarLogin(e) {
@@ -2373,46 +2788,7 @@ ul { list-style: none; }
   }
 
   function atualizarInterfaceUsuario() {
-    const headerArea = document.getElementById('user-header-area');
-    const adminBar = document.getElementById('admin-bar');
-    const quickEvt = document.getElementById('btn-admin-quick-eventos');
-    const quickAvs = document.getElementById('btn-admin-quick-avisos');
-    const quickLinks = document.getElementById('btn-admin-quick-links');
-    const navAdminLink = document.getElementById('nav-admin-link');
-
-    if (usuarioLogado) {
-      headerArea.innerHTML = `
-        <span class="educador-logged-badge">
-          <span>${usuarioLogado.avatar || '👩‍🏫'}</span> ${usuarioLogado.nome}
-        </span>
-        <button class="btn-admin-panel" onclick="abrirPainelAdmin('posts')">
-          <span class="material-symbols-outlined">edit_note</span>
-          Painel Admin
-        </button>
-        <button class="btn-logout" onclick="fazerLogout()" title="Sair do sistema">
-          <span class="material-symbols-outlined">logout</span>
-        </button>
-      `;
-      if (adminBar) adminBar.style.display = 'block';
-      if (quickEvt) quickEvt.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('eventos')">+ Gerenciar</button>`;
-      if (quickAvs) quickAvs.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('avisos')">+ Gerenciar</button>`;
-      if (quickLinks) quickLinks.innerHTML = `<button class="btn-quick-admin" onclick="abrirPainelAdmin('horario')">+ Gerenciar</button>`;
-      // Mostrar aba admin no nav
-      if (navAdminLink) navAdminLink.style.display = 'inline';
-    } else {
-      headerArea.innerHTML = `
-        <button class="btn-area-educador" onclick="abrirModalLogin()">
-          <span class="material-symbols-outlined">lock</span>
-          Área do Educador
-        </button>
-      `;
-      if (adminBar) adminBar.style.display = 'none';
-      if (quickEvt) quickEvt.innerHTML = '';
-      if (quickAvs) quickAvs.innerHTML = '';
-      if (quickLinks) quickLinks.innerHTML = '';
-      // Ocultar aba admin no nav
-      if (navAdminLink) navAdminLink.style.display = 'none';
-    }
+    // Login removido do site principal — gerenciamento via /admin
   }
 
   // ============================================================
@@ -2425,7 +2801,84 @@ ul { list-style: none; }
     renderizarAvisosSidebar();
     renderizarLinksSidebar();
     renderizarInterclassePublico();
+    renderizarFormsLinks();
+    exibirPopupCuriosidadesAutomatico();
   }
+
+  function renderizarFormsLinks() {
+    const fl = dbData.formsLinks || {};
+    const btnMusica = document.getElementById('btn-form-musica');
+    if (btnMusica) {
+      btnMusica.href = fl.musica || '#';
+      btnMusica.style.opacity = fl.musica ? '1' : '0.5';
+      btnMusica.title = fl.musica ? 'Abrir formulário de música' : 'Link ainda não configurado';
+    }
+  }
+
+  // ============================================================
+  // POPUP DE CURIOSIDADES
+  // ============================================================
+  let _curIdx = 0;
+  let _curLista = [];
+
+  function _getCuriosidades() {
+    const fallback = [
+      { titulo: 'Quem foi Bertha Lutz?', categoria: 'Ciência & História', icone: 'psychology',
+        texto: 'Bertha Lutz foi uma das maiores cientistas brasileiras, bióloga e zoóloga renomada internacionalmente por suas pesquisas com anfíbios no Museu Nacional. Além disso, foi a principal líder do movimento pelos direitos políticos e pelo voto das mulheres no Brasil!' },
+      { titulo: 'O Som no Espaço', categoria: 'Física & Astronomia', icone: 'rocket_launch',
+        texto: 'No espaço sideral existe vácuo quase absoluto — sem moléculas suficientes para propagar ondas sonoras. Por isso, até as maiores explosões cósmicas ocorrem em silêncio absoluto!' },
+      { titulo: 'A Rede Subterrânea das Árvores', categoria: 'Botânica & Ecologia', icone: 'forest',
+        texto: 'Por meio de fungos subterrâneos (micorrizas), as árvores compartilham nutrientes entre si e emitem sinais químicos de alerta para a floresta toda em caso de perigo!' },
+      { titulo: 'O Poder do Cérebro Humano', categoria: 'Neurociência', icone: 'neurology',
+        texto: 'O cérebro humano representa apenas ~2% do peso corporal, mas consome mais de 20% de toda a energia, oxigênio e glicose que ingerimos por dia.' },
+      { titulo: 'DNA Compartilhado na Natureza', categoria: 'Genética', icone: 'biotech',
+        texto: 'Seres humanos compartilham 99,9% do DNA entre si — e surpreendentes 60% do nosso código genético é idêntico ao de uma banana!' }
+    ];
+    return (dbData.curiosidades && dbData.curiosidades.length > 0) ? dbData.curiosidades : fallback;
+  }
+
+  function _renderCurPopup() {
+    const c = _curLista[_curIdx];
+    if (!c) return;
+    const el = (id) => document.getElementById(id);
+    if (el('popup-cur-titulo'))    el('popup-cur-titulo').textContent    = c.titulo    || '';
+    if (el('popup-cur-categoria')) el('popup-cur-categoria').textContent = c.categoria || '';
+    if (el('popup-cur-texto'))     el('popup-cur-texto').textContent     = c.texto     || '';
+    if (el('popup-cur-icone'))     el('popup-cur-icone').textContent     = c.icone     || 'auto_awesome';
+    if (el('popup-cur-indicador')) el('popup-cur-indicador').textContent = `${_curIdx + 1} / ${_curLista.length}`;
+  }
+
+  function abrirPopupCuriosidades() {
+    _curLista = _getCuriosidades();
+    _curIdx = Math.floor(Math.random() * _curLista.length);
+    _renderCurPopup();
+    const popup = document.getElementById('popup-curiosidades');
+    if (popup) popup.classList.add('aberto');
+  }
+
+  function fecharPopupCuriosidades(evt) {
+    // Se foi chamada via click no fundo (overlay), fecha. Sem argumento, sempre fecha.
+    if (evt && evt.target !== document.getElementById('popup-curiosidades')) return;
+    const popup = document.getElementById('popup-curiosidades');
+    if (popup) popup.classList.remove('aberto');
+  }
+
+  function navegarCuriosidade(dir) {
+    if (_curLista.length === 0) return;
+    _curIdx = (_curIdx + dir + _curLista.length) % _curLista.length;
+    _renderCurPopup();
+  }
+
+  function exibirPopupCuriosidadesAutomatico() {
+    // Exibe automaticamente 1 vez por sessão
+    if (!sessionStorage.getItem('cur_popup_visto')) {
+      setTimeout(() => {
+        abrirPopupCuriosidades();
+        sessionStorage.setItem('cur_popup_visto', '1');
+      }, 900);
+    }
+  }
+
 
   function filtrarCategoria(cat, el) {
     filtroCategoriaAtual = cat;
@@ -2470,16 +2923,7 @@ ul { list-style: none; }
       const eDestaque = post.destaque || (index === 0 && paginaCards === 0 && filtroCategoriaAtual === 'todas');
       const cardClasse = eDestaque ? 'card-evento card-destaque' : 'card-evento card-menor';
 
-      const adminBtns = usuarioLogado ? `
-        <div class="card-admin-actions" onclick="event.stopPropagation()">
-          <button class="btn-card-admin" onclick="editarPost('${post.id}')" title="Editar postagem">
-            <span class="material-symbols-outlined" style="font-size:14px;">edit</span> Editar
-          </button>
-          <button class="btn-card-admin delete" onclick="excluirPostConfirm('${post.id}')" title="Excluir postagem">
-            <span class="material-symbols-outlined" style="font-size:14px;">delete</span>
-          </button>
-        </div>
-      ` : '';
+      const adminBtns = '';
 
       html += `
         <article class="${cardClasse}" onclick="abrirModalPostDetalhes('${post.id}')">
@@ -2533,13 +2977,8 @@ ul { list-style: none; }
     if (!listaDiv || !dbData.eventosSidebar) return;
 
     listaDiv.innerHTML = dbData.eventosSidebar.map(e => {
-      const clickAction = usuarioLogado ? `editarEventoDirect('${e.id}')` : `abrirModalEventoDetalhes('${e.id}')`;
-      const adminBtns = usuarioLogado ? `
-        <div style="margin-left: auto; display: flex; gap: 4px;" onclick="event.stopPropagation()">
-          <button class="btn-tbl-action btn-tbl-edit" onclick="editarEventoDirect('${e.id}')" title="Editar Evento"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
-          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirEventoConfirm('${e.id}')" title="Excluir Evento"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>
-        </div>
-      ` : '';
+      const clickAction = `abrirModalEventoDetalhes('${e.id}')`;
+      const adminBtns = '';
 
       return `
         <div class="evento-item" onclick="${clickAction}">
@@ -2562,13 +3001,8 @@ ul { list-style: none; }
     if (!container || !dbData.avisosSidebar) return;
 
     container.innerHTML = dbData.avisosSidebar.map(a => {
-      const clickAction = usuarioLogado ? `editarAvisoSidebarDirect('${a.id}')` : `abrirModalAvisoDetalhes('${a.id}')`;
-      const adminBtns = usuarioLogado ? `
-        <div style="margin-left: auto; display: flex; gap: 4px;" onclick="event.stopPropagation()">
-          <button class="btn-tbl-action btn-tbl-edit" onclick="editarAvisoSidebarDirect('${a.id}')" title="Editar Aviso"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
-          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirAvisoSidebarConfirm('${a.id}')" title="Excluir Aviso"><span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>
-        </div>
-      ` : '';
+      const clickAction = `abrirModalAvisoDetalhes('${a.id}')`;
+      const adminBtns = '';
 
       return `
         <div class="aviso-item" onclick="${clickAction}">
@@ -2586,15 +3020,11 @@ ul { list-style: none; }
   }
 
   function editarEventoDirect(id) {
-    if (!usuarioLogado) { abrirModalLogin(); return; }
-    abrirPainelAdmin('eventos');
-    editarEvento(id);
+    window.location.href = '/admin';
   }
 
   function editarAvisoSidebarDirect(id) {
-    if (!usuarioLogado) { abrirModalLogin(); return; }
-    abrirPainelAdmin('avisos');
-    editarAvisoSidebar(id);
+    window.location.href = '/admin';
   }
 
   function abrirModalEventoDetalhes(id) {
@@ -2707,18 +3137,12 @@ ul { list-style: none; }
   // ============================================================
   // PAINEL ADMIN CMS (GERENCIADOR GERAL)
   // ============================================================
-  function abrirPainelAdmin(secaoInicial = 'posts') {
-    if (!usuarioLogado) {
-      abrirModalLogin();
-      return;
-    }
-    alternarSecaoAdmin(secaoInicial);
-    abrirModal('modal-admin');
+  function abrirPainelAdmin(secaoInicial) {
+    window.location.href = '/admin';
   }
 
   function abrirFormularioPost() {
-    abrirPainelAdmin('posts');
-    limparFormularioPost();
+    window.location.href = '/admin';
   }
 
   function alternarSecaoAdmin(secao) {
@@ -2748,6 +3172,8 @@ ul { list-style: none; }
       atualizarTabelaAdminInterclasse();
     } else if (secao === 'historico') {
       atualizarTabelaAdminHistorico();
+    } else if (secao === 'forms') {
+      carregarFormFormsAdmin();
     }
   }
 
@@ -3203,17 +3629,8 @@ ul { list-style: none; }
     const container = document.getElementById('links-grid-sidebar');
     if (!container) return;
 
-    const adminHorarioBtns = usuarioLogado ? `
-      <div style="display: flex; gap: 4px;" onclick="event.stopPropagation()">
-        <button class="btn-tbl-action btn-tbl-edit" onclick="editarHorarioDirect()" title="Editar Horário"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
-      </div>
-    ` : '';
-
-    const adminCardapioBtns = usuarioLogado ? `
-      <div style="display: flex; gap: 4px;" onclick="event.stopPropagation()">
-        <button class="btn-tbl-action btn-tbl-edit" onclick="editarCardapioDirect()" title="Editar Cardápio"><span class="material-symbols-outlined" style="font-size:16px;">edit</span></button>
-      </div>
-    ` : '';
+    const adminHorarioBtns = '';
+    const adminCardapioBtns = '';
 
     container.innerHTML = `
       <div class="link-util" onclick="abrirModalHorario()">
@@ -3248,11 +3665,8 @@ ul { list-style: none; }
     const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
     if(modalTopoTipo) modalTopoTipo.innerText = 'Horário e Turnos Escolares';
 
-    const editBtn = usuarioLogado ? `
-      <button class="btn-salvar-post" style="margin-top: 18px; background: var(--cor-destaque);" onclick="fecharModal(); abrirPainelAdmin('horario');">
-        <span class="material-symbols-outlined">edit</span> Editar Horário no Modo Admin
-      </button>
-    ` : '';
+    const editBtn = '';
+
     
     const printBtn = `
       <button class="btn-cancelar" style="margin-top: 18px; width: 100%; border: 1px solid #cbd5e1; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="window.print()">
@@ -3293,11 +3707,8 @@ ul { list-style: none; }
     const modalTopoTipo = document.getElementById('modal-dinamico-tipo');
     if(modalTopoTipo) modalTopoTipo.innerText = 'Alimentação e Cardápio Escolar';
 
-    const editBtn = usuarioLogado ? `
-      <button class="btn-salvar-post" style="margin-top: 18px; background: var(--cor-destaque);" onclick="fecharModal(); abrirPainelAdmin('cardapio');">
-        <span class="material-symbols-outlined">edit</span> Editar Cardápio no Modo Admin
-      </button>
-    ` : '';
+    const editBtn = '';
+
     
     const printBtn = `
       <button class="btn-cancelar" style="margin-top: 18px; width: 100%; border: 1px solid #cbd5e1; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="window.print()">
@@ -3325,22 +3736,17 @@ ul { list-style: none; }
     abrirModal('modal-detalhes-dinamico');
   }
 
+  // abrirModalCuriosidades agora redireciona para o popup dedicado
+  function abrirModalCuriosidades() {
+    abrirPopupCuriosidades();
+  }
+
   function editarHorarioDirect() {
-    if (!usuarioLogado) { abrirModalLogin(); return; }
-    abrirPainelAdmin('horario');
-    setTimeout(() => {
-      const el = document.getElementById('horario-titulo-input');
-      if (el) el.focus();
-    }, 100);
+    window.location.href = '/admin';
   }
 
   function editarCardapioDirect() {
-    if (!usuarioLogado) { abrirModalLogin(); return; }
-    abrirPainelAdmin('cardapio');
-    setTimeout(() => {
-      const el = document.getElementById('cardapio-titulo-input');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    window.location.href = '/admin';
   }
 
   function carregarFormHorarioAdmin() {
@@ -3821,6 +4227,52 @@ ul { list-style: none; }
     });
 
     tbody.innerHTML = html;
+  }
+
+  // ============================================================
+  // LINKS DOS GOOGLE FORMS
+  // ============================================================
+
+  function carregarFormFormsAdmin() {
+    const fl = dbData.formsLinks || { musica: '' };
+    const inputMusica = document.getElementById('forms-link-musica');
+    const previewMusica = document.getElementById('forms-preview-musica');
+    const statusMusica = document.getElementById('forms-status-musica');
+
+    if (inputMusica) inputMusica.value = fl.musica || '';
+
+    // Atualiza link de preview
+    if (previewMusica) {
+      previewMusica.href = fl.musica || '#';
+      previewMusica.style.display = fl.musica ? 'inline-flex' : 'none';
+    }
+
+    // Status
+    if (statusMusica) {
+      statusMusica.textContent = fl.musica ? '✅ Configurado' : '❌ Sem link configurado';
+      statusMusica.style.color = fl.musica ? '#8b5cf6' : '#ef4444';
+    }
+
+    // Live preview ao digitar
+    inputMusica && inputMusica.addEventListener('input', function() {
+      if (previewMusica) {
+        previewMusica.href = this.value || '#';
+        previewMusica.style.display = this.value ? 'inline-flex' : 'none';
+      }
+    });
+  }
+
+  async function salvarFormsLinksSubmit(e) {
+    e.preventDefault();
+    if (!usuarioLogado) return;
+
+    const musica = (document.getElementById('forms-link-musica')?.value || '').trim();
+
+    dbData.formsLinks = { musica };
+    await salvarBanco();
+    renderizarFormsLinks();
+    carregarFormFormsAdmin();
+    mostrarToast('Links dos Forms salvos com sucesso!');
   }
 
 </script>
