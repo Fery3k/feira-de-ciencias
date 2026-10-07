@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Portal Escolar — Colégio Exemplo</title>
-<meta name="description" content="Portal de informações do Colégio Exemplo. Acesse avisos, eventos, matérias e muito mais."/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<title>Portal Escolar — E.E. PEI Bertha Corrêa e Castro da Rocha</title>
+<meta name="description" content="Portal oficial da E.E. PEI Bertha Corrêa e Castro da Rocha — Poá, SP. Acesse avisos, eventos, matérias, horários e muito mais."/>
+<!-- Fontes servidas localmente (funciona sem internet) -->
+<link href="/fonts/fonts.css" rel="stylesheet"/>
+<link href="/fonts/icons.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="/favicon.png"/>
 
 <style>
 /* ============================================================ */
@@ -32,20 +33,20 @@ ul { list-style: none; }
 /*  VARIÁVEIS DE TEMA                                           */
 /* ============================================================ */
 :root {
-  --cor-primaria: #1a73e8;
-  --cor-primaria-escura: #1557b0;
-  --cor-secundaria: #0d9488;
-  --cor-destaque: #7c3aed;
-  --cor-aviso: #f59e0b;
+  --cor-primaria: #286334;
+  --cor-primaria-escura: #1a4723;
+  --cor-secundaria: #639434;
+  --cor-destaque: #c88a1b;
+  --cor-aviso: #eab308;
   --cor-erro: #ef4444;
 
-  --bg-pagina: #f0f4f8;
+  --bg-pagina: #f3f6f3;
   --bg-card: #ffffff;
-  --bg-header: #0f172a;
-  --bg-header-grad: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  --bg-header: #0f2014;
+  --bg-header-grad: linear-gradient(135deg, #0d1c11 0%, #183821 50%, #234d2d 100%);
 
-  --texto-principal: #1e293b;
-  --texto-secundario: #64748b;
+  --texto-principal: #17281a;
+  --texto-secundario: #516553;
   --texto-claro: #ffffff;
 
   --max-w: 1200px;
@@ -103,16 +104,28 @@ ul { list-style: none; }
   gap: 14px;
 }
 .masthead-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: var(--bg-header-grad);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border: 1.5px solid #e2e8f0;
+  overflow: hidden;
   flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.masthead-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+.masthead-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .masthead-info { display: flex; flex-direction: column; }
 .masthead-nome {
@@ -177,7 +190,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(26, 115, 232, 0.08);
+  background: rgba(40, 99, 52, 0.08);
   color: var(--cor-primaria);
   padding: 6px 14px;
   border-radius: 20px;
@@ -511,7 +524,7 @@ ul { list-style: none; }
   transition: all 0.2s ease;
 }
 .link-util:hover {
-  background: #f0f7ff;
+  background: #f0f7ee;
   border-color: var(--cor-primaria);
   color: var(--cor-primaria);
   transform: translateY(-2px);
@@ -526,7 +539,7 @@ ul { list-style: none; }
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: rgba(26, 115, 232, 0.1);
+  background: rgba(40, 99, 52, 0.1);
   color: var(--cor-primaria);
   display: flex;
   align-items: center;
@@ -616,7 +629,7 @@ ul { list-style: none; }
   border-radius: 6px;
   transition: all 0.2s;
 }
-.btn-area-educador:hover { background: #6d28d9; }
+.btn-area-educador:hover { background: #b47913; }
 
 .educador-logged-badge {
   display: flex;
@@ -725,7 +738,7 @@ ul { list-style: none; }
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none;
   border-color: var(--cor-primaria);
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+  box-shadow: 0 0 0 3px rgba(40, 99, 52, 0.18);
 }
 .input-with-icon {
   position: relative;
@@ -968,7 +981,7 @@ ul { list-style: none; }
   background: var(--cor-primaria);
   color: #fff;
   border-color: var(--cor-primaria);
-  box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+  box-shadow: 0 4px 12px rgba(40,99,52,0.28);
 }
 
 /* ============================================================ */
@@ -1046,12 +1059,61 @@ ul { list-style: none; }
   font-weight: 500;
   margin-top: 2px;
 }
-.sobre-nos-img-wrap img {
+.sobre-nos-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0d1c11 0%, #183821 60%, #234d2d 100%);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+  min-height: 340px;
+  position: relative;
+}
+.sobre-nos-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(40,99,52,0.35) 0%, transparent 65%);
+  pointer-events: none;
+}
+.sobre-nos-img-wrap img {
+  border-radius: 0;
   width: 100%;
   height: 340px;
   object-fit: cover;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+  box-shadow: none;
+}
+.sobre-nos-img-wrap .eb-logo-display {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  text-align: center;
+}
+.sobre-nos-img-wrap .eb-logo-display img {
+  width: auto;
+  height: auto;
+  max-width: 240px;
+  max-height: 120px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 18px 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.sobre-nos-img-wrap .eb-logo-caption {
+  color: rgba(255,255,255,0.75);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 16px;
+  max-width: 280px;
 }
 
 /* ============================================================ */
@@ -1433,6 +1495,194 @@ ul { list-style: none; }
 }
 .popup-cur-btn-fechar:hover { opacity: 0.88; }
 
+/* ============================================================ */
+/*  MENU HAMBURGUER (MOBILE)                                    */
+/* ============================================================ */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(40, 99, 52, 0.1);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.hamburger-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--cor-primaria);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger-btn.aberto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.aberto span:nth-child(2) { opacity: 0; }
+.hamburger-btn.aberto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.nav-mobile-menu.aberto { opacity: 1; pointer-events: all; }
+.nav-mobile-panel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 285px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+.nav-mobile-menu.aberto .nav-mobile-panel { transform: translateX(0); }
+.nav-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--bg-header-grad);
+  color: #fff;
+}
+.nav-mobile-titulo { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; }
+.nav-mobile-fechar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  border: none; cursor: pointer;
+}
+.nav-mobile-links { display: flex; flex-direction: column; padding: 8px 0; flex: 1; }
+.nav-mobile-link {
+  font-size: 14px; font-weight: 600;
+  color: var(--texto-principal);
+  padding: 14px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex; align-items: center; gap: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-mobile-link:hover, .nav-mobile-link.active { background: #f0f7ee; color: var(--cor-primaria); }
+.nav-mobile-acoes {
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  border-top: 1px solid #e2e8f0;
+}
+.nav-mobile-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; border-radius: 10px;
+  font-size: 14px; font-weight: 700;
+  border: none; cursor: pointer;
+}
+.nav-mobile-btn.horario { background: rgba(40,99,52,0.1); color: var(--cor-primaria); }
+.nav-mobile-btn.cardapio { background: rgba(99,148,52,0.12); color: var(--cor-secundaria); }
+
+/* ============================================================ */
+/*  MEDIA QUERIES RESPONSIVAS                                   */
+/* ============================================================ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .conteudo-grid { grid-template-columns: 1fr 300px; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .container { width: 100%; max-width: 100%; }
+
+  .header-top, .masthead, .nav-materias,
+  .barra-avisos, .conteudo, .rodape {
+    width: 100%; max-width: 100%; overflow-x: hidden;
+  }
+
+  /* Header: esconde endereco */
+  .header-top-left { display: none !important; }
+  .header-top .container { justify-content: flex-end; }
+
+  /* Masthead compacto */
+  .masthead { padding: 12px 0; }
+  .masthead .container { flex-wrap: nowrap; gap: 8px; min-width: 0; }
+  .masthead-left { min-width: 0; flex: 1; overflow: hidden; }
+  .masthead-logo { width: 40px; height: 40px; font-size: 20px; flex-shrink: 0; }
+  .masthead-info { min-width: 0; }
+  .masthead-nome { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .masthead-subtitulo { display: none !important; }
+  .masthead-right { flex-shrink: 0; }
+  .btn-contato { padding: 7px 10px; font-size: 11px; }
+  .btn-contato .material-symbols-outlined { display: none; }
+
+  /* Nav mobile */
+  .hamburger-btn { display: flex !important; }
+  .nav-materias .container {
+    justify-content: flex-start !important;
+    padding: 6px 12px !important;
+    overflow: hidden !important;
+  }
+  .nav-link { display: none !important; }
+  .nav-btn-action { display: none !important; }
+  div[style*="display: flex; gap: 8px;"] { display: none !important; }
+  .nav-mobile-menu { display: block !important; }
+
+  /* Layout 1 coluna */
+  .conteudo-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Cards coluna unica */
+  .cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  .card-evento { width: 100% !important; min-width: 0 !important; }
+  .card-destaque {
+    grid-row: auto !important;
+    min-height: 240px !important;
+    height: 260px !important;
+    max-height: 280px !important;
+  }
+  .card-menor { min-height: 160px !important; height: 180px !important; max-height: 200px !important; }
+  .card-destaque .card-titulo { font-size: 17px; }
+  .card-menor .card-titulo { font-size: 14px; }
+
+  /* Sidebar abaixo */
+  .sidebar { order: 2 !important; width: 100% !important; }
+  #cards-grid-container { order: 1 !important; width: 100% !important; }
+
+  /* Rodape */
+  .rodape-grid { flex-direction: column; gap: 1rem; }
+  .rodape-links { flex-wrap: wrap; gap: 0.75rem; }
+  .rodape-marca-desc { max-width: 100%; }
+
+  /* Admin */
+  .admin-bar-content { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .admin-bar-btns { flex-wrap: wrap; gap: 8px; }
+
+  /* Modal */
+  .modal-janela { width: 95% !important; max-height: 85vh; border-radius: 12px; }
+  .modal-corpo { padding: 16px; }
+  .modal-topo { padding: 12px 16px; }
+  .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+  .evento-item, .aviso-item { padding: 10px 12px; }
+}
 </style>
 </head>
 
@@ -1444,9 +1694,9 @@ ul { list-style: none; }
 <div class="header-top">
   <div class="container">
     <div class="header-top-left">
-      <span>📍 Rua Exemplo, 123 — São Paulo, SP</span>
-      <span>📞 (11) 1234-5678</span>
-      <span>📧 contato@colegioexemplo.com.br</span>
+      <span>📍 Rua Eneida Franco Pinto, 55 — Poá, SP</span>
+      <span>📞 (11) 4638-1177 / 4636-0415</span>
+      <span>📧 e007006a@educacao.sp.gov.br</span>
     </div>
     <div class="header-top-right" id="user-header-area">
       <button class="btn-area-educador" onclick="window.open('/admin.html','_blank')">
@@ -1466,11 +1716,11 @@ ul { list-style: none; }
   <div class="container">
     <div class="masthead-left">
       <div class="masthead-logo">
-        <span class="material-symbols-outlined">school</span>
+        <img src="/logo.png" alt="Brasão E.E. PEI Bertha Corrêa e Castro"/>
       </div>
       <div class="masthead-info">
-        <span class="masthead-nome">Colégio Exemplo</span>
-        <span class="masthead-subtitulo">Educação que transforma — Ensino Fundamental e Médio</span>
+        <span class="masthead-nome">E.E. PEI Bertha Corrêa</span>
+        <span class="masthead-subtitulo">Programa de Ensino Integral — Poá, SP</span>
       </div>
     </div>
   </div>
@@ -1481,6 +1731,11 @@ ul { list-style: none; }
 <!-- ============================================================ -->
 <nav class="nav-materias">
   <div class="container">
+    <!-- Botao hamburguer (so mobile) -->
+    <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenuMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
     <a href="#" class="nav-link active" onclick="filtrarCategoria('todas', this)">Início</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Português', this)">Português</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Matemática', this)">Matemática</a>
@@ -1491,7 +1746,6 @@ ul { list-style: none; }
     <a href="#" class="nav-link" onclick="filtrarCategoria('Artes', this)">Artes</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico DS', this)">Técnico DS</a>
     <a href="#" class="nav-link" onclick="filtrarCategoria('Técnico ADM', this)">Técnico ADM</a>
-    
 
     <div style="display: flex; gap: 8px; padding: 4px 0; flex-shrink: 0;">
       <button class="nav-btn-action" onclick="abrirModalHorario()" title="Ver Horário de Aulas">
@@ -1505,6 +1759,61 @@ ul { list-style: none; }
     </div>
   </div>
 </nav>
+
+<!-- MENU MOBILE (DRAWER) -->
+<div class="nav-mobile-menu" id="nav-mobile-menu" onclick="fecharMenuMobileOverlay(event)">
+  <div class="nav-mobile-panel">
+    <div class="nav-mobile-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/logo.png" alt="Logo Bertha Corrêa" style="width: 36px; height: 36px; border-radius: 50%; background: #fff; object-fit: contain; border: 1.5px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);"/>
+        <span class="nav-mobile-titulo">E.E. PEI Bertha Corrêa</span>
+      </div>
+      <button class="nav-mobile-fechar" onclick="fecharMenuMobile()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="nav-mobile-links">
+      <a href="#" class="nav-mobile-link active" onclick="filtrarCategoriaMobile('todas',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-primaria)">home</span> Início
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Português',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-secundaria)">menu_book</span> Português
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Matemática',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-primaria)">calculate</span> Matemática
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Ciências',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-secundaria)">science</span> Ciências
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('História',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-aviso)">history_edu</span> História
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Geografia',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-primaria)">public</span> Geografia
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Ed. Física',this)">
+        <span class="material-symbols-outlined" style="color:var(--cor-destaque)">fitness_center</span> Ed. Física
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Artes',this)">
+        <span class="material-symbols-outlined" style="color:#e11d48">palette</span> Artes
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Técnico DS',this)">
+        <span class="material-symbols-outlined" style="color:#e11d48">code</span> Técnico DS
+      </a>
+      <a href="#" class="nav-mobile-link" onclick="filtrarCategoriaMobile('Técnico ADM',this)">
+        <span class="material-symbols-outlined" style="color:#0891b2">business_center</span> Técnico ADM
+      </a>
+    </div>
+    <div class="nav-mobile-acoes">
+      <button class="nav-mobile-btn horario" onclick="abrirModalHorario();fecharMenuMobile()">
+        <span class="material-symbols-outlined">schedule</span> Horário de Aulas
+      </button>
+      <button class="nav-mobile-btn cardapio" onclick="abrirModalCardapio();fecharMenuMobile()">
+        <span class="material-symbols-outlined">restaurant</span> Cardápio Escolar
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 4. BARRA DE AVISOS                                           -->
@@ -1701,9 +2010,9 @@ ul { list-style: none; }
 <!-- modal-login removido: acesso via /admin -->
 <div class="modal-fundo" id="modal-login" style="display:none" onclick="fecharModal(event)">
   <div class="modal-janela modal-janela-sm" onclick="event.stopPropagation()">
-    <div class="modal-topo" style="background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); color: #fff;">
+    <div class="modal-topo" style="background: var(--bg-header-grad); color: #fff;">
       <div class="modal-topo-esq">
-        <span class="material-symbols-outlined" style="color: #60a5fa;">lock_person</span>
+        <span class="material-symbols-outlined" style="color: #86efac;">lock_person</span>
         <span style="font-weight: 700; font-size: 15px;">Login — Área do Educador</span>
       </div>
       <button class="modal-fechar" style="color: #fff;" onclick="fecharModal()">
@@ -2358,8 +2667,8 @@ ul { list-style: none; }
   <div class="modal-janela modal-janela-lg" onclick="event.stopPropagation()">
     <div class="modal-topo" style="background: var(--bg-header-grad); color: #fff;">
       <div class="modal-topo-esq">
-        <span class="material-symbols-outlined" style="color: #60a5fa;">school</span>
-        <span style="font-weight: 700; font-size: 16px;">Sobre o Colégio</span>
+        <span class="material-symbols-outlined" style="color: #86efac;">school</span>
+        <span style="font-weight: 700; font-size: 16px;">Sobre a Escola</span>
       </div>
       <button class="modal-fechar" style="color: #fff;" onclick="fecharModal()">
         <span class="material-symbols-outlined">close</span>
@@ -2369,38 +2678,51 @@ ul { list-style: none; }
       <div class="sobre-nos-grid">
         <div class="sobre-nos-texto">
           <span class="sobre-nos-label">Quem Somos</span>
-          <h2 class="sobre-nos-titulo">Sobre o Colégio Exemplo</h2>
+          <h2 class="sobre-nos-titulo">E.E. PEI Bertha Corrêa e Castro da Rocha</h2>
           <p class="sobre-nos-desc">
-            Fundado em 1990, o Colégio Exemplo é uma instituição de ensino comprometida com
-            a formação integral dos estudantes. Oferecemos Ensino Fundamental e Médio com
-            metodologias modernas, professores qualificados e infraestrutura de excelência.
+            Fundada em <strong>21 de janeiro de 1962</strong> em Poá – SP, a escola iniciou
+            suas atividades como <em>Ginásio Estadual Bertha Correa e Castro</em> e homenageia
+            a educadora <strong>Bertha Corrêa e Castro da Rocha</strong>, símbolo de cidadania
+            e inclusão. Localizada na Rua Eneida Franco Pinto, 55 — Vila Anita, Poá - SP
+            (CEP 08557-130), é uma das escolas mais tradicionais do município, atendendo
+            Ensino Fundamental (Anos Finais), Ensino Médio e Educação Profissional.
           </p>
           <p class="sobre-nos-desc">
-            Nossa missão é desenvolver cidadãos críticos, criativos e éticos, preparados
-            para os desafios do século XXI. Acreditamos que a educação de qualidade transforma
-            vidas e comunidades.
+            Em <strong>2022</strong>, aderiu ao <strong>Programa de Ensino Integral (PEI)</strong>,
+            com jornada estendida, Clubes Juvenis, Projeto de Vida e Práticas Experimentais.
+            Participa de olimpíadas como <strong>OMASP</strong> e <strong>OLITEF</strong>, e organiza
+            visitas à FATEC Mogi, à Assembleia Legislativa de SP e a museus paulistas.
+            Conquistou o <strong>Reconhecimento Ouro no SARESP 2025</strong>.
+          </p>
+          <p class="sobre-nos-desc">
+            Infraestrutura: 18 salas de aula, quadra coberta, refeitório, sala de leitura,
+            laboratório de informática, internet 100 Mbps, <strong>160 notebooks</strong> e
+            <strong>60 tablets</strong> para uso estudantil.
           </p>
           <div class="sobre-nos-stats">
             <div class="stat-item">
-              <strong>+30</strong>
-              <span>Anos de história</span>
+              <strong>1962</strong>
+              <span>Ano de fundação</span>
             </div>
             <div class="stat-item">
-              <strong>+800</strong>
-              <span>Alunos matriculados</span>
+              <strong>28</strong>
+              <span>Docentes ativos</span>
             </div>
             <div class="stat-item">
-              <strong>60+</strong>
-              <span>Educadores</span>
+              <strong>5,3 / 4,6</strong>
+              <span>IDEB Fund. / Médio</span>
             </div>
             <div class="stat-item">
-              <strong>98%</strong>
-              <span>Aprovados no ENEM</span>
+              <strong>🥇 Ouro</strong>
+              <span>SARESP 2025</span>
             </div>
           </div>
         </div>
         <div class="sobre-nos-img-wrap">
-          <img src="img-ciencias.jpg" alt="Colégio Exemplo — Ambiente Escolar"/>
+          <div class="eb-logo-display">
+            <img src="/logo-eb-bertha.png" alt="Logo EB PEI Bertha"/>
+            <p class="eb-logo-caption">E.E. PEI Bertha Corrêa e Castro da Rocha<br>Programa de Ensino Integral &mdash; Poá, SP</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2428,15 +2750,21 @@ ul { list-style: none; }
 <footer class="rodape">
   <div class="container">
     <div class="rodape-grid">
-      <div>
-        <p class="rodape-marca-nome">Colégio Exemplo</p>
-        <p class="rodape-marca-desc">Educação que transforma. Ensino Fundamental e Médio de excelência desde 1990.</p>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="/logo.png" alt="Logo Bertha Corrêa e Castro" style="width: 54px; height: 54px; border-radius: 50%; background: #fff; object-fit: contain; padding: 2px; flex-shrink: 0; box-shadow: 0 3px 10px rgba(0,0,0,0.15); border: 2px solid rgba(255,255,255,0.2);"/>
+        <div>
+          <p class="rodape-marca-nome">E.E. PEI Bertha Corrêa e Castro da Rocha</p>
+          <p class="rodape-marca-desc">Programa de Ensino Integral — Educação que transforma vidas. Poá, SP desde 2002.</p>
+        </div>
       </div>
       <div class="rodape-links">
         <a href="javascript:void(0)" class="rodape-link" onclick="abrirModal('modal-sobre-nos');">Sobre Nós</a>
+        <a href="https://www.instagram.com/peiberthacorrea/" target="_blank" class="rodape-link">Instagram</a>
+        <a href="https://www.facebook.com/berthacorrea.castrodarocha/" target="_blank" class="rodape-link">Facebook</a>
+        <a href="https://transparencia.educacao.sp.gov.br/Home/DetalhesEscola?codesc=7006" target="_blank" class="rodape-link">Transparência</a>
       </div>
     </div>
-    <p class="rodape-copy">© 2024 Colégio Exemplo. Todos os direitos reservados.</p>
+    <p class="rodape-copy">© 2025 E.E. PEI Bertha Corrêa e Castro da Rocha — Poá, SP. Todos os direitos reservados.</p>
   </div>
 </footer>
 
@@ -3097,7 +3425,7 @@ ul { list-style: none; }
           font-size: 15px;
           font-weight: 600;
           color: var(--texto-principal);
-          background: #f0f7ff;
+          background: #f0f7ee;
           border-left: 4px solid var(--cor-primaria);
           padding: 12px 16px;
           border-radius: 0 8px 8px 0;
@@ -3946,7 +4274,7 @@ ul { list-style: none; }
         position: fixed;
         bottom: 24px;
         right: 24px;
-        background: #0f172a;
+        background: var(--bg-header);
         color: #fff;
         padding: 12px 20px;
         border-radius: 8px;
@@ -4273,6 +4601,39 @@ ul { list-style: none; }
     renderizarFormsLinks();
     carregarFormFormsAdmin();
     mostrarToast('Links dos Forms salvos com sucesso!');
+  }
+
+  // ============================================================
+  //  MENU MOBILE
+  // ============================================================
+  function toggleMenuMobile() {
+    const menu = document.getElementById('nav-mobile-menu');
+    const btn  = document.getElementById('hamburger-btn');
+    if (menu.classList.contains('aberto')) {
+      fecharMenuMobile();
+    } else {
+      menu.classList.add('aberto');
+      btn.classList.add('aberto');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function fecharMenuMobile() {
+    document.getElementById('nav-mobile-menu').classList.remove('aberto');
+    document.getElementById('hamburger-btn').classList.remove('aberto');
+    document.body.style.overflow = '';
+  }
+  function fecharMenuMobileOverlay(e) {
+    if (e.target === document.getElementById('nav-mobile-menu')) fecharMenuMobile();
+  }
+  function filtrarCategoriaMobile(cat, el) {
+    document.querySelectorAll('.nav-mobile-link').forEach(l => l.classList.remove('active'));
+    if (el) el.classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.remove('active');
+      if ((l.getAttribute('onclick') || '').includes("'" + cat + "'")) l.classList.add('active');
+    });
+    filtrarCategoria(cat, null);
+    fecharMenuMobile();
   }
 
 </script>

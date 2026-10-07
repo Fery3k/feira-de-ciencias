@@ -500,7 +500,7 @@ app.get('/admin', (req, res) => {
 });
 
 // ============================================================
-// FALLBACK: Serve index.html para rotas não-API
+// FALLBACK: Serve index.html do public (versao mais avancada)
 // ============================================================
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

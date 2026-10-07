@@ -7,16 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="/favicon.png"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--az:#1a73e8;--aze:#1557b0;--vd:#10b981;--rx:#8b5cf6;--er:#ef4444;--bg:#f0f4f8;--cd:#fff;--bd:#e2e8f0;--tx:#1e293b;--tx2:#64748b;--gd:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)}
+:root{--az:#286334;--aze:#1a4723;--vd:#639434;--rx:#c88a1b;--er:#ef4444;--bg:#f3f6f3;--cd:#fff;--bd:#e2e8f0;--tx:#17281a;--tx2:#516553;--gd:linear-gradient(135deg,#0d1c11 0%,#183821 50%,#234d2d 100%)}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
 .material-symbols-outlined{vertical-align:middle}
 #lov{position:fixed;inset:0;background:var(--gd);display:flex;align-items:center;justify-content:center;z-index:9999}
 .lbox{background:#fff;border-radius:20px;padding:38px 34px;width:355px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.lbox-logo{width:50px;height:50px;background:var(--gd);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:25px;margin-bottom:16px}
+.lbox-logo{width:64px;height:64px;background:#fff;border:1.5px solid var(--bd);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);overflow:hidden;padding:2px}
+.lbox-logo img{width:100%;height:100%;object-fit:contain;border-radius:50%}
 .lbox h2{font-size:19px;font-weight:800;margin-bottom:3px}
 .lbox .sub{font-size:12px;color:var(--tx2);margin-bottom:20px}
 .fg{margin-bottom:12px}
@@ -28,7 +30,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .lerro{display:none;color:var(--er);font-size:12px;margin-top:8px;font-weight:600}
 .hdr{background:var(--gd);color:#fff;height:57px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 14px rgba(0,0,0,.3)}
 .hdr-l{display:flex;align-items:center;gap:11px}
-.hdr-logo{width:33px;height:33px;background:rgba(255,255,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.hdr-logo{width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:1px;box-shadow:0 2px 6px rgba(0,0,0,.15);flex-shrink:0}
+.hdr-logo img{width:100%;height:100%;object-fit:contain;border-radius:50%}
 .hdr-title{font-size:14px;font-weight:700}
 .hdr-sub{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
 .hdr-r{display:flex;align-items:center;gap:8px}
@@ -42,11 +45,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .sb-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;padding:10px 7px 3px}
 .sb-btn{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:8px;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;width:100%;text-align:left;transition:.15s}
 .sb-btn:hover{background:#f1f5f9;color:var(--tx)}
-.sb-btn.active{background:#eff6ff;color:var(--az);font-weight:700}
+.sb-btn.active{background:#eaf3e8;color:var(--az);font-weight:700}
 .sb-btn .material-symbols-outlined{font-size:18px;flex-shrink:0}
 .main{flex:1;padding:24px 28px;overflow-y:auto}
 .secao{display:none}.secao.on{display:block}
 .tcard{background:var(--cd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.tcard-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
 .thead-bar{padding:12px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
 .thead-bar h3{font-size:14px;font-weight:700}
 .thead-bar p{font-size:11px;color:var(--tx2);margin-top:1px}
@@ -59,8 +63,8 @@ tr:hover td{background:#fafafa}
 .badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
 .b-green{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
 .b-orange{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
-.b-blue{background:#eff6ff;color:var(--az);border:1px solid #bfdbfe}
-.b-ag{background:#eff6ff;color:var(--az);border:1px solid #bfdbfe}
+.b-blue{background:#eaf3e8;color:var(--az);border:1px solid #c2dec0}
+.b-ag{background:#eaf3e8;color:var(--az);border:1px solid #c2dec0}
 .b-ej{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
 .b-en{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
 .tl{display:flex;flex-direction:column;gap:3px}
@@ -94,14 +98,114 @@ tr:hover td{background:#fafafa}
 .lturno{grid-template-columns:1fr 1fr 1fr auto}
 .ldia{grid-template-columns:140px 1fr auto}
 .sep{height:1px;background:var(--bd);margin:16px 0}
-@media(max-width:768px){.layout{flex-direction:column}.sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap}.main{padding:13px}.fg2,.fg3{grid-template-columns:1fr}}
+
+/* ============================================================ */
+/*  RESPONSIVE — MOBILE                                         */
+/* ============================================================ */
+
+@media(max-width:480px){
+  .lbox{width:calc(100vw - 32px);padding:28px 20px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+}
+
+@media(max-width:768px){
+
+  /* --- HEADER --- */
+  .hdr{padding:0 12px;height:52px}
+  .hdr-title{font-size:13px}
+  .hdr-sub{display:none}
+  .badge-adm{display:none}
+  .btn-back{padding:5px 9px;font-size:11px;gap:4px}
+  .btn-exit{padding:5px 9px;font-size:11px;gap:4px}
+
+  /* --- LAYOUT --- */
+  .layout{flex-direction:column;min-height:calc(100vh - 52px)}
+
+  /* --- SIDEBAR: sticky horizontal tab bar --- */
+  .sidebar{
+    position:sticky;
+    top:52px;
+    z-index:40;
+    width:100%;
+    height:auto;
+    max-height:none;
+    min-height:0;
+    border-right:none;
+    border-bottom:2px solid var(--bd);
+    background:var(--cd);
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:visible;
+    padding:5px 6px;
+    gap:2px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.07);
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .sidebar::-webkit-scrollbar{display:none}
+  .sb-label{display:none}
+  .sb-btn{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:5px 8px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:600;
+    white-space:nowrap;
+    flex-shrink:0;
+    min-width:50px;
+    color:var(--tx2);
+  }
+  .sb-btn .material-symbols-outlined{font-size:18px}
+  .sb-btn.active{background:#eaf3e8;color:var(--az);font-weight:700}
+
+  /* --- MAIN --- */
+  .main{padding:12px 10px;flex:1;overflow-x:hidden}
+
+  /* Forms */
+  .fg2,.fg3{grid-template-columns:1fr}
+  .fc{padding:12px}
+  .ft{font-size:13px}
+
+  /* Tables: remove overflow:hidden from tcard, add wrapper inside */
+  .tcard{overflow:visible;border-radius:12px}
+  .tcard-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:0 0 12px 12px}
+  table{min-width:500px}
+  th{padding:7px 9px;font-size:10px}
+  td{padding:7px 9px;font-size:12px}
+  .thumb{width:30px;height:30px;border-radius:6px}
+
+  /* thead bar */
+  .thead-bar{padding:10px 12px;gap:8px;flex-wrap:wrap}
+
+  /* Schedule / cardapio grids */
+  .lturno{grid-template-columns:1fr 1fr auto;gap:5px}
+  .ldia{grid-template-columns:1fr auto;gap:5px}
+
+  /* Buttons */
+  .faction{flex-wrap:wrap;gap:6px}
+  .bp,.bs{font-size:11px;padding:6px 10px}
+}
+
+@media(max-width:390px){
+  .hdr-r{gap:4px}
+  .btn-back span{display:none}
+  .sb-btn{min-width:42px;padding:4px 5px;font-size:8px}
+  .sb-btn .material-symbols-outlined{font-size:17px}
+  .main{padding:10px 6px}
+  .fc{padding:10px}
+}
+
 </style>
 </head>
 <body>
 
 <div id="lov">
   <div class="lbox">
-    <div class="lbox-logo"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+    <div class="lbox-logo"><img src="/logo.png" alt="Logo Bertha Corrêa"/></div>
     <h2>Acesso Restrito</h2>
     <p class="sub">Somente educadores autorizados.</p>
     <div class="fg"><label>E-mail</label><input type="email" id="li-e" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')login()"/></div>
@@ -114,7 +218,7 @@ tr:hover td{background:#fafafa}
 
 <header class="hdr" id="hdr" style="display:none">
   <div class="hdr-l">
-    <div class="hdr-logo"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+    <div class="hdr-logo"><img src="/logo.png" alt="Logo Bertha Corrêa"/></div>
     <div><div class="hdr-title">Painel Administrativo</div><div class="hdr-sub" id="hdr-user">...</div></div>
   </div>
   <div class="hdr-r">
@@ -183,7 +287,7 @@ tr:hover td{background:#fafafa}
       </div>
       <div class="tcard">
         <div class="thead-bar"><div><h3>Postagens Cadastradas</h3><p>Clique em editar para modificar.</p></div><button class="bp sm" onclick="renderPosts()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <table><thead><tr><th>Img</th><th>Titulo</th><th>Cat.</th><th>Autor</th><th>Dest.</th><th>Acoes</th></tr></thead><tbody id="tb-posts"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th>Img</th><th>Titulo</th><th>Cat.</th><th>Autor</th><th>Dest.</th><th>Acoes</th></tr></thead><tbody id="tb-posts"></tbody></table></div>
       </div>
     </div>
 
@@ -208,7 +312,7 @@ tr:hover td{background:#fafafa}
       </div>
       <div class="tcard">
         <div class="thead-bar"><div><h3>Proximos Eventos</h3></div><button class="bp sm" onclick="renderEvts()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <table><thead><tr><th>Data</th><th>Evento</th><th>Detalhe</th><th>Acoes</th></tr></thead><tbody id="tb-evt"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th>Data</th><th>Evento</th><th>Detalhe</th><th>Acoes</th></tr></thead><tbody id="tb-evt"></tbody></table></div>
       </div>
     </div>
 
@@ -239,7 +343,7 @@ tr:hover td{background:#fafafa}
           </div>
         </form>
         <div class="sep"></div>
-        <table><thead><tr><th>Titulo</th><th>Descricao</th><th>Acoes</th></tr></thead><tbody id="tb-avsb"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th>Titulo</th><th>Descricao</th><th>Acoes</th></tr></thead><tbody id="tb-avsb"></tbody></table></div>
       </div>
     </div>
 
@@ -405,7 +509,7 @@ tr:hover td{background:#fafafa}
       </div>
       <div class="tcard">
         <div class="thead-bar"><div><h3>Educadores Cadastrados</h3></div><button class="bp sm" onclick="renderEdu()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <table><thead><tr><th></th><th>Nome</th><th>E-mail</th><th>Cargo</th><th>Acoes</th></tr></thead><tbody id="tb-edu"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th></th><th>Nome</th><th>E-mail</th><th>Cargo</th><th>Acoes</th></tr></thead><tbody id="tb-edu"></tbody></table></div>
       </div>
     </div>
 
@@ -437,7 +541,7 @@ tr:hover td{background:#fafafa}
       </div>
       <div class="tcard">
         <div class="thead-bar"><div><h3>Partidas</h3></div><button class="bp sm" onclick="renderInter()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <table><thead><tr><th>Modalidade</th><th>Turma A</th><th>Placar</th><th>Turma B</th><th>Data</th><th>Status</th><th>Acoes</th></tr></thead><tbody id="tb-int"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th>Modalidade</th><th>Turma A</th><th>Placar</th><th>Turma B</th><th>Data</th><th>Status</th><th>Acoes</th></tr></thead><tbody id="tb-int"></tbody></table></div>
       </div>
     </div>
 
@@ -445,7 +549,7 @@ tr:hover td{background:#fafafa}
     <div class="secao" id="s-historico">
       <div class="tcard">
         <div class="thead-bar"><div><h3>Historico Completo de Postagens</h3><p>Quem criou e editou cada postagem.</p></div><button class="bp sm" onclick="renderHist()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <table><thead><tr><th>Img</th><th>Postagem</th><th>Categoria</th><th>Timeline de Edicoes</th></tr></thead><tbody id="tb-hist"></tbody></table>
+        <div class="tcard-table-wrap"><table><thead><tr><th>Img</th><th>Postagem</th><th>Categoria</th><th>Timeline de Edicoes</th></tr></thead><tbody id="tb-hist"></tbody></table></div>
       </div>
     </div>
 
