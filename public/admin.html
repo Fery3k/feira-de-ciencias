@@ -241,7 +241,6 @@ tr:hover td{background:#fafafa}
     <button class="sb-btn" id="sb-forms" onclick="nav('forms')"><span class="material-symbols-outlined">link</span>Links dos Forms</button>
     <div class="sb-label">Administracao</div>
     <button class="sb-btn" id="sb-educadores" onclick="nav('educadores')"><span class="material-symbols-outlined">group</span>Contas e Senhas</button>
-    <button class="sb-btn" id="sb-interclasse" onclick="nav('interclasse')"><span class="material-symbols-outlined">sports</span>Interclasse</button>
     <button class="sb-btn" id="sb-historico" onclick="nav('historico')"><span class="material-symbols-outlined">history</span>Historico</button>
     <div class="sb-label">Atalhos</div>
     <button class="sb-btn" onclick="window.open('/','_blank')"><span class="material-symbols-outlined">open_in_new</span>Ver o Site</button>
@@ -513,37 +512,6 @@ tr:hover td{background:#fafafa}
       </div>
     </div>
 
-    <!-- INTERCLASSE -->
-    <div class="secao" id="s-interclasse">
-      <div class="fc">
-        <div class="ft" id="ttl-int"><span class="material-symbols-outlined" style="color:var(--vd)">sports</span>Nova Partida</div>
-        <form id="frm-int" onsubmit="salvarPartida(event)">
-          <input type="hidden" id="int-id"/>
-          <div class="fg3">
-            <div class="fgr"><label class="fl">Modalidade *</label><input type="text" id="int-mod" class="fi" required placeholder="Futebol"/></div>
-            <div class="fgr"><label class="fl">Data</label><input type="text" id="int-data" class="fi" placeholder="30/11"/></div>
-            <div class="fgr"><label class="fl">Local</label><input type="text" id="int-local" class="fi" placeholder="Quadra"/></div>
-          </div>
-          <div class="fg2" style="margin-top:10px">
-            <div class="fgr"><label class="fl">Turma A *</label><input type="text" id="int-ta" class="fi" required placeholder="3A"/></div>
-            <div class="fgr"><label class="fl">Turma B *</label><input type="text" id="int-tb" class="fi" required placeholder="3B"/></div>
-          </div>
-          <div class="fg3" style="margin-top:10px">
-            <div class="fgr"><label class="fl">Placar A</label><input type="number" id="int-pa" class="fi" value="0" min="0"/></div>
-            <div class="fgr"><label class="fl">Placar B</label><input type="number" id="int-pb" class="fi" value="0" min="0"/></div>
-            <div class="fgr"><label class="fl">Status</label><select id="int-st" class="fsel"><option value="agendado">Agendado</option><option value="emjogo">Em Jogo</option><option value="encerrado">Encerrado</option></select></div>
-          </div>
-          <div class="faction">
-            <button type="submit" class="bp g"><span class="material-symbols-outlined">save</span>Salvar</button>
-            <button type="button" class="bs" onclick="limparInt()">Limpar</button>
-          </div>
-        </form>
-      </div>
-      <div class="tcard">
-        <div class="thead-bar"><div><h3>Partidas</h3></div><button class="bp sm" onclick="renderInter()"><span class="material-symbols-outlined">refresh</span>Atualizar</button></div>
-        <div class="tcard-table-wrap"><table><thead><tr><th>Modalidade</th><th>Turma A</th><th>Placar</th><th>Turma B</th><th>Data</th><th>Status</th><th>Acoes</th></tr></thead><tbody id="tb-int"></tbody></table></div>
-      </div>
-    </div>
 
     <!-- HISTORICO -->
     <div class="secao" id="s-historico">
@@ -591,7 +559,7 @@ function nav(id){
   document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
   const s=document.getElementById('s-'+id),b=document.getElementById('sb-'+id);
   if(s)s.classList.add('on');if(b)b.classList.add('active');
-  ({posts:renderPosts,eventos:renderEvts,avisos:()=>{renderAvRol();renderAvSb();},horario:carregarHor,cardapio:carregarCard,curiosidades:renderCuriosidades,forms:carregarForms,educadores:renderEdu,interclasse:renderInter,historico:renderHist}[id]||(() => {}))();
+  ({posts:renderPosts,eventos:renderEvts,avisos:()=>{renderAvRol();renderAvSb();},horario:carregarHor,cardapio:carregarCard,curiosidades:renderCuriosidades,forms:carregarForms,educadores:renderEdu,historico:renderHist}[id]||(() => {}))();
 }
 function fmt(iso){if(!iso)return '-';const d=new Date(iso);return d.toLocaleDateString('pt-BR')+' as '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
 function toast(msg){
@@ -814,18 +782,6 @@ async function salvarEdu(e){e.preventDefault();const id=document.getElementById(
 async function excluirEdu(id){if(id===user?.id){alert('Nao e possivel excluir sua propria conta.');return;}if(!confirm('Excluir este educador?'))return;db.educadores=db.educadores.filter(x=>x.id!==id);await salvarBanco();renderEdu();toast('Educador removido.');}
 function limparEdu(){document.getElementById('frm-edu').reset();document.getElementById('edu-id').value='';document.getElementById('ttl-edu').innerHTML='<span class="material-symbols-outlined" style="color:var(--az)">person_add</span>Novo Educador';}
 
-/* INTERCLASSE */
-function renderInter(){
-  const tb=document.getElementById('tb-int'),pp=db?.interclasse||[];
-  if(!pp.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;padding:14px;color:#94a3b8">Nenhuma partida.</td></tr>';return;}
-  const bs={agendado:'b-ag',emjogo:'b-ej',encerrado:'b-en'};
-  tb.innerHTML=pp.map(p=>`<tr><td><strong>${p.modalidade}</strong></td><td><strong>${p.turmaA}</strong></td><td style="text-align:center"><strong style="font-size:15px">${p.placarA||0} x ${p.placarB||0}</strong></td><td><strong>${p.turmaB}</strong></td><td style="font-size:12px">${p.data||'-'}</td><td><span class="badge ${bs[p.status]||'b-ag'}">${p.status||'agendado'}</span></td>
-    <td style="white-space:nowrap"><button class="bp sm" onclick="editarInt('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">edit</span></button><button class="bp sm d" style="margin-left:3px" onclick="excluirInt('${p.id}')"><span class="material-symbols-outlined" style="font-size:13px">delete</span></button></td></tr>`).join('');
-}
-function editarInt(id){const p=(db.interclasse||[]).find(x=>x.id===id);if(!p)return;document.getElementById('int-id').value=p.id;document.getElementById('int-mod').value=p.modalidade||'';document.getElementById('int-data').value=p.data||'';document.getElementById('int-local').value=p.local||'';document.getElementById('int-ta').value=p.turmaA||'';document.getElementById('int-tb').value=p.turmaB||'';document.getElementById('int-pa').value=p.placarA||0;document.getElementById('int-pb').value=p.placarB||0;document.getElementById('int-st').value=p.status||'agendado';document.getElementById('ttl-int').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">edit</span>Editando Partida';window.scrollTo(0,0);}
-async function salvarPartida(e){e.preventDefault();const id=document.getElementById('int-id').value;const d={modalidade:document.getElementById('int-mod').value.trim(),data:document.getElementById('int-data').value.trim(),local:document.getElementById('int-local').value.trim(),turmaA:document.getElementById('int-ta').value.trim(),turmaB:document.getElementById('int-tb').value.trim(),placarA:parseInt(document.getElementById('int-pa').value)||0,placarB:parseInt(document.getElementById('int-pb').value)||0,status:document.getElementById('int-st').value};if(!db.interclasse)db.interclasse=[];if(id){const idx=db.interclasse.findIndex(x=>x.id===id);if(idx>-1)db.interclasse[idx]={...db.interclasse[idx],...d};}else{db.interclasse.push({id:'intcl-'+Date.now(),...d});}await salvarBanco();limparInt();renderInter();toast('Partida salva!');}
-async function excluirInt(id){if(!confirm('Excluir partida?'))return;db.interclasse=db.interclasse.filter(x=>x.id!==id);await salvarBanco();renderInter();toast('Partida removida.');}
-function limparInt(){document.getElementById('frm-int').reset();document.getElementById('int-id').value='';document.getElementById('ttl-int').innerHTML='<span class="material-symbols-outlined" style="color:var(--vd)">sports</span>Nova Partida';}
 
 /* HISTORICO */
 function renderHist(){

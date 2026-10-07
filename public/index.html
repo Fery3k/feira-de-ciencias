@@ -1116,95 +1116,6 @@ ul { list-style: none; }
   max-width: 280px;
 }
 
-/* ============================================================ */
-/*  SEÇÃO INTERCLASSE                                           */
-/* ============================================================ */
-.interclasse-section {
-  background: var(--bg-pagina);
-  padding: 48px 0;
-  border-top: 1px solid #e2e8f0;
-}
-.interclasse-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-}
-.interclasse-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 768px) { .interclasse-grid { grid-template-columns: 1fr; } }
-.intcl-card {
-  background: #fff;
-  border-radius: var(--raio);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: 16px 20px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 12px;
-  border-left: 4px solid var(--cor-destaque);
-  transition: box-shadow 0.2s;
-}
-.intcl-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-.intcl-time {
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--texto-principal);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.intcl-time.right { text-align: right; }
-.intcl-placar {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 900;
-  font-family: 'Poppins', sans-serif;
-  background: #f8fafc;
-  border-radius: 10px;
-  padding: 8px 14px;
-  min-width: 90px;
-  border: 1px solid #e2e8f0;
-  line-height: 1.2;
-}
-.intcl-status-ao-vivo {
-  display: inline-block;
-  background: #ef4444;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-  animation: pulse-live 1.5s ease-in-out infinite;
-}
-@keyframes pulse-live {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-.intcl-meta {
-  display: flex;
-  gap: 6px;
-  font-size: 10px;
-  color: var(--texto-secundario);
-  margin-top: 3px;
-  white-space: nowrap;
-}
-.intcl-modalidade-header {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--texto-principal);
-  margin: 20px 0 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #e2e8f0;
-}
 
 /* ============================================================ */
 /*  NAVBARS DE FORMULÁRIOS (DICAS E MÚSICA)                     */
@@ -2086,9 +1997,6 @@ ul { list-style: none; }
         <button type="button" class="admin-tab-item" id="tab-nav-educadores" onclick="alternarSecaoAdmin('educadores')">
           <span class="material-symbols-outlined">group</span> Contas &amp; Senhas
         </button>
-        <button type="button" class="admin-tab-item" id="tab-nav-interclasse" onclick="alternarSecaoAdmin('interclasse')">
-          <span class="material-symbols-outlined">sports</span> Interclasse
-        </button>
         <button type="button" class="admin-tab-item" id="tab-nav-historico" onclick="alternarSecaoAdmin('historico')">
           <span class="material-symbols-outlined">history</span> Histórico de Edições
         </button>
@@ -2485,86 +2393,6 @@ ul { list-style: none; }
         </div>
       </div>
 
-      <!-- ======================================== -->
-      <!-- SEÇÃO: INTERCLASSE                       -->
-      <!-- ======================================== -->
-      <div id="secao-admin-interclasse" class="admin-secao-panel" style="display: none;">
-        <h3 style="font-size: 15px; margin-bottom: 14px; color: var(--texto-principal);">Tabela de Esportes — Interclasse</h3>
-        <form id="form-interclasse" onsubmit="salvarInterclasseSubmit(event)">
-          <input type="hidden" id="intcl-id" value=""/>
-          <div class="form-grid-3">
-            <div class="form-group">
-              <label class="form-label" for="intcl-modalidade">Modalidade *</label>
-              <select id="intcl-modalidade" class="form-select" required>
-                <option value="Futebol">⚽ Futebol</option>
-                <option value="Vôlei">🏐 Vôlei</option>
-                <option value="Basquete">🏀 Basquete</option>
-                <option value="Handebol">🤾 Handebol</option>
-                <option value="Atletismo">🏃 Atletismo</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="intcl-turmaA">Turma A *</label>
-              <input type="text" id="intcl-turmaA" class="form-input" placeholder="Ex: 3º A" required/>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="intcl-turmaB">Turma B *</label>
-              <input type="text" id="intcl-turmaB" class="form-input" placeholder="Ex: 3º B" required/>
-            </div>
-          </div>
-          <div class="form-grid-3" style="margin-top: 14px;">
-            <div class="form-group">
-              <label class="form-label" for="intcl-placarA">Placar Turma A</label>
-              <input type="number" id="intcl-placarA" class="form-input" min="0" value="0"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="intcl-placarB">Placar Turma B</label>
-              <input type="number" id="intcl-placarB" class="form-input" min="0" value="0"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="intcl-status">Status da Partida</label>
-              <select id="intcl-status" class="form-select">
-                <option value="agendado">🗓️ Agendado</option>
-                <option value="ao-vivo">🔴 Ao Vivo</option>
-                <option value="encerrado">✅ Encerrado</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-grid-2" style="margin-top: 14px;">
-            <div class="form-group">
-              <label class="form-label" for="intcl-data">Data da Partida *</label>
-              <input type="text" id="intcl-data" class="form-input" placeholder="Ex: 25/10/2026" required/>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="intcl-local">Local</label>
-              <input type="text" id="intcl-local" class="form-input" placeholder="Ex: Quadra Principal"/>
-            </div>
-          </div>
-          <div class="form-actions" style="margin-top: 18px;">
-            <button type="button" class="btn-cancelar" onclick="limparFormInterclasse()">Limpar</button>
-            <button type="submit" class="btn-salvar-post">
-              <span class="material-symbols-outlined">sports</span> Salvar Partida
-            </button>
-          </div>
-        </form>
-        <h4 style="margin-top: 24px; font-size: 14px; color: var(--texto-principal);">Partidas Cadastradas</h4>
-        <div class="table-responsive">
-          <table class="post-table">
-            <thead>
-              <tr>
-                <th>Modalidade</th>
-                <th>Turma A</th>
-                <th>Placar</th>
-                <th>Turma B</th>
-                <th>Data</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody id="lista-interclasse-admin-tbody"></tbody>
-          </table>
-        </div>
-      </div>
 
       <!-- ======================================== -->
       <!-- SEÇÃO: HISTÓRICO DE EDIÇÕES              -->
@@ -2728,21 +2556,6 @@ ul { list-style: none; }
     </div>
   </div>
 </div>
-
-<!-- SEÇÃO: INTERCLASSE -->
-<section id="interclasse" class="interclasse-section">
-  <div class="container">
-    <div class="interclasse-header">
-      <div>
-        <span class="sobre-nos-label">Competição Escolar</span>
-        <h2 class="sobre-nos-titulo" style="margin-top:4px;">&#9917; Interclasse 2026</h2>
-      </div>
-    </div>
-    <div id="interclasse-publico-container">
-      <p style="text-align:center;color:#94a3b8;padding:32px;">Nenhuma partida cadastrada ainda.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ============================================================ -->
 <!-- 7. FOOTER                                                    -->
@@ -2997,7 +2810,6 @@ ul { list-style: none; }
         if (!dbData.eventosSidebar) dbData.eventosSidebar = INITIAL_DB.eventosSidebar;
         if (!dbData.horarioAulas) dbData.horarioAulas = INITIAL_DB.horarioAulas;
         if (!dbData.cardapio) dbData.cardapio = INITIAL_DB.cardapio;
-        if (!dbData.interclasse) dbData.interclasse = [];
         if (!dbData.formsLinks) dbData.formsLinks = INITIAL_DB.formsLinks;
         return;
       }
@@ -3128,7 +2940,6 @@ ul { list-style: none; }
     renderizarEventosSidebar();
     renderizarAvisosSidebar();
     renderizarLinksSidebar();
-    renderizarInterclassePublico();
     renderizarFormsLinks();
     exibirPopupCuriosidadesAutomatico();
   }
@@ -4297,143 +4108,6 @@ ul { list-style: none; }
       toast.style.opacity = '0';
       toast.style.transform = 'translateY(10px)';
     }, 3000);
-  }
-
-
-
-  // ============================================================
-  // INTERCLASSE — CRUD e RENDER PÚBLICO
-  // ============================================================
-  async function salvarInterclasseSubmit(e) {
-    e.preventDefault();
-    if (!usuarioLogado) return;
-    const id = document.getElementById('intcl-id').value;
-    const modalidade = document.getElementById('intcl-modalidade').value;
-    const turmaA = document.getElementById('intcl-turmaA').value.trim();
-    const turmaB = document.getElementById('intcl-turmaB').value.trim();
-    const placarA = parseInt(document.getElementById('intcl-placarA').value) || 0;
-    const placarB = parseInt(document.getElementById('intcl-placarB').value) || 0;
-    const status = document.getElementById('intcl-status').value;
-    const data = document.getElementById('intcl-data').value.trim();
-    const local = document.getElementById('intcl-local').value.trim();
-
-    if (!dbData.interclasse) dbData.interclasse = [];
-
-    if (id) {
-      const idx = dbData.interclasse.findIndex(p => p.id === id);
-      if (idx !== -1) dbData.interclasse[idx] = { id, modalidade, turmaA, turmaB, placarA, placarB, status, data, local };
-      mostrarToast('Partida atualizada!');
-    } else {
-      dbData.interclasse.push({ id: 'intcl-' + Date.now(), modalidade, turmaA, turmaB, placarA, placarB, status, data, local });
-      mostrarToast('Partida cadastrada!');
-    }
-
-    await salvarBanco();
-    limparFormInterclasse();
-    atualizarTabelaAdminInterclasse();
-    renderizarInterclassePublico();
-  }
-
-  function editarInterclasse(id) {
-    const p = (dbData.interclasse || []).find(item => item.id === id);
-    if (!p) return;
-    document.getElementById('intcl-id').value = p.id;
-    document.getElementById('intcl-modalidade').value = p.modalidade;
-    document.getElementById('intcl-turmaA').value = p.turmaA;
-    document.getElementById('intcl-turmaB').value = p.turmaB;
-    document.getElementById('intcl-placarA').value = p.placarA || 0;
-    document.getElementById('intcl-placarB').value = p.placarB || 0;
-    document.getElementById('intcl-status').value = p.status || 'agendado';
-    document.getElementById('intcl-data').value = p.data || '';
-    document.getElementById('intcl-local').value = p.local || '';
-  }
-
-  async function excluirInterclasseConfirm(id) {
-    if (confirm('Remover esta partida?')) {
-      dbData.interclasse = (dbData.interclasse || []).filter(p => p.id !== id);
-      await salvarBanco();
-      atualizarTabelaAdminInterclasse();
-      renderizarInterclassePublico();
-      mostrarToast('Partida removida.');
-    }
-  }
-
-  function limparFormInterclasse() {
-    document.getElementById('form-interclasse').reset();
-    document.getElementById('intcl-id').value = '';
-  }
-
-  function atualizarTabelaAdminInterclasse() {
-    const tbody = document.getElementById('lista-interclasse-admin-tbody');
-    if (!tbody) return;
-    const lista = dbData.interclasse || [];
-    if (lista.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px;">Nenhuma partida cadastrada ainda.</td></tr>';
-      return;
-    }
-    const statusLabel = { 'agendado': '🗓️ Agendado', 'ao-vivo': '🔴 Ao Vivo', 'encerrado': '✅ Encerrado' };
-    tbody.innerHTML = lista.map(p => `
-      <tr>
-        <td><strong>${p.modalidade}</strong></td>
-        <td>${p.turmaA}</td>
-        <td style="text-align:center;font-weight:700;">${p.placarA} × ${p.placarB}</td>
-        <td>${p.turmaB}</td>
-        <td>${p.data || '—'}</td>
-        <td>${statusLabel[p.status] || p.status}</td>
-        <td>
-          <button class="btn-tbl-action btn-tbl-edit" onclick="editarInterclasse('${p.id}')" title="Editar"><span class="material-symbols-outlined">edit</span></button>
-          <button class="btn-tbl-action btn-tbl-delete" onclick="excluirInterclasseConfirm('${p.id}')" title="Excluir"><span class="material-symbols-outlined">delete</span></button>
-        </td>
-      </tr>
-    `).join('');
-  }
-
-  function renderizarInterclassePublico() {
-    const container = document.getElementById('interclasse-publico-container');
-    if (!container) return;
-    const lista = dbData.interclasse || [];
-    if (lista.length === 0) {
-      container.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:32px;">Nenhuma partida cadastrada ainda.</p>';
-      return;
-    }
-
-    // Agrupar por modalidade
-    const grupos = {};
-    lista.forEach(p => {
-      if (!grupos[p.modalidade]) grupos[p.modalidade] = [];
-      grupos[p.modalidade].push(p);
-    });
-
-    const statusLabel = { 'agendado': 'Agendado', 'ao-vivo': 'Ao Vivo', 'encerrado': 'Encerrado' };
-    const iconeModalidade = { 'Futebol': '⚽', 'Vôlei': '🏀', 'Basquete': '🏀', 'Handebol': '🤾', 'Atletismo': '🏃' };
-
-    let html = '';
-    for (const [mod, partidas] of Object.entries(grupos)) {
-      html += `<div class="intcl-modalidade-header">${iconeModalidade[mod] || '🏅'} ${mod}</div>`;
-      html += '<div class="interclasse-grid">';
-      partidas.forEach(p => {
-        const aoVivo = p.status === 'ao-vivo';
-        html += `
-          <div class="intcl-card">
-            <div>
-              <div class="intcl-time">${p.turmaA}</div>
-              <div class="intcl-meta">${p.data || ''}</div>
-            </div>
-            <div class="intcl-placar">
-              ${aoVivo ? `<div class="intcl-status-ao-vivo">AO VIVO</div>` : ''}
-              <div>${p.placarA} : ${p.placarB}</div>
-              <div style="font-size:10px;color:var(--texto-secundario);margin-top:2px;">${statusLabel[p.status] || p.status}</div>
-            </div>
-            <div>
-              <div class="intcl-time right">${p.turmaB}</div>
-              <div class="intcl-meta" style="justify-content:flex-end;">${p.local || ''}</div>
-            </div>
-          </div>
-        `;
-      });
-      html += '</div>';
-    }
-    container.innerHTML = html;
   }
 
 

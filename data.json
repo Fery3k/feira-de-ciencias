@@ -102,19 +102,6 @@
   "avisos": [
     "curiosidades bertha"
   ],
-  "interclasse": [
-    {
-      "id": "intcl-1790618138400",
-      "modalidade": "Vôlei",
-      "turmaA": "3a",
-      "turmaB": "3b",
-      "placarA": 0,
-      "placarB": 0,
-      "status": "agendado",
-      "data": "28/09",
-      "local": "Quadra"
-    }
-  ],
   "avisosSidebar": [],
   "eventosSidebar": [],
   "horarioAulas": {
